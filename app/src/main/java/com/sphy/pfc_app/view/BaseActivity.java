@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.MenuAdapter;
+import com.sphy.pfc_app.view.stations.StationListView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
 import java.util.Arrays;
@@ -51,14 +52,18 @@ public class BaseActivity extends AppCompatActivity {
                 dialog.dismiss(); // Cierra el diálogo después de seleccionar
                 // Verifica si la opción seleccionada es "VEHICULOS"
                 if ("VEHICULOS".equals(selectedOption)) {
-                    // Inicia la actividad VehiclesListView
+
                     Intent intent = new Intent(BaseActivity.this, VehicleListView.class);
                     startActivity(intent);
+                } else if ("GASOLINERAS".equals(selectedOption)) {
+
+                    Intent intent = new Intent(BaseActivity.this, StationListView.class);
+                    startActivity(intent);
                 } else if ("SALIR".equals(selectedOption)) {
-                    // Maneja la opción de salir si es necesario
-                    finish(); // Cierra la actividad actual
+
+                    finish();
                 } else {
-                    // Aquí puedes manejar otras opciones
+
                     Toast.makeText(BaseActivity.this, "Opción seleccionada: " + selectedOption, Toast.LENGTH_SHORT).show();
                 }
             }

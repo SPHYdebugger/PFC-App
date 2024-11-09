@@ -83,36 +83,20 @@
             android:translationX="25dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/detalleDE"
-        android:layout_width="331dp"
-        android:layout_height="29dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textSize="18dp"
-        android:textStyle="bold"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stations_list"
+        android:layout_width="408dp"
+        android:layout_height="505dp"
+        android:layout_marginTop="4dp"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-
-
-
-
-    <include
-        android:id="@+id/vehicleDetailsLayout"
-        layout="@layout/vehicle_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout3" />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="392dp"
-        android:layout_height="54dp"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
         android:layout_marginBottom="4dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +107,7 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="348dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="VOLVER A PANTALLA PRINCIPAL" />
@@ -131,4 +115,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

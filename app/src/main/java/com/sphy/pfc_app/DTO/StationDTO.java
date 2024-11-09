@@ -7,8 +7,10 @@ public class StationDTO {
     private String name;
 
     private String address;
+    private String site;
+    private String province;
 
-
+    private boolean hide;
     private String registrationDate;
 
     private boolean favorite = false;
@@ -71,5 +73,29 @@ public class StationDTO {
 
     public void setRefuels(int refuels) {
         this.refuels = refuels;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }

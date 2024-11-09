@@ -10,6 +10,8 @@ public class Station {
 
     private String name;
     private String address;
+    private String site;
+    private String province;
     private LocalDate registrationDate;
     private boolean favorite = false;
     private boolean glpFuel = false;
@@ -78,6 +80,22 @@ public class Station {
 
     public void setRefuels(List<Refuel> refuels) {
         this.refuels = refuels;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 }
 

@@ -85,6 +85,25 @@ public class SpinnerAdapter {
         });
     }
 
+    public static void populateProvinceSpinner(Context context, Spinner provinceSpinner) {
+
+        String[] provinces = {
+                "Elige una de la lista...", "A Coruña", "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz",
+                "Baleares", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real",
+                "Córdoba", "Cuenca", "Girona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca",
+                "Jaén", "La Rioja", "Las Palmas", "León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia",
+                "Navarra", "Ourense", "Palencia", "Pontevedra", "Salamanca", "Segovia", "Sevilla",
+                "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia",
+                "Valladolid", "Vizcaya", "Zamora", "Zaragoza"
+        };
+
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, provinces);
+        provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        provinceSpinner.setAdapter(provinceAdapter);
+    }
+
+
 
 
 }

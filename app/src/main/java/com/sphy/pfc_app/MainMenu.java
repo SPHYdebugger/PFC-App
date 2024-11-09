@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.sphy.pfc_app.view.BaseActivity;
+import com.sphy.pfc_app.view.stations.RegisterStationView;
 import com.sphy.pfc_app.view.vehicles.RegisterVehicleView;
 import com.sphy.pfc_app.view.vehicles.SelectionVehicleListView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
@@ -17,6 +18,7 @@ public class MainMenu extends BaseActivity {
     private ImageButton menuButton;
     private ImageButton addRefuelButton;
     private ImageButton addVehicleButton;
+    private ImageButton addStationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainMenu extends BaseActivity {
 
         addVehicleButton = findViewById(R.id.addVehicle);
         addRefuelButton = findViewById(R.id.addRefuel);
-        menuButton = findViewById(R.id.menuButton);
+        addStationButton = findViewById(R.id.addStation);
 
 
 
@@ -46,6 +48,16 @@ public class MainMenu extends BaseActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainMenu.this, SelectionVehicleListView.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        addStationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainMenu.this, RegisterStationView.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }

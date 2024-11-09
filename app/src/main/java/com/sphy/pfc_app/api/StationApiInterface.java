@@ -23,26 +23,24 @@ public interface StationApiInterface {
     @GET("stations/{id}")
     Call<Station> getStationById(@Path("id") long id);
 
-    @GET("vehicle/{id}")
-    Call<VehicleDTO> getVehicleDTOById(@Path("id") long id);
+    @GET("station/{id}")
+    Call<StationDTO> getStationDTOById(@Path("id") long id);
 
-    @POST("vehicles")
-    Call<Vehicle> addVehicle(@Body Vehicle vehicle);
+    @POST("stations")
+    Call<Station> addStation(@Body Station station);
 
-    @DELETE("vehicles/{id}")
-    Call<Void> deleteVehicle(@Path("id") long id);
+    @DELETE("stations/{id}")
+    Call<Void> deleteStation(@Path("id") long id);
 
-    @PUT("vehicles/{license}")
-    Call<Vehicle> editVehicleByLicense(@Path("license") String license, @Body Vehicle vehicle);
+    @PUT("stations/{id}")
+    Call<Station> editStationById(@Path("id") long id, @Body Station station);
 
 
-    @PUT("vehicles/{vehicleid}")
-    Call hideVehicleById(@Path("vehicleId") long vehicleId);
+    @PUT("stations/{id}")
+    Call<Void> hideStationById(@Path("Id") long id);
 
-    @GET("vehicles")
-    Call<List<Vehicle>> searchVehicleBylicense(
-            @Query("license") String searchText
-    );
+    @GET("stations/{vehicleId}")
+    Call<List<Station>> searchStationByVehicle(@Path("vehicleId") long id);
 
 
 }

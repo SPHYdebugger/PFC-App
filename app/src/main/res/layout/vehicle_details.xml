@@ -123,7 +123,7 @@
                 android:id="@+id/detail_fuel_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="fuel"
+                android:text="Refuels"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

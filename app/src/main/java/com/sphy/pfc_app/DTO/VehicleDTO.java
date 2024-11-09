@@ -3,7 +3,7 @@ package com.sphy.pfc_app.DTO;
 public class VehicleDTO {
 
 
-    private int id;
+    private long id;
     private String licensePlate;
     private String brand;
     private String model;
@@ -13,10 +13,11 @@ public class VehicleDTO {
     private float medConsumption;
     private String registrationDate;
     private int refuels;
+    private boolean hide;
 
     public VehicleDTO() {}
 
-    public VehicleDTO(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, int refuels) {
+    public VehicleDTO(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, int refuels, boolean hide) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -27,6 +28,15 @@ public class VehicleDTO {
         this.medConsumption = medConsumption;
         this.registrationDate = registrationDate;
         this.refuels = refuels;
+        this.hide = hide;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 
     public long getId() {

@@ -1,8 +1,9 @@
 package com.sphy.pfc_app.api;
 
+import com.sphy.pfc_app.DTO.StationDTO;
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.domain.Vehicle;
-
 
 import java.util.List;
 
@@ -15,12 +16,12 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface VehicleApiInterface {
-    @GET("vehicles")
-    Call<List<VehicleDTO>> getVehicles();
+public interface StationApiInterface {
+    @GET("stations")
+    Call<List<StationDTO>> getStations();
 
-    @GET("vehicles/{id}")
-    Call<Vehicle> getVehicleById(@Path("id") long id);
+    @GET("stations/{id}")
+    Call<Station> getStationById(@Path("id") long id);
 
     @GET("vehicle/{id}")
     Call<VehicleDTO> getVehicleDTOById(@Path("id") long id);

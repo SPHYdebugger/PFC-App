@@ -32,7 +32,7 @@
             android:name=".MainMenu"
             android:exported="false"/>
         <activity
-            android:name=".view.vehicles.PostVehicles"
+            android:name=".view.vehicles.RegisterVehicleView"
             android:exported="false"/>
         <activity
             android:name=".view.vehicles.VehicleListView"
@@ -43,6 +43,14 @@
         <activity
             android:name=".view.refuels.RefuelListView"
             android:exported="false"/>
+        <activity
+            android:name=".view.vehicles.SelectionVehicleListView"
+            android:exported="false"/>
+        <activity
+            android:name=".view.refuels.RegisterRefuelView"
+            android:exported="false"/>
+
+
 
     </application>
 

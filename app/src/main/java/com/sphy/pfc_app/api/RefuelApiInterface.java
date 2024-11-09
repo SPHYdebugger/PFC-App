@@ -30,10 +30,10 @@ public interface RefuelApiInterface {
 
     // Crear un nuevo repostaje para un vehículo y estación específicos
     @POST("/refuels/{vehicleId}/{stationId}")
-    Call<RefuelDTO> addRefuel(
+    Call<Refuel> addRefuel(
             @Path("vehicleId") long vehicleId,
             @Path("stationId") long stationId,
-            @Body RefuelDTO refuel
+            @Body Refuel refuel
     );
 
     // Eliminar repostaje por ID

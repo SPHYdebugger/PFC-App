@@ -6,10 +6,9 @@ import android.util.Log;
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
+import com.sphy.pfc_app.contract.vehicles.SelectionVehicleListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
-import com.sphy.pfc_app.domain.Vehicle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VehicleListModel implements VehicleListContract.Model {
+public class SelectionVehicleListModel implements SelectionVehicleListContract.Model {
 
     private Context context;
 
-    public VehicleListModel(Context context){
+    public SelectionVehicleListModel(Context context){
         this.context = context;
     }
 

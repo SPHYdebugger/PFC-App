@@ -5,7 +5,7 @@ import java.util.List;
 public class Vehicle {
 
 
-    private int id;
+    private long id;
     private String licensePlate;
     private String brand;
     private String model;
@@ -14,12 +14,12 @@ public class Vehicle {
     private int kmActual;
     private float medConsumption;
     private String registrationDate;
+    private boolean hide;
     private List<Refuel> refuels;
-    private int nRefuels;
 
     public Vehicle() {}
 
-    public Vehicle(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, List<Refuel> refuels, int nRefuels) {
+    public Vehicle(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, boolean hide, List<Refuel> refuels) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -29,8 +29,8 @@ public class Vehicle {
         this.kmActual = kmActual;
         this.medConsumption = medConsumption;
         this.registrationDate = registrationDate;
+        this.hide = hide;
         this.refuels = refuels;
-        this.nRefuels = nRefuels;
     }
 
     public long getId() {
@@ -113,11 +113,12 @@ public class Vehicle {
         this.refuels = refuels;
     }
 
-    public int getnRefuels() {
-        return nRefuels;
+
+    public boolean getHide() {
+        return hide;
     }
 
-    public void setnRefuels(int nRefuels) {
-        this.nRefuels = nRefuels;
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 }

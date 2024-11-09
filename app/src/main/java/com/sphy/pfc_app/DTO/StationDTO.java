@@ -1,20 +1,21 @@
-package com.sphy.pfc_app.domain;
+package com.sphy.pfc_app.DTO;
 
-import java.time.LocalDate;
-import java.util.List;
-
-public class Station {
-
+public class StationDTO {
 
     private long id;
 
     private String name;
+
     private String address;
-    private LocalDate registrationDate;
+
+
+    private String registrationDate;
+
     private boolean favorite = false;
+
     private boolean glpFuel = false;
-    private boolean hide;
-    private List<Refuel> refuels;
+
+    private int refuels = 0;
 
     public long getId() {
         return id;
@@ -40,11 +41,11 @@ public class Station {
         this.address = address;
     }
 
-    public LocalDate getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDate registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 
@@ -64,20 +65,11 @@ public class Station {
         this.glpFuel = glpFuel;
     }
 
-    public boolean isHide() {
-        return hide;
-    }
-
-    public void setHide(boolean hide) {
-        this.hide = hide;
-    }
-
-    public List<Refuel> getRefuels() {
+    public int getRefuels() {
         return refuels;
     }
 
-    public void setRefuels(List<Refuel> refuels) {
+    public void setRefuels(int refuels) {
         this.refuels = refuels;
     }
 }
-

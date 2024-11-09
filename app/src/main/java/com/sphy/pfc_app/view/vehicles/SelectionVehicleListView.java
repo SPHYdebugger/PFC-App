@@ -12,18 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.VehicleDTOAdapter;
+import com.sphy.pfc_app.adapter.VehicleSelectionAdapter;
+import com.sphy.pfc_app.contract.vehicles.SelectionVehicleListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.presenter.vehicles.SelectionVehicleListPresenter;
 import com.sphy.pfc_app.presenter.vehicles.VehicleListPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleListView extends BaseActivity implements VehicleListContract.View {
+public class SelectionVehicleListView extends BaseActivity implements SelectionVehicleListContract.View {
 
     private List<VehicleDTO> vehicles;
-    private VehicleDTOAdapter adapter;
-    private VehicleListPresenter presenter;
+    private VehicleSelectionAdapter adapter;
+    private SelectionVehicleListPresenter presenter;
 
     private ImageButton menuButton;
 
@@ -32,11 +35,11 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_vehicles);
+        setContentView(R.layout.activity_selection_vehicles);
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
 
-        presenter = new VehicleListPresenter(this);
+        presenter = new SelectionVehicleListPresenter(this);
 
 
 
@@ -45,7 +48,7 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new VehicleDTOAdapter(vehicles);
+        adapter = new VehicleSelectionAdapter(vehicles);
         recyclerView.setAdapter(adapter);
     }
 
@@ -58,29 +61,7 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
 
     }
 
-    /*public void addVehicle(View view) {
-        Intent intent = new Intent(this, RegisterVehicleView.class);
-        startActivity(intent);
-    }*/
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_bar, menu);
-        return true;
-
-    }*/
-
-    /*@Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.search){
-
-            Intent intent = new Intent(ClientListView.this, SearchClientView.class);
-            startActivity(intent);
-            return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void listVehicles(List<VehicleDTO> vehicles) {

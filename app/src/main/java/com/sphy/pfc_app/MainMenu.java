@@ -1,33 +1,21 @@
 package com.sphy.pfc_app;
 
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.sphy.pfc_app.adapter.MenuAdapter;
 import com.sphy.pfc_app.view.BaseActivity;
-import com.sphy.pfc_app.view.vehicles.PostVehicles;
+import com.sphy.pfc_app.view.vehicles.RegisterVehicleView;
+import com.sphy.pfc_app.view.vehicles.SelectionVehicleListView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MainMenu extends BaseActivity {
 
 
     private ImageButton menuButton;
-    private ImageButton listVehicleButton;
+    private ImageButton addRefuelButton;
     private ImageButton addVehicleButton;
 
     @Override
@@ -38,7 +26,7 @@ public class MainMenu extends BaseActivity {
         setupMenuButton(menuButton);
 
         addVehicleButton = findViewById(R.id.addVehicle);
-        listVehicleButton = findViewById(R.id.listVehicles);
+        addRefuelButton = findViewById(R.id.addRefuel);
         menuButton = findViewById(R.id.menuButton);
 
 
@@ -46,18 +34,18 @@ public class MainMenu extends BaseActivity {
         addVehicleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crear un Intent para iniciar la actividad
-                Intent intent = new Intent(MainMenu.this, PostVehicles.class);
+
+                Intent intent = new Intent(MainMenu.this, RegisterVehicleView.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
 
-        listVehicleButton.setOnClickListener(new View.OnClickListener() {
+        addRefuelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Crear un Intent para iniciar la actividad
-                Intent intent = new Intent(MainMenu.this, VehicleListView.class);
+
+                Intent intent = new Intent(MainMenu.this, SelectionVehicleListView.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }

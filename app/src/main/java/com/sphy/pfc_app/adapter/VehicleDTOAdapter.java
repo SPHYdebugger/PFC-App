@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.api.VehicleApi;
@@ -127,26 +128,64 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
         private void hideVehicleConfirmed() {
             int currentPosition = getAdapterPosition();
             long vehicleId = vehicles.get(currentPosition).getId();
-
+            String vehicleLicense = vehicles.get(currentPosition).getLicensePlate();
+            System.out.println("VehiculoDTO con id " + vehicleId + " tiene estado inicial del hide: " + vehicles.get(currentPosition).isHide());
             VehicleApiInterface api = VehicleApi.buildInstance();
-            Call<Void> hideVehicleCall = api.hideVehicleById(vehicleId);
-            hideVehicleCall.enqueue(new Callback<Void>() {
+            Call<Vehicle> vehicleToHideCall = api.getVehicleById(vehicleId);
+            vehicleToHideCall.enqueue(new Callback<Vehicle>() {
                 @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+                public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Vehicle vehicleToHide = response.body();
+                        Gson gson = new Gson();
 
-                    vehicles.remove(currentPosition);
-                    notifyItemRemoved(currentPosition);
-                    notifyItemRangeChanged(currentPosition, vehicles.size());
+                        Vehicle vehicleTemp = new Vehicle();
+                        vehicleTemp.setLicensePlate(vehicleToHide.getLicensePlate());
+                        vehicleTemp.setBrand(vehicleToHide.getBrand());
+                        vehicleTemp.setModel(vehicleToHide.getModel());
+                        vehicleTemp.setFuel1(vehicleToHide.getFuel1());
+                        vehicleTemp.setFuel2(vehicleToHide.getFuel2());
+                        vehicleTemp.setKmActual(vehicleToHide.getKmActual());
+                        vehicleTemp.setMedConsumption(vehicleToHide.getMedConsumption());
+                        vehicleTemp.setRegistrationDate(vehicleToHide.getRegistrationDate());
+                        vehicleTemp.setHide(vehicleToHide.getHide());
 
+                        vehicleToHide.setHide(true);
+
+                        Call<Vehicle> hideVehicleCall = api.editVehicleByLicense(vehicleLicense, vehicleToHide);
+                        hideVehicleCall.enqueue(new Callback<Vehicle>() {
+                            @Override
+                            public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
+                                if (response.isSuccessful()) {
+
+                                    //vehicles.get(currentPosition).setHide(true);
+
+                                    vehicles.remove(currentPosition);
+                                    notifyItemRemoved(currentPosition);
+                                    notifyItemRangeChanged(currentPosition, vehicles.size());
+
+                                } else {
+                                    Log.e("hideVehicle", "Error al actualizar el vehículo: " + response.message());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Vehicle> call, Throwable t) {
+                                Log.e("hideVehicle", "Error al conectar con el servidor: " + t.getMessage());
+                            }
+                        });
+                    } else {
+                        Log.e("hideVehicle", "Error al obtener el vehículo: " + response.message());
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("deleteClient", "Error al conectar con el servidor: " + t.getMessage());
-
+                public void onFailure(Call<Vehicle> call, Throwable t) {
+                    Log.e("hideVehicle", "Error al conectar con el servidor para obtener el vehículo: " + t.getMessage());
                 }
             });
         }
+
     }
 
 

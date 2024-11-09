@@ -1,20 +1,23 @@
 package com.sphy.pfc_app.presenter.vehicles;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.contract.vehicles.SelectionVehicleListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.model.vehicles.SelectionVehicleListModel;
 import com.sphy.pfc_app.model.vehicles.VehicleListModel;
+import com.sphy.pfc_app.view.vehicles.SelectionVehicleListView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
 import java.util.List;
 
-public class VehicleListPresenter implements VehicleListContract.Presenter, VehicleListContract.Model.OnLoadVehicleListener{
+public class SelectionVehicleListPresenter implements SelectionVehicleListContract.Presenter, SelectionVehicleListContract.Model.OnLoadVehicleListener{
 
-    private VehicleListView view;
-    private VehicleListModel model;
+    private SelectionVehicleListView view;
+    private SelectionVehicleListModel model;
 
-    public VehicleListPresenter(VehicleListView view){
+    public SelectionVehicleListPresenter(SelectionVehicleListView view){
         this.view = view;
-        model= new VehicleListModel(view);
+        model= new SelectionVehicleListModel(view);
     }
 
     @Override

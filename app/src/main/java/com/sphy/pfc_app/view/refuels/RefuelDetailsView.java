@@ -1,20 +1,14 @@
-package com.sphy.pfc_app.view.vehicles;
+package com.sphy.pfc_app.view.refuels;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
@@ -22,10 +16,9 @@ import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Vehicle;
 import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
-import com.sphy.pfc_app.view.refuels.RefuelListView;
 
 
-public class VehicleDetailsView extends BaseActivity implements VehicleDetailsContract.View {
+public class RefuelDetailsView extends BaseActivity implements VehicleDetailsContract.View {
 
     private TextView tvVehicleId;
     private TextView tvLicense;
@@ -89,7 +82,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     }
 
     private void goVehicleRefuels() {
-        Intent intent = new Intent(VehicleDetailsView.this, RefuelListView.class);
+        Intent intent = new Intent(RefuelDetailsView.this, RefuelListView.class);
         System.out.println("valor que se pasa " + licensePlateGet);
         intent.putExtra("licensePlate", licensePlateGet);
         startActivity(intent);

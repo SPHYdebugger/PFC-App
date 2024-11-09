@@ -144,6 +144,14 @@
             android:hint="@string/vehicle_fuel2"
             android:inputType="text" />
 
+        <EditText
+            android:id="@+id/vehicle_kms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Kilómetros actuales"
+            android:inputType="text" />
+
 
     </LinearLayout>
 
@@ -160,6 +168,7 @@
             android:id="@+id/create_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="createVehicle"
             android:text="@string/create" />
     </LinearLayout>
 

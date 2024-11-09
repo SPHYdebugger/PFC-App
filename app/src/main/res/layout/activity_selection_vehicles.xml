@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD5D4"
-    tools:context=".MainActivity"
-    tools:ignore="ExtraText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
 
     <!-- Logo Superior y Nombre de la App -->
 
@@ -85,37 +83,52 @@
             android:translationX="25dp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="410dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Seleccione el vehículo del repostaje"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/vehicles_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vehicles_list"
+        android:layout_width="410dp"
+        android:layout_height="481dp"
+        android:layout_marginTop="52dp"
+        android:background="#156081"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
     <LinearLayout
-        android:layout_width="413dp"
-        android:layout_height="563dp"
-        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="4dp"
+        android:background="#156080"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
 
-        <ImageButton
-            android:id="@+id/addRefuel"
-            android:layout_width="387dp"
-            android:layout_height="182dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/boton_repostaje"
-            tools:src="@drawable/boton_repostaje" />
-
-        <ImageButton
-            android:id="@+id/addVehicle"
-            android:layout_width="387dp"
-            android:layout_height="182dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/boton_vehiculo"
-            tools:src="@drawable/boton_vehiculo" />
-
-        <ImageButton
-            android:id="@+id/addStation"
-            android:layout_width="387dp"
-            android:layout_height="182dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/boton_gasolinera"
-            tools:src="@drawable/boton_gasolinera" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="VOLVER A PANTALLA PRINCI" />
     </LinearLayout>
 
 

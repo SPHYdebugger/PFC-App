@@ -4,15 +4,21 @@ import android.content.Context;
 import android.util.Log;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.api.RefuelApi;
+import com.sphy.pfc_app.api.RefuelApiInterface;
 import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
+import com.sphy.pfc_app.contract.refuels.RefuelDetailsContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
+import com.sphy.pfc_app.domain.Refuel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RefuelDetailsModel implements VehicleDetailsContract.Model {
+public class RefuelDetailsModel implements RefuelDetailsContract.Model {
 
     private Context context;
 
@@ -20,69 +26,31 @@ public class RefuelDetailsModel implements VehicleDetailsContract.Model {
         this.context = context;
     }
 
-
-
-
     @Override
-    public void getVehicleDetails(long vehicleId, OnVehicleDetailsListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
-        Call<VehicleDTO> getVehicleCall = api.getVehicleDTOById(vehicleId);
-        getVehicleCall.enqueue(new Callback<VehicleDTO>() {
-            @Override
-            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response) {
-                Log.e("getVehicle", response.message());
-                VehicleDTO vehicle = response.body();
-                listener.onVehicleDetailsSuccess(vehicle);
-            }
+    public void getRefuel(String refuelId, RefuelDetailsContract.Model.OnRefuelDetailsListener listener) {
+        RefuelApiInterface api = RefuelApi.buildInstance();
+        Call<List<Refuel>> getRefuelCall = api.findRefuelByIdentifier(refuelId);
 
+        getRefuelCall.enqueue(new Callback<List<Refuel>>() {
             @Override
-            public void onFailure(Call<VehicleDTO> call, Throwable t) {
-                Log.e("getVehicle", t.getMessage());
-                listener.onVehicleDetailsError("Se ha producido un error al conectar con el servidor");
-            }
-        });
-    }
-
-    @Override
-    public void getVehicleDTO(long vehicleId, OnVehicleDetailsListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
-        Call<VehicleDTO> getVehicleCall = api.getVehicleDTOById(vehicleId);
-        getVehicleCall.enqueue(new Callback<VehicleDTO>() {
-            @Override
-            public void onResponse(Call<VehicleDTO> call, Response<VehicleDTO> response) {
-                Log.e("getVehicle", response.message());
-                VehicleDTO vehicle = response.body();
-                listener.onVehicleDetailsSuccess(vehicle);
-            }
-
-            @Override
-            public void onFailure(Call<VehicleDTO> call, Throwable t) {
-                Log.e("getVehicle", t.getMessage());
-                listener.onVehicleDetailsError("Se ha producido un error al conectar con el servidor");
-            }
-        });
-    }
-
-    @Override
-    public void deleteVehicle(long vehicleId, OnDeleteListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
-        Call<Void> deleteVehicleCall = api.deleteVehicle(vehicleId);
-        deleteVehicleCall.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    listener.onDeleteSuccess();
+            public void onResponse(Call<List<Refuel>> call, Response<List<Refuel>> response) {
+                Log.e("getRefuel", response.message());
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    Refuel refuel = response.body().get(0);
+                    System.out.println("Detalles de .... " + refuel.getId());
+                    listener.onRefuelDetailsSuccess(refuel);
                 } else {
-                    Log.e("deleteClient", "Error al eliminar el vehicle: " + response.message());
-                    listener.onDeleteError("Error al eliminar el vehicle");
+                    listener.onRefuelDetailsError("No se encontraron detalles para este refuel.");
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.e("deleteVehicle", "Error al conectar con el servidor: " + t.getMessage());
-                listener.onDeleteError("Se ha producido un error al conectar con el servidor");
+            public void onFailure(Call<List<Refuel>> call, Throwable t) {
+                Log.e("getRefuel", t.getMessage());
+                listener.onRefuelDetailsError("Se ha producido un error al conectar con el servidor");
             }
         });
     }
+
+
 }

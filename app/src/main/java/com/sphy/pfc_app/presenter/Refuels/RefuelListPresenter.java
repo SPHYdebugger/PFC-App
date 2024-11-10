@@ -29,7 +29,7 @@ public class RefuelListPresenter implements RefuelListContract.Presenter, Refuel
     @Override
     public void onLoadRefuelsSuccess(List<Refuel> refuels) {
         if (view != null) {
-            view.listVehicleRefuels(refuels);
+            view.listRefuels(refuels);
         }
     }
 

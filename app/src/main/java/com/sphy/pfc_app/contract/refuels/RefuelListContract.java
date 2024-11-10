@@ -9,7 +9,8 @@ public interface RefuelListContract {
 
     interface View {
 
-        void listVehicleRefuels(List<Refuel> refuels);
+        void listRefuels(List<Refuel> refuels);
+
 
         void showMessage(String message);
     }

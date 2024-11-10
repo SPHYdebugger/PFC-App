@@ -35,6 +35,10 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     private TextView tvKMs;
 
     private TextView tvRefuels;
+    private TextView tvfuel;
+    private TextView tvConsum;
+    private TextView tvDate;
+
     private TextView tvDetalleDE;
 
     private Button goRefuels;
@@ -62,13 +66,16 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
-        tvVehicleId = findViewById(R.id.detail_vehicleId);
+
         tvLicense = findViewById(R.id.detail_license);
         tvBrand = findViewById(R.id.detail_brand);
         tvModel = findViewById(R.id.detail_model);
         tvKMs = findViewById(R.id.detail_kms);
         tvRefuels = findViewById(R.id.detail_refuels);
         goRefuels = findViewById(R.id.goRefuels);
+        tvfuel = findViewById(R.id.fuel);
+        tvConsum = findViewById(R.id.consum);
+        tvDate = findViewById(R.id.date);
 
 
         presenter = new VehicleDetailsPresenter(this);
@@ -91,7 +98,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     private void goVehicleRefuels() {
         Intent intent = new Intent(VehicleDetailsView.this, RefuelListView.class);
         System.out.println("valor que se pasa " + licensePlateGet);
-        intent.putExtra("licensePlate", licensePlateGet);
+        intent.putExtra("identifier", licensePlateGet);
         startActivity(intent);
     }
 
@@ -108,12 +115,16 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
 
         String text = "DETALLE DEL VEHÍCULO: " + vehicle.getLicensePlate();
         tvDetalleDE.setText(text);
-        tvVehicleId.setText(String.valueOf(vehicle.getId()));
+
         tvLicense.setText(vehicle.getLicensePlate());
         tvBrand.setText(vehicle.getBrand());
         tvModel.setText(vehicle.getModel());
         tvKMs.setText(String.valueOf(vehicle.getKmActual()));
         tvRefuels.setText(String.valueOf(vehicle.getRefuels()));
+        tvfuel.setText(vehicle.getFuel1());
+        tvConsum.setText(String.valueOf(vehicle.getMedConsumption()));
+        tvDate.setText(vehicle.getRegistrationDate());
+
     }
 
     @Override

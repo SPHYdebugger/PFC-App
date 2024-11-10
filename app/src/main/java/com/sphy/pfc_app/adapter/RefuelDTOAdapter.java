@@ -1,6 +1,7 @@
 package com.sphy.pfc_app.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sphy.pfc_app.DTO.RefuelDTO;
+import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
+import com.sphy.pfc_app.view.refuels.RefuelDetailsView;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
+import com.sphy.pfc_app.view.vehicles.VehicleDetailsView;
 
 import java.util.List;
 
@@ -35,18 +39,14 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
 
     @Override
     public void onBindViewHolder(@NonNull RefuelHolder holder, int position) {
-        RefuelDTO refuel = refuels.get(position);
 
-        holder.creationDate.setText(refuel.getCreationDate());
-        holder.amount.setText(String.valueOf(refuel.getAmount()));
-        holder.stationName.setText(refuel.getStationName());
 
-        // Manejo de detalles en el botón
-        holder.detailsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), RefuelListView.class);
-            intent.putExtra("refuelId", refuel.getId());
-            v.getContext().startActivity(intent);
-        });
+        holder.creationDate.setText(refuels.get(position).getCreationDate());
+        holder.amount.setText(String.valueOf(refuels.get(position).getAmount()));
+        holder.stationName.setText(refuels.get(position).getStationName());
+        holder.fulled.setChecked(refuels.get(position).isFulled());
+
+
     }
 
     @Override
@@ -60,6 +60,8 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
         public TextView amount;
         public TextView stationName;
         public Button detailsButton;
+        public CheckBox fulled;
+
 
         public RefuelHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,7 +69,14 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
             creationDate = itemView.findViewById(R.id.creationDate);
             amount = itemView.findViewById(R.id.amount);
             stationName = itemView.findViewById(R.id.station);
-            detailsButton = itemView.findViewById(R.id.button);
+            detailsButton = itemView.findViewById(R.id.detailsButton);
+            fulled = itemView.findViewById(R.id.fulledCheck);
+
+            detailsButton = itemView.findViewById(R.id.detailsButton);
+
         }
+
+
     }
+
 }

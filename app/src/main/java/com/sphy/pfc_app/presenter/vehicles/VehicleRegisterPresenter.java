@@ -26,7 +26,7 @@ public class VehicleRegisterPresenter implements VehicleRegisterContract.Present
 
             @Override
             public void onVehicleInsertedError(String message) {
-                view.showInsertErrorMessage();
+                view.showInsertErrorMessage(message);
             }
         });
     }

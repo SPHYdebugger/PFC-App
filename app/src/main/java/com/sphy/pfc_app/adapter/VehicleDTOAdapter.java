@@ -19,7 +19,6 @@ import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.domain.Vehicle;
-import com.sphy.pfc_app.view.refuels.RefuelListView;
 import com.sphy.pfc_app.view.vehicles.VehicleDetailsView;
 
 import java.util.List;
@@ -50,6 +49,10 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
 
 
         holder.license.setText(vehicles.get(position).getLicensePlate());
+        holder.brand.setText(vehicles.get(position).getBrand());
+        holder.model.setText(vehicles.get(position).getModel());
+        holder.kms.setText(String.valueOf(vehicles.get(position).getKmActual()));
+        holder.consum.setText(String.valueOf(vehicles.get(position).getMedConsumption()));
 
 
 
@@ -65,6 +68,11 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
 
 
         public TextView license;
+        public TextView brand;
+        public TextView model;
+        public TextView kms;
+        public TextView consum;
+
 
         public Button getDetailsButton;
         public Button deleteButton;
@@ -74,9 +82,13 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
             super(view);
             parentView = view;
             license = view.findViewById(R.id.license);
+            brand = view.findViewById(R.id.brand);
+            model = view.findViewById(R.id.model);
+            kms = view.findViewById(R.id.kms);
+            consum = view.findViewById(R.id.medConsum);
 
             deleteButton = view.findViewById(R.id.button2);
-            getDetailsButton = view.findViewById(R.id.button);
+            getDetailsButton = view.findViewById(R.id.detailsButton);
 
 
             getDetailsButton.setOnClickListener(v -> goVehicleDetails(view));

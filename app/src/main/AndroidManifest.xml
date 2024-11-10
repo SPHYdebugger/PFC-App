@@ -58,6 +58,9 @@
         <activity
             android:name=".view.stations.StationDetailsView"
             android:exported="false"/>
+        <activity
+            android:name=".view.refuels.RefuelDetailsView"
+            android:exported="false"/>
 
 
 

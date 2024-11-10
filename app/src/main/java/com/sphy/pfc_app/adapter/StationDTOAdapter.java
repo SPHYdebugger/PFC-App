@@ -15,16 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.sphy.pfc_app.DTO.StationDTO;
-import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.api.StationApi;
 import com.sphy.pfc_app.api.StationApiInterface;
-import com.sphy.pfc_app.api.VehicleApi;
-import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.domain.Station;
-import com.sphy.pfc_app.domain.Vehicle;
 import com.sphy.pfc_app.view.stations.StationDetailsView;
-import com.sphy.pfc_app.view.vehicles.VehicleDetailsView;
 
 import java.util.List;
 
@@ -79,7 +74,7 @@ public class StationDTOAdapter extends RecyclerView.Adapter<StationDTOAdapter.Ta
             name = view.findViewById(R.id.name);
 
             deleteButton = view.findViewById(R.id.button2);
-            getDetailsButton = view.findViewById(R.id.button);
+            getDetailsButton = view.findViewById(R.id.detailsButton);
 
 
             getDetailsButton.setOnClickListener(v -> goStationDetails(view));
@@ -163,6 +158,7 @@ public class StationDTOAdapter extends RecyclerView.Adapter<StationDTOAdapter.Ta
                                     stations.remove(currentPosition);
                                     notifyItemRemoved(currentPosition);
                                     notifyItemRangeChanged(currentPosition, stations.size());
+                                    notifyDataSetChanged();
 
                                 } else {
                                     Log.e("hideStation", "Error al actualizar la estación: " + response.message());

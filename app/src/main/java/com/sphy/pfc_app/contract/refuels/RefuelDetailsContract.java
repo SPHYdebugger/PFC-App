@@ -1,26 +1,24 @@
 package com.sphy.pfc_app.contract.refuels;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.domain.Refuel;
 
 public interface RefuelDetailsContract {
     interface View {
-        void displayVehicleDetails(VehicleDTO vehicle);
-        void showUpdateSuccessMessage();
-        void showUpdateErrorMessage();
-        void showDeleteSuccessMessage();
-        void showDeleteErrorMessage();
+        void displayRefuelDetails(Refuel refuel);
+
+
     }
 
     interface Presenter {
-        void getVehicle(long vehicleId);
+        void getRefuel(String refuelId);
 
-        void deleteVehicle(long vehicleId);
     }
 
     interface Model {
-        interface OnVehicleDetailsListener {
-            void onVehicleDetailsSuccess(VehicleDTO vehicle);
-            void onVehicleDetailsError(String message);
+        interface OnRefuelDetailsListener {
+            void onRefuelDetailsSuccess(Refuel refuel);
+            void onRefuelDetailsError(String message);
         }
 
         interface OnUpdateListener {
@@ -28,15 +26,12 @@ public interface RefuelDetailsContract {
             void onUpdateError(String message);
         }
 
-        interface OnDeleteListener {
-            void onDeleteSuccess();
-            void onDeleteError(String message);
-        }
 
-        void getVehicleDetails(long vehicleId, OnVehicleDetailsListener listener);
 
-        void getVehicleDTO(long vehicleId, OnVehicleDetailsListener listener);
 
-        void deleteVehicle(long vehicleId, OnDeleteListener listener);
+
+        void getRefuel(String refuelId, OnRefuelDetailsListener listener);
+
+
     }
 }

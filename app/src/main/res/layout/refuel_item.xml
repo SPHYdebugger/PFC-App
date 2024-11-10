@@ -84,7 +84,7 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/fulledCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="LLenado"
@@ -98,7 +98,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/detailsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

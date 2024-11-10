@@ -12,7 +12,7 @@ public class Station {
     private String address;
     private String site;
     private String province;
-    private LocalDate registrationDate;
+    private String registrationDate;
     private boolean favorite = false;
     private boolean glpFuel = false;
     private boolean hide;
@@ -42,11 +42,11 @@ public class Station {
         this.address = address;
     }
 
-    public LocalDate getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDate registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 

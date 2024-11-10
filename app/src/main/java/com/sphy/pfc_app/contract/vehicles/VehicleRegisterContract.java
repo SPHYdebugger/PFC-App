@@ -8,7 +8,7 @@ public interface VehicleRegisterContract {
     interface View {
         void showInsertSuccessMessage();
 
-        void showInsertErrorMessage();
+        void showInsertErrorMessage(String message);
 
         void clearFields();
     }

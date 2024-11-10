@@ -65,8 +65,8 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
     }
 
     @Override
-    public void showInsertErrorMessage() {
-        Toast.makeText(this, "Error al insertar el vehículo", Toast.LENGTH_LONG).show();
+    public void showInsertErrorMessage(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
     @Override

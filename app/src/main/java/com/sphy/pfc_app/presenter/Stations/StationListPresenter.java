@@ -23,7 +23,7 @@ public class StationListPresenter implements StationListContract.Presenter, Stat
 
     @Override
     public void loadAllStations() {
-        System.out.println("llega hasta aquí");
+
         model.loadAllStations(this);
     }
 

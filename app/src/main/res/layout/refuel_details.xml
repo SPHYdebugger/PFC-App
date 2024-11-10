@@ -23,15 +23,15 @@
                 android:background="#000000" />
 
             <TextView
-                android:id="@+id/detail_license_label"
+                android:id="@+id/detail_date_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="License Plate"
+                android:text="Register date"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detail_license"
+                android:id="@+id/detail_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -45,15 +45,15 @@
                 android:background="#000000" />
 
             <TextView
-                android:id="@+id/detail_brand_label"
+                android:id="@+id/detail_vehicle_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Brand"
+                android:text="Vehicle"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detail_brand"
+                android:id="@+id/detail_vehicle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -67,15 +67,15 @@
                 android:background="#000000" />
 
             <TextView
-                android:id="@+id/detail_model_label"
+                android:id="@+id/detail_station_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Model"
+                android:text="Station"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detail_model"
+                android:id="@+id/detail_station"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -90,15 +90,15 @@
 
 
             <TextView
-                android:id="@+id/detail_kms_label"
+                android:id="@+id/detail_amount_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="KMs"
+                android:text="Amount"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detail_kms"
+                android:id="@+id/detail_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -110,36 +110,102 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="#000000" />
-
 
             <TextView
                 android:id="@+id/detail_fuel_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refuels"
+                android:text="Fuel"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/detail_fuel"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/detail_refuels"
-                    android:layout_width="188dp"
-                    android:layout_height="match_parent"
-                    android:text=""
-                    android:textSize="18sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
 
-                <Button
-                    android:id="@+id/goRefuels"
-                    android:backgroundTint="@color/colorFondoOscuro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="VER" />
+            <TextView
+                android:id="@+id/detail_price_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="liter price"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/detail_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:id="@+id/detail_liters_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Liters refueled"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_liters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
+
+
+            <CheckBox
+                android:id="@+id/fulled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Llenado" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#000000" />
+
+            <TextView
+                android:id="@+id/detail_kmsTraveled_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KMs Traveled"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_kmsTraveled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp" />
+
 
             <View
                 android:id="@+id/view"
@@ -150,15 +216,15 @@
                 android:background="#000000" />
 
             <TextView
-                android:id="@+id/detail_brand_label2"
+                android:id="@+id/detail_refuelConsumption_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fuel"
+                android:text="Refuel consumption"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/fuel"
+                android:id="@+id/detail_refuelConsumption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -172,15 +238,15 @@
                 android:background="#000000" />
 
             <TextView
-                android:id="@+id/detail_brand_label3"
+                android:id="@+id/detail_vehicle_consumption_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Med consumption"
+                android:text="Vehicle consumption"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/consum"
+                android:id="@+id/detail_consum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -194,20 +260,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="#000000" />
 
-            <TextView
-                android:id="@+id/detail_brand_label4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Register date"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="18sp" />
 
 
         </LinearLayout>

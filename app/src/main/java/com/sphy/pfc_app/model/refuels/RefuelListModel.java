@@ -30,14 +30,14 @@ public class RefuelListModel implements RefuelListContract.Model {
         getRefuelsCall.enqueue(new Callback<List<Refuel>>() {
             @Override
             public void onResponse(Call<List<Refuel>> call, Response<List<Refuel>> response) {
-                Log.e("getVehicleRefuels", response.message());
+                Log.e("getRefuels", response.message());
                 List<Refuel> refuels = response.body();
                 listener.onLoadRefuelsSuccess(refuels);
             }
 
             @Override
             public void onFailure(Call<List<Refuel>> call, Throwable t) {
-                Log.e("getVehicleRefuels", t.getMessage());
+                Log.e("getRefuels", t.getMessage());
                 listener.onLoadRefuelsError("Se ha producido un error al conectar con el servidor");
             }
         });

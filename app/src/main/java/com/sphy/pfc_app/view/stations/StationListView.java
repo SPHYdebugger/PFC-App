@@ -66,6 +66,7 @@ public class StationListView extends BaseActivity implements StationListContract
 
     @Override
     public void listStations(List<StationDTO> stations) {
+
         this.stations.clear();
         this.stations.addAll(stations);
         adapter.notifyDataSetChanged();

@@ -9,12 +9,13 @@ public class RefuelDTO {
     private String creationDate;
     private String licensePlate;
     private String stationName;
+    private boolean fulled;
 
 
     public RefuelDTO() {}
 
 
-    public RefuelDTO(long id, String fuel, float amount, float price, String creationDate, String licensePlate, String stationName) {
+    public RefuelDTO(long id, String fuel, float amount, float price, String creationDate, String licensePlate, String stationName, boolean fulled) {
         this.id = id;
         this.fuel = fuel;
         this.amount = amount;
@@ -22,6 +23,7 @@ public class RefuelDTO {
         this.creationDate = creationDate;
         this.licensePlate = licensePlate;
         this.stationName = stationName;
+        this.fulled = fulled;
     }
 
 
@@ -80,5 +82,13 @@ public class RefuelDTO {
 
     public void setStationName(String stationName) {
         this.stationName = stationName;
+    }
+
+    public boolean isFulled() {
+        return fulled;
+    }
+
+    public void setFulled(boolean fulled) {
+        this.fulled = fulled;
     }
 }

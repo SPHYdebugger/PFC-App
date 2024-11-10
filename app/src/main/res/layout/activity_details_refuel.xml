@@ -83,20 +83,35 @@
             android:translationX="25dp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stations_list"
-        android:layout_width="408dp"
-        android:layout_height="546dp"
-        android:layout_marginTop="4dp"
-        android:padding="5dp"
+    <TextView
+        android:id="@+id/detalleDE"
+        android:layout_width="331dp"
+        android:layout_height="29dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+
+    <include
+        android:id="@+id/stationDetailsLayout"
+        layout="@layout/refuel_details"
+        android:layout_width="402dp"
+        android:layout_height="505dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
+        app:layout_constraintVertical_bias="0.585" />
 
     <LinearLayout
-        android:layout_width="389dp"
-        android:layout_height="49dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="392dp"
+        android:layout_height="54dp"
         android:layout_marginBottom="4dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,12 +122,13 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:backgroundTint="@color/colorFondoOscuro"
+            android:layout_weight="1"
             android:text="VOLVER A PANTALLA PRINCIPAL" />
     </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -40,11 +40,11 @@ public class StationRegisterModel implements StationRegisterContract.Model {
             @Override
             public void onResponse(Call<Station> call, Response<Station> response) {
                 if (response.isSuccessful()) {
-
                     listener.onStationInsertedSuccess();
                 } else {
                     if (response.code() == 409) {
                         String errorMessage = getErrorMessage(response);
+                        listener.onStationInsertedError(errorMessage);
                     } else {
                         String errorMessage = getErrorMessage(response);
                         listener.onStationInsertedError("Error al insertar la estación: " + errorMessage);
@@ -64,7 +64,6 @@ public class StationRegisterModel implements StationRegisterContract.Model {
         private String getErrorMessage(Response<Station> response) {
             try {
                 String errorBody = response.errorBody().string();
-
 
                 JSONObject jsonObject = new JSONObject(errorBody);
                 if (jsonObject.has("message")) {

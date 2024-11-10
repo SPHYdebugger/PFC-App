@@ -11,14 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.DTO.StationDTO;
-import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.stations.StationDetailsContract;
-import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Station;
-import com.sphy.pfc_app.domain.Vehicle;
 import com.sphy.pfc_app.presenter.Stations.StationDetailsPresenter;
-import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
 
@@ -61,7 +57,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
-        tvStationId = findViewById(R.id.detail_stationId);
+
         tvName = findViewById(R.id.detail_name);
         tvAddress = findViewById(R.id.detail_address);
         tvSite = findViewById(R.id.detail_site);
@@ -76,7 +72,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
         Intent intent = getIntent();
         stationId = intent.getLongExtra("Id", stationId);
         nameGet = intent.getStringExtra("name");
-        System.out.println("valor que se recoge " + nameGet);
+        System.out.println("valor que se recoge de name" + nameGet);
         System.out.println("valor id que se recoge " + stationId);
         presenter.getStation(stationId);
 
@@ -92,7 +88,8 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
     private void goStationRefuels() {
         Intent intent = new Intent(StationDetailsView.this, RefuelListView.class);
         System.out.println("valor que se pasa " + nameGet);
-        intent.putExtra("name", nameGet);
+        String identifierString = nameGet;
+        intent.putExtra("identifier", identifierString);
         startActivity(intent);
     }
 
@@ -109,7 +106,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
 
         String text = "DETALLE DE LA ESTACIÓN: " + station.getName();
         tvDetalleDE.setText(text);
-        tvStationId.setText(String.valueOf(station.getId()));
+
         tvName.setText(station.getName());
         tvAddress.setText(station.getAddress());
         tvSite.setText(station.getSite());

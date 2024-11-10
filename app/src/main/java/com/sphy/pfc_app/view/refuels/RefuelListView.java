@@ -2,7 +2,9 @@ package com.sphy.pfc_app.view.refuels;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,8 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     private RefuelListPresenter presenter;
 
     private ImageButton menuButton;
-    String licensePlate;
+    private Button refuelDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,33 +39,34 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
 
+
+
+
         presenter = new RefuelListPresenter(this);
 
         refuels = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.refuels_list);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RefuelAdapter(refuels);
         recyclerView.setAdapter(adapter);
 
-        Intent intent = getIntent();
-        String identifier = intent.getStringExtra("licensePlate");
-        System.out.println("esto es " + identifier);
+
+        String identifier = getIntent().getStringExtra("identifier");
+        System.out.println("El identifier es: " + identifier);
         presenter.findRefuelByIdentifier(identifier);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = getIntent();
-        String identifier = intent.getStringExtra("licensePlate");
-        System.out.println("esto es " + identifier);
+        String identifier = getIntent().getStringExtra("identifier");
+        System.out.println("El identifier es: " + identifier);
         presenter.findRefuelByIdentifier(identifier);
     }
 
     @Override
-    public void listVehicleRefuels(List<Refuel> refuels) {
+    public void listRefuels(List<Refuel> refuels) {
         this.refuels.clear();
         this.refuels.addAll(refuels);
         adapter.notifyDataSetChanged();

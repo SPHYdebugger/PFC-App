@@ -2,7 +2,10 @@ package com.sphy.pfc_app.view.vehicles;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -10,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.VehicleDTOAdapter;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
@@ -26,6 +30,7 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     private VehicleListPresenter presenter;
 
     private ImageButton menuButton;
+    private Button backButton;
 
 
 
@@ -35,6 +40,8 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
         setContentView(R.layout.activity_list_vehicles);
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
+        backButton = findViewById(R.id.backButton);
+
 
         presenter = new VehicleListPresenter(this);
 
@@ -93,6 +100,11 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 
 

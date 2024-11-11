@@ -3,10 +3,12 @@ package com.sphy.pfc_app.contract.refuels;
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.domain.Refuel;
 
+import java.util.List;
+
 public interface RefuelDetailsContract {
     interface View {
         void displayRefuelDetails(Refuel refuel);
-
+        void displayRefuelGrafDetails(List<Refuel> refuel);
 
     }
 
@@ -26,7 +28,10 @@ public interface RefuelDetailsContract {
             void onUpdateError(String message);
         }
 
-
+        interface OnRefuelDetailsGrafListener {
+            void onRefuelDetailsGrafSuccess(Refuel refuel);
+            void onRefuelDetailsGrafError(String message);
+        }
 
 
 

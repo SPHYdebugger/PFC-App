@@ -15,8 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.MenuAdapter;
+import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafView;
+import com.sphy.pfc_app.view.refuels.RefuelDetailsView;
 import com.sphy.pfc_app.view.stations.StationListView;
+import com.sphy.pfc_app.view.vehicles.VehicleConsumDetailsView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
+import com.sphy.pfc_app.view.vehicles.VehiclePruebasConsumDetailsView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,20 +41,20 @@ public class BaseActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_menu);
 
-        // Define las opciones del menú
-        List<String> options = Arrays.asList("VEHICULOS", "GASOLINERAS", "HISTORIAL", "", "SALIR");
+
+        List<String> options = Arrays.asList("VEHICULOS", "GASOLINERAS", "CONSUMOS", "PRUEBAS", "SALIR");
         ListView listView = dialog.findViewById(R.id.listViewOptions);
         MenuAdapter adapter = new MenuAdapter(this, options);
         listView.setAdapter(adapter);
 
-        // Maneja el clic en las opciones
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedOption = options.get(position);
-                // Aquí puedes manejar la acción para cada opción
+
                 dialog.dismiss(); // Cierra el diálogo después de seleccionar
-                // Verifica si la opción seleccionada es "VEHICULOS"
+
                 if ("VEHICULOS".equals(selectedOption)) {
 
                     Intent intent = new Intent(BaseActivity.this, VehicleListView.class);
@@ -59,7 +63,17 @@ public class BaseActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(BaseActivity.this, StationListView.class);
                     startActivity(intent);
-                } else if ("SALIR".equals(selectedOption)) {
+                } else if ("CONSUMOS".equals(selectedOption)) {
+
+                    Intent intent = new Intent(BaseActivity.this, VehicleConsumDetailsView.class);
+                    startActivity(intent);
+
+                }else if ("PRUEBAS".equals(selectedOption)) {
+
+                    Intent intent = new Intent(BaseActivity.this, RefuelDetailsGrafView.class);
+                    startActivity(intent);
+                }
+                else if ("SALIR".equals(selectedOption)) {
 
                     finish();
                 } else {

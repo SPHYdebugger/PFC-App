@@ -61,6 +61,15 @@
         <activity
             android:name=".view.refuels.RefuelDetailsView"
             android:exported="false"/>
+        <activity
+            android:name=".view.vehicles.VehicleConsumDetailsView"
+            android:exported="false"/>
+        <activity
+            android:name=".view.vehicles.VehiclePruebasConsumDetailsView"
+            android:exported="false"/>
+        <activity
+            android:name=".view.refuels.RefuelDetailsGrafView"
+            android:exported="false"/>
 
 
 

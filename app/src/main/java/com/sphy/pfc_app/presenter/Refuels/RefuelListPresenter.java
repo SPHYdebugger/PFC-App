@@ -1,11 +1,10 @@
 package com.sphy.pfc_app.presenter.Refuels;
 
-import com.sphy.pfc_app.DTO.RefuelDTO;
+import android.content.Context;
+
 import com.sphy.pfc_app.contract.refuels.RefuelListContract;
 import com.sphy.pfc_app.domain.Refuel;
 import com.sphy.pfc_app.model.refuels.RefuelListModel;
-import com.sphy.pfc_app.model.vehicles.VehicleListModel;
-import com.sphy.pfc_app.view.refuels.RefuelListView;
 
 import java.util.List;
 
@@ -14,9 +13,10 @@ public class RefuelListPresenter implements RefuelListContract.Presenter, Refuel
     private RefuelListContract.View view;
     private RefuelListContract.Model model;
 
-    public RefuelListPresenter(RefuelListView view) {
+
+    public RefuelListPresenter(RefuelListContract.View view) {
         this.view = view;
-        model= new RefuelListModel(view);
+        this.model = new RefuelListModel((Context) view);
     }
 
     @Override
@@ -40,3 +40,4 @@ public class RefuelListPresenter implements RefuelListContract.Presenter, Refuel
         }
     }
 }
+

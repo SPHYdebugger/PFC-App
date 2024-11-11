@@ -21,6 +21,8 @@ import com.sphy.pfc_app.presenter.Refuels.RefuelDetailsPresenter;
 import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
+import java.util.List;
+
 
 public class RefuelDetailsView extends BaseActivity implements RefuelDetailsContract.View {
 
@@ -126,6 +128,11 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
         tvRefuelConsumption.setText(String.valueOf(refuel.getRefuelConsumption()));
         tvVehicleConsumption.setText(String.valueOf(refuel.getMedConsumption()));
         cbFulled.setChecked(refuel.isFulled());
+
+    }
+
+    @Override
+    public void displayRefuelGrafDetails(List<Refuel> refuel) {
 
     }
 

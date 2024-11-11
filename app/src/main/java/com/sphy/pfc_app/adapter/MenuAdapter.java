@@ -16,15 +16,15 @@ public class MenuAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Obtén el dato para esta posición
+
         String option = getItem(position);
 
-        // Infla la vista si es necesario
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
         }
 
-        // Configura la vista
+
         TextView textView = convertView.findViewById(android.R.id.text1);
         textView.setText(option);
         textView.setTextColor(getContext().getResources().getColor(android.R.color.white));

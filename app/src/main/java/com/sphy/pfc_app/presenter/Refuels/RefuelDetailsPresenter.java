@@ -20,6 +20,7 @@ public class RefuelDetailsPresenter implements RefuelDetailsContract.Presenter {
         this.model = new RefuelDetailsModel(((AppCompatActivity) view).getApplicationContext());
     }
 
+
     @Override
     public void getRefuel(String id) {
         model.getRefuel(id, new RefuelDetailsModel.OnRefuelDetailsListener() {
@@ -34,6 +35,8 @@ public class RefuelDetailsPresenter implements RefuelDetailsContract.Presenter {
             }
         });
     }
+
+
 
 
 

@@ -75,11 +75,13 @@ public class RegisterStationView extends BaseActivity implements StationRegister
         station.setGlpFuel(glp);
 
         presenter.insertStation(station);
+
     }
 
     @Override
     public void showInsertSuccessMessage() {
         Toast.makeText(this,"Estación añadida", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override

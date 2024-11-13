@@ -28,7 +28,8 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     private RefuelListPresenter presenter;
 
     private ImageButton menuButton;
-    private Button refuelDetails;
+    private Button buttonGraf;
+
 
 
     @Override
@@ -38,7 +39,7 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
 
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
-
+        buttonGraf = findViewById(R.id.button_graf);
 
 
 
@@ -51,6 +52,15 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         adapter = new RefuelAdapter(refuels);
         recyclerView.setAdapter(adapter);
 
+
+        buttonGraf.setOnClickListener(v -> {
+            String license = refuels.get(0).getNameVehicle();
+
+
+            Intent intent = new Intent(RefuelListView.this, RefuelDetailsGrafView.class);
+            intent.putExtra("license", license);
+            startActivity(intent);
+        });
 
         String identifier = getIntent().getStringExtra("identifier");
         System.out.println("El identifier es: " + identifier);
@@ -76,4 +86,7 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+
+
 }

@@ -48,6 +48,7 @@ public class VehicleSelectionAdapter extends RecyclerView.Adapter<VehicleSelecti
             Intent intent = new Intent(holder.itemView.getContext(), RegisterRefuelView.class);
             intent.putExtra("vehicleId", vehicle.getId());
             intent.putExtra("vehicleLicense", vehicle.getLicensePlate());
+            intent.putExtra("vehicleKms", String.valueOf(vehicle.getKmActual()));
             holder.itemView.getContext().startActivity(intent);
         });
     }

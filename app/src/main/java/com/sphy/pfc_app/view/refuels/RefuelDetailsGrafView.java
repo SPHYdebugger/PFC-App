@@ -10,11 +10,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.refuels.RefuelDetailsContract;
@@ -27,6 +33,8 @@ import com.sphy.pfc_app.view.BaseActivity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -42,10 +50,14 @@ public class RefuelDetailsGrafView extends BaseActivity implements RefuelListCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consum_vehicle);
         tvDetalleDE = findViewById(R.id.detalleDE);
-        barChart = findViewById(R.id.barCha);
+
+        Intent intent = getIntent();
+        String license = intent.getStringExtra("license");
 
         presenter = new RefuelListPresenter(this);
-        presenter.findRefuelByIdentifier("1111AAA");
+        presenter.findRefuelByIdentifier(license);
+
+
 
     }
 
@@ -57,51 +69,84 @@ public class RefuelDetailsGrafView extends BaseActivity implements RefuelListCon
 
     @Override
     public void listRefuels(List<Refuel> refuels) {
-        List<BarEntry> entries = new ArrayList<>();
+        List<BarEntry> barEntries = new ArrayList<>();
+        List<Entry> lineEntries1 = new ArrayList<>(); // Primera línea
+        List<Entry> lineEntries2 = new ArrayList<>(); // Segunda línea
 
-        // Iterar sobre los repostajes y agregar los datos en el gráfico
-        for (int i = 0; i < refuels.size(); i++) {
-            Refuel refuel = refuels.get(i);
-            float consumption = refuel.getRefuelConsumption();  // Consumo de combustible
-            entries.add(new BarEntry(i, consumption));  // 'i' es el índice que se usa para el eje X
-        }
-
-        // Crear el conjunto de datos y configurarlo
-        BarDataSet dataSet = new BarDataSet(entries, "Consumo de Combustible");
-        dataSet.setColor(Color.BLUE);
-        BarData barData = new BarData(dataSet);
-
-        // Habilitar los valores en las barras
-        dataSet.setDrawValues(true);  // Habilitar mostrar los valores sobre las barras
-        dataSet.setValueTextColor(Color.BLACK);  // Color del texto
-        dataSet.setValueTextSize(10f);  // Tamaño del texto
-
-        // Establecer el ValueFormatter para los valores
-        dataSet.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                // Convertir el valor a un String con 2 decimales
-                return String.format("%.2f", value);  // Formatear el valor con 2 decimales
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Collections.sort(refuels, (r1, r2) -> {
+            try {
+                Date date1 = dateFormat.parse(r1.getCreationDate());
+                Date date2 = dateFormat.parse(r2.getCreationDate());
+                return date1.compareTo(date2);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
             }
         });
 
-        // Configurar el gráfico
-        barChart.setData(barData);
-        barChart.invalidate();  // Refrescar la gráfica
+        // Iterar sobre los repostajes y agregar los datos en las listas correspondientes
+        for (int i = 0; i < refuels.size(); i++) {
+            Refuel refuel = refuels.get(i);
 
-        // Configuración del eje X para mostrar las fechas
-        XAxis xAxis = barChart.getXAxis();
+            // Datos para las barras
+            float consumption = refuel.getRefuelConsumption();
+            barEntries.add(new BarEntry(i, consumption));
+
+            // Primera línea: consumo real
+            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
+                float realConsumption = refuel.getRefuelConsumption();
+                lineEntries1.add(new Entry(i, realConsumption));
+            }
+
+            // Segunda línea: promedio de consumo
+            float medConsumption = refuel.getMedConsumption();
+            lineEntries2.add(new Entry(i, medConsumption));
+        }
+
+        // Conjunto de datos para las barras
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Consumo del repostaje");
+        barDataSet.setColor(Color.parseColor("#156082"));
+        barDataSet.setValueTextSize(16f);
+
+        // Conjunto de datos para la primera línea
+        LineDataSet lineDataSet1 = new LineDataSet(lineEntries1, "Consumo real");
+        lineDataSet1.setColor(Color.GREEN);
+        lineDataSet1.setCircleColor(Color.GREEN);
+        lineDataSet1.setLineWidth(4f);
+        lineDataSet1.setDrawValues(false);
+
+        // Conjunto de datos para la segunda línea
+        LineDataSet lineDataSet2 = new LineDataSet(lineEntries2, "Consumo Promedio");
+        lineDataSet2.setColor(Color.RED);
+        lineDataSet2.setCircleColor(Color.RED);
+        lineDataSet2.setLineWidth(4f);
+        lineDataSet2.setDrawValues(false);
+
+        // Crear los objetos BarData y LineData
+        BarData barData = new BarData(barDataSet);
+        LineData lineData = new LineData(lineDataSet1, lineDataSet2);
+
+        // Crear el gráfico combinado y añadir los conjuntos de datos
+        CombinedData combinedData = new CombinedData();
+        combinedData.setData(barData);  // Añadir barras
+        combinedData.setData(lineData); // Añadir las dos líneas
+
+        CombinedChart combinedChart = findViewById(R.id.combinedChart);
+        combinedChart.setData(combinedData);
+        combinedChart.invalidate();
+
+        // Configuración del eje X para mostrar fechas
+        XAxis xAxis = combinedChart.getXAxis();
         xAxis.setValueFormatter(new ValueFormatter() {
+            SimpleDateFormat displayFormat = new SimpleDateFormat("dd/MM/yyyy");
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
-                int index = (int) value;  // Convertir el valor flotante a entero
+                int index = (int) value;
                 if (index >= 0 && index < refuels.size()) {
-                    String creationDateStr = refuels.get(index).getCreationDate();  // Obtener la fecha de creación como String
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  // Usar el formato adecuado
                     try {
-                        Date creationDate = dateFormat.parse(creationDateStr);  // Parsear la fecha a Date
-                        SimpleDateFormat formattedDate = new SimpleDateFormat("dd/MM/yyyy");  // Formatear para mostrar
-                        return formattedDate.format(creationDate);  // Formatear la fecha para mostrarla
+                        Date date = dateFormat.parse(refuels.get(index).getCreationDate());
+                        return displayFormat.format(date);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -110,22 +155,19 @@ public class RefuelDetailsGrafView extends BaseActivity implements RefuelListCon
             }
         });
 
-        // Configuración del eje X
+        // Configuración adicional
         xAxis.setPosition(XAxis.XAxisPosition.TOP);
-        xAxis.setGranularity(1f);  // Granularidad en el eje X
-        xAxis.setLabelRotationAngle(90f);  // Rotar las etiquetas del eje X a 90 grados
+        xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(90f);
         xAxis.setTextSize(14f);
 
-        // Configuración del eje Y
-        barChart.getAxisLeft().setAxisMinimum(0f);  // Establecer límite inferior
-        barChart.getAxisLeft().setGranularity(1f);  // Granularidad en el eje Y
-
-        // Otras configuraciones del gráfico
-        barChart.getDescription().setEnabled(false);  // Desactivar la descripción del gráfico
-
-        barChart.setDragEnabled(true);  // Habilitar arrastre
-        barChart.setScaleEnabled(true);  // Habilitar zoom
-        barChart.getAxisRight().setEnabled(false);  // Desactivar el eje Y derecho
+        YAxis leftAxis = combinedChart.getAxisLeft();
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setGranularity(1f);
+        combinedChart.getAxisRight().setEnabled(false);
+        combinedChart.getDescription().setEnabled(false);
+        combinedChart.setDragEnabled(true);
+        combinedChart.setScaleEnabled(true);
     }
 
 

@@ -1,6 +1,7 @@
 package com.sphy.pfc_app.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.domain.Refuel;
+import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafView;
 import com.sphy.pfc_app.view.refuels.RefuelDetailsView;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
 
@@ -48,6 +50,10 @@ public class RefuelAdapter extends RecyclerView.Adapter<RefuelAdapter.RefuelHold
             intent.putExtra("refuelId", refuel.getId());
             v.getContext().startActivity(intent);
         });
+
+
+
+
     }
 
     @Override
@@ -63,6 +69,7 @@ public class RefuelAdapter extends RecyclerView.Adapter<RefuelAdapter.RefuelHold
         public Button detailsButton;
         public CheckBox fulled;
 
+
         public RefuelHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -71,6 +78,7 @@ public class RefuelAdapter extends RecyclerView.Adapter<RefuelAdapter.RefuelHold
             stationName = itemView.findViewById(R.id.station);
             detailsButton = itemView.findViewById(R.id.detailsButton);
             fulled = itemView.findViewById(R.id.fulledCheck);
+
         }
     }
 

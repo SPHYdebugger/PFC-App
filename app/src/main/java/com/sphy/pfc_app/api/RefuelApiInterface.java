@@ -20,7 +20,7 @@ public interface RefuelApiInterface {
 
 
 
-    // Obtener todos los repostajes
+
     @GET("/refuels")
     Call<List<RefuelDTO>> getAllRefuels();
 
@@ -28,7 +28,7 @@ public interface RefuelApiInterface {
     @GET("/refuels/{refuelIdentifier}")
     Call<List<Refuel>> findRefuelByIdentifier(@Path("refuelIdentifier") String refuelIdentifier);
 
-    // Crear un nuevo repostaje para un vehículo y estación específicos
+
     @POST("/refuels/{vehicleId}/{stationId}")
     Call<Refuel> addRefuel(
             @Path("vehicleId") long vehicleId,
@@ -36,7 +36,7 @@ public interface RefuelApiInterface {
             @Body Refuel refuel
     );
 
-    // Eliminar repostaje por ID
+
     @DELETE("/refuels/{id}")
     Call<Void> deleteRefuel(@Path("id") long refuelId);
 

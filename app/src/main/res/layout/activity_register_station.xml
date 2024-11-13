@@ -156,6 +156,7 @@
             android:id="@+id/register_station_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorFondoOscuro"
             android:text="Registrar Estación"
             android:onClick="registerStation" />
     </LinearLayout>

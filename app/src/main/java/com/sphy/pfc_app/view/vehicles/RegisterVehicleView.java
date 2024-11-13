@@ -62,6 +62,7 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
     @Override
     public void showInsertSuccessMessage() {
         Toast.makeText(this,"Vehiculo añadido", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override

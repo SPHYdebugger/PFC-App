@@ -189,8 +189,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:hint="Ingrese los kilómetros"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="#00000F" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -226,6 +226,7 @@
             android:id="@+id/create_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorFondoOscuro"
             android:onClick="createVehicle"
             android:text="@string/create" />
     </LinearLayout>

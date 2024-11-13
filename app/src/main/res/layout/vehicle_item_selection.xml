@@ -67,6 +67,7 @@
                 android:id="@+id/kms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorFondoOscuro"
                 android:text="TextView"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"

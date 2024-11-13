@@ -33,6 +33,7 @@
             android:exported="false"/>
         <activity
             android:name=".view.vehicles.RegisterVehicleView"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
         <activity
             android:name=".view.vehicles.VehicleListView"
@@ -48,9 +49,11 @@
             android:exported="false"/>
         <activity
             android:name=".view.refuels.RegisterRefuelView"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
         <activity
             android:name=".view.stations.RegisterStationView"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
         <activity
             android:name=".view.stations.StationListView"

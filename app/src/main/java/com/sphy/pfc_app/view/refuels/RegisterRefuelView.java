@@ -2,8 +2,11 @@ package com.sphy.pfc_app.view.refuels;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.DTO.StationDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.SpinnerAdapter;
 import com.sphy.pfc_app.domain.Refuel;
@@ -46,6 +50,7 @@ public class RegisterRefuelView extends BaseActivity {
     private long vehicleId;
     private long stationId;
     private String license;
+    private String kms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,8 @@ public class RegisterRefuelView extends BaseActivity {
 
         vehicleId = getIntent().getLongExtra("vehicleId", -1);
         license = getIntent().getStringExtra("vehicleLicense");
+        kms = getIntent().getStringExtra("vehicleKms");
+
 
         if (vehicleId == -1) {
             Toast.makeText(this, "Error: Vehículo no encontrado", Toast.LENGTH_LONG).show();
@@ -71,8 +78,47 @@ public class RegisterRefuelView extends BaseActivity {
 
         full = findViewById(R.id.checkBox2);
         selectedVehicleTextView = findViewById(R.id.selectedVehicleTextView);
-
         selectedVehicleTextView.setText(license);
+
+
+        vehicleKmEditText.setText(String.valueOf(kms));
+        vehicleKmEditText.setTextColor(Color.GRAY);
+        vehicleKmEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    vehicleKmEditText.setTextColor(Color.BLACK);
+                } else {
+                    if (vehicleKmEditText.getText().toString().isEmpty()) {
+                        vehicleKmEditText.setTextColor(Color.GRAY);
+                    }
+                }
+            }
+        });
+
+        vehicleKmEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String enteredKmText = vehicleKmEditText.getText().toString();
+
+                if (!enteredKmText.isEmpty()) {
+                    int enteredKm = Integer.parseInt(enteredKmText);
+                    if (enteredKm <= Integer.parseInt(kms)) {
+                        vehicleKmEditText.setError("El valor no puede ser menor o igual al actual.");
+                        return false;
+                    }
+
+                    if (enteredKm > Integer.parseInt(kms) + 1500) {
+                        vehicleKmEditText.setError("No puede superar los " + (Integer.parseInt(kms) + 1500) + " km.");
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        });
+
+
         SpinnerAdapter.populateFuelTypeSpinner(this, fuelTypeSpinner, vehicleId);
         SpinnerAdapter.populateStationSpinner(this,stationSpinner);
 
@@ -141,9 +187,10 @@ public class RegisterRefuelView extends BaseActivity {
                 "Kilómetros actuales del vehículo: " + vehicleKmEditText.getText().toString() + "\n" +
                 "Llenado de depósito: " + llenado);
 
-
-        builder.setPositiveButton("Sí", (dialog, which) -> registerRefuel(create_button));
-
+        builder.setPositiveButton("Sí", (dialog, which) -> {
+            registerRefuel(create_button);
+            showRefuelSuccessMessage();
+        });
 
         builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
 
@@ -152,8 +199,12 @@ public class RegisterRefuelView extends BaseActivity {
         dialog.show();
     }
 
+
     public void showRefuelSuccessMessage() {
         Toast.makeText(this, "Repostaje registrado exitosamente", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
+        startActivity(intent);
+        finish();
     }
 
     public void showRefuelErrorMessage() {

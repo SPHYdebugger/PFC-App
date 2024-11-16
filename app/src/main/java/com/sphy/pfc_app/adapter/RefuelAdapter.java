@@ -1,7 +1,6 @@
 package com.sphy.pfc_app.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.domain.Refuel;
-import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafView;
 import com.sphy.pfc_app.view.refuels.RefuelDetailsView;
-import com.sphy.pfc_app.view.refuels.RefuelListView;
 
 import java.util.List;
 

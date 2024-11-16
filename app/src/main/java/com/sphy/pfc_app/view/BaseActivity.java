@@ -12,15 +12,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.MenuAdapter;
-import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafView;
-import com.sphy.pfc_app.view.refuels.RefuelDetailsView;
+import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafByVehicleView;
 import com.sphy.pfc_app.view.stations.StationListView;
 import com.sphy.pfc_app.view.vehicles.VehicleConsumDetailsView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
-import com.sphy.pfc_app.view.vehicles.VehiclePruebasConsumDetailsView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,7 +67,7 @@ public class BaseActivity extends AppCompatActivity {
 
                 }else if ("PRUEBAS".equals(selectedOption)) {
 
-                    Intent intent = new Intent(BaseActivity.this, RefuelDetailsGrafView.class);
+                    Intent intent = new Intent(BaseActivity.this, RefuelDetailsGrafByVehicleView.class);
                     startActivity(intent);
                 }
                 else if ("SALIR".equals(selectedOption)) {

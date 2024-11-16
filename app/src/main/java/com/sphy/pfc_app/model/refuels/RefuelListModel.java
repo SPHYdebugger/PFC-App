@@ -32,6 +32,7 @@ public class RefuelListModel implements RefuelListContract.Model {
             public void onResponse(Call<List<Refuel>> call, Response<List<Refuel>> response) {
                 Log.e("getRefuels", response.message());
                 List<Refuel> refuels = response.body();
+                System.out.println("tamaño de la lista obtenida" + refuels.size());
                 listener.onLoadRefuelsSuccess(refuels);
             }
 

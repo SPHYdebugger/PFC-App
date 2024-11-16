@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,13 +52,23 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
 
 
         buttonGraf.setOnClickListener(v -> {
-            String license = refuels.get(0).getNameVehicle();
+            String identifier = getIntent().getStringExtra("identifier");
+            System.out.println("El identifier que se manda a gráfica es: " + identifier);
 
+            String regexForStation = "^[a-zA-Z\\s]+\\d{0,2}$";
+            String regexForVehicle = "^[a-zA-Z0-9]+$";
 
-            Intent intent = new Intent(RefuelListView.this, RefuelDetailsGrafView.class);
-            intent.putExtra("license", license);
-            startActivity(intent);
+            if (identifier.matches(regexForVehicle) && !identifier.matches(regexForStation)) {
+                Intent intent = new Intent(RefuelListView.this, RefuelDetailsGrafByVehicleView.class);
+                intent.putExtra("identifier", identifier);
+                startActivity(intent);
+            } else if (identifier.matches(regexForStation)) {
+                Intent intent = new Intent(RefuelListView.this, RefuelDetailsGrafByStationView.class);
+                intent.putExtra("identifier", identifier);
+                startActivity(intent);
+            }
         });
+
 
         String identifier = getIntent().getStringExtra("identifier");
         System.out.println("El identifier es: " + identifier);

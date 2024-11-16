@@ -3,4 +3,13 @@
     <string name="logo">Logo de la app</string>
     <string name="bottom_logo">Logo de la app sin nombres</string>
 
+
+    <string-array name="filter_options">
+        <item>TODOS</item>
+        <item>ÚLTIMOS 12 MESES</item>
+        <item>ÚLTIMOS 6 MESES</item>
+    </string-array>
+
+
+
 </resources>

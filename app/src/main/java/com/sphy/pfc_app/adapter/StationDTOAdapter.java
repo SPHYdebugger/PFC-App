@@ -128,7 +128,7 @@ public class StationDTOAdapter extends RecyclerView.Adapter<StationDTOAdapter.Ta
             long stationId = stations.get(currentPosition).getId();
             String stationName = stations.get(currentPosition).getName();
             System.out.println("EstaciónDTO con id " + stationId + " tiene estado inicial del hide: " + stations.get(currentPosition).isHide());
-            StationApiInterface api = StationApi.buildInstance();
+            StationApiInterface api = StationApi.buildInstance(parentView.getContext());
             Call<StationDTO> stationToHideCall = api.getStationDTOById(stationId);
             stationToHideCall.enqueue(new Callback<StationDTO>() {
                 @Override

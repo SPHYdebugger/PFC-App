@@ -30,7 +30,7 @@ public class VehicleRegisterModel implements VehicleRegisterContract.Model {
 
     @Override
     public void insertVehicle(Vehicle vehicle, OnVehicleInsertedListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<Vehicle> addVehicleCall = api.addVehicle(vehicle);
         addVehicleCall.enqueue(new Callback<Vehicle>() {
             @Override

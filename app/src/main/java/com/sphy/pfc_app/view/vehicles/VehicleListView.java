@@ -22,7 +22,6 @@ import com.sphy.pfc_app.view.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class VehicleListView extends BaseActivity implements VehicleListContract.View {
 
     private List<VehicleDTO> vehicles;
@@ -32,20 +31,16 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     private ImageButton menuButton;
     private Button backButton;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_vehicles);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         backButton = findViewById(R.id.backButton);
 
-
-        presenter = new VehicleListPresenter(this);
-
-
+        presenter = new VehicleListPresenter(this);  // Inicializamos el Presenter
 
         vehicles = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.vehicles_list);
@@ -59,35 +54,8 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     @Override
     protected void onResume() {
         super.onResume();
-
-        presenter.loadAllVehicles();
-
-
+        presenter.loadAllVehicles();  // Llamamos al presenter para cargar los vehículos
     }
-
-    /*public void addVehicle(View view) {
-        Intent intent = new Intent(this, RegisterVehicleView.class);
-        startActivity(intent);
-    }*/
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_bar, menu);
-        return true;
-
-    }*/
-
-    /*@Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.search){
-
-            Intent intent = new Intent(ClientListView.this, SearchClientView.class);
-            startActivity(intent);
-            return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void listVehicles(List<VehicleDTO> vehicles) {
@@ -99,13 +67,10 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
     }
 
     public void backMain(View view) {
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
-
-
 }

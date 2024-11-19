@@ -142,7 +142,7 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
             long vehicleId = vehicles.get(currentPosition).getId();
             String vehicleLicense = vehicles.get(currentPosition).getLicensePlate();
             System.out.println("VehiculoDTO con id " + vehicleId + " tiene estado inicial del hide: " + vehicles.get(currentPosition).isHide());
-            VehicleApiInterface api = VehicleApi.buildInstance();
+            VehicleApiInterface api = VehicleApi.buildInstance(parentView.getContext());
             Call<Vehicle> vehicleToHideCall = api.getVehicleById(vehicleId);
             vehicleToHideCall.enqueue(new Callback<Vehicle>() {
                 @Override

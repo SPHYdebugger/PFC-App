@@ -24,7 +24,7 @@ public class RefuelRegisterModel implements RefuelRegisterContract.Model {
 
     @Override
     public void insertRefuel(long vehicleId, long stationId, Refuel refuel, RefuelRegisterContract.Model.OnRefuelInsertedListener listener) {
-        RefuelApiInterface api = RefuelApi.buildInstance();
+        RefuelApiInterface api = RefuelApi.buildInstance(context);
         Call<Refuel> call = api.addRefuel(vehicleId, stationId, refuel);
 
         call.enqueue(new Callback<Refuel>() {

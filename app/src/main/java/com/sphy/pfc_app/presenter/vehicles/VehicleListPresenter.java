@@ -1,5 +1,7 @@
 package com.sphy.pfc_app.presenter.vehicles;
 
+import android.content.Context;
+
 import com.sphy.pfc_app.DTO.VehicleDTO;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
 import com.sphy.pfc_app.model.vehicles.VehicleListModel;
@@ -7,23 +9,22 @@ import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
 import java.util.List;
 
-public class VehicleListPresenter implements VehicleListContract.Presenter, VehicleListContract.Model.OnLoadVehicleListener{
 
-    private VehicleListView view;
-    private VehicleListModel model;
+public class VehicleListPresenter implements VehicleListContract.Presenter, VehicleListContract.Model.OnLoadVehicleListener {
 
-    public VehicleListPresenter(VehicleListView view){
+    private VehicleListContract.View view;
+    private VehicleListContract.Model model;
+
+    public VehicleListPresenter(VehicleListContract.View view) {
         this.view = view;
-        model= new VehicleListModel(view);
+        // Accede directamente al contexto de la vista
+        model = new VehicleListModel((Context) view); // Hacer un cast de View a Context
     }
 
     @Override
     public void loadAllVehicles() {
-        System.out.println("llega hasta aquí");
-        model.loadAllVehicles(this);
+        model.loadAllVehicles(this);  // Llamamos al modelo para cargar los vehículos
     }
-
-
 
     @Override
     public void onLoadVehiclesSuccess(List<VehicleDTO> vehicles) {

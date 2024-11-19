@@ -25,7 +25,7 @@ public class SpinnerAdapter {
 
     public static void populateFuelTypeSpinner(Context context, Spinner fuelTypeSpinner, long vehicleId) {
 
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<Vehicle> vehicleSelected = api.getVehicleById(vehicleId);
 
         vehicleSelected.enqueue(new Callback<Vehicle>() {
@@ -62,7 +62,7 @@ public class SpinnerAdapter {
     }
 
     public static void populateStationSpinner(Context context, Spinner stationSpinner) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<List<StationDTO>> stationsCall = api.getStations();
 
         stationsCall.enqueue(new Callback<List<StationDTO>>() {

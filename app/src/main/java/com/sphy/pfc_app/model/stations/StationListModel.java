@@ -29,7 +29,7 @@ public class StationListModel implements StationListContract.Model {
 
     @Override
     public void loadAllStations(OnLoadStationListener listener) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<List<StationDTO>> getStationsCall = api.getStations();
         getStationsCall.enqueue(new Callback<List<StationDTO>>() {
             @Override

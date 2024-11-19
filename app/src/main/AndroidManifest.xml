@@ -76,6 +76,12 @@
         <activity
             android:name=".view.refuels.RefuelDetailsGrafByStationView"
             android:exported="false"/>
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".view.users.UserRegisterView"
+            android:exported="false"/>
 
 
 

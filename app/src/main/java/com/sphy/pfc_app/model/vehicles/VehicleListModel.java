@@ -16,6 +16,16 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.content.Context;
+import android.util.Log;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VehicleListModel implements VehicleListContract.Model {
 
@@ -27,26 +37,33 @@ public class VehicleListModel implements VehicleListContract.Model {
 
     @Override
     public void loadAllVehicles(OnLoadVehicleListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        // Usamos el VehicleApi con el token en las solicitudes
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<List<VehicleDTO>> getVehiclesCall = api.getVehicles();
+
         getVehiclesCall.enqueue(new Callback<List<VehicleDTO>>() {
             @Override
             public void onResponse(Call<List<VehicleDTO>> call, Response<List<VehicleDTO>> response) {
                 Log.e("getVehicles", response.message());
-                List<VehicleDTO> vehicles = response.body();
 
-                if (vehicles != null) {
-                    // Filtra los vehículos con `hide` igual a false
-                    List<VehicleDTO> visibleVehicles = new ArrayList<>();
-                    for (VehicleDTO vehicle : vehicles) {
-                        if (!vehicle.isHide()) {
-                            visibleVehicles.add(vehicle);
+                if (response.isSuccessful()) {
+                    List<VehicleDTO> vehicles = response.body();
+
+                    if (vehicles != null) {
+                        // Filtra los vehículos con `hide` igual a false
+                        List<VehicleDTO> visibleVehicles = new ArrayList<>();
+                        for (VehicleDTO vehicle : vehicles) {
+                            if (!vehicle.isHide()) {
+                                visibleVehicles.add(vehicle);
+                            }
                         }
+                        // Llama al listener con la lista filtrada
+                        listener.onLoadVehiclesSuccess(visibleVehicles);
+                    } else {
+                        listener.onLoadVehiclesError("Error: La respuesta está vacía");
                     }
-                    // Llama al listener con la lista filtrada
-                    listener.onLoadVehiclesSuccess(visibleVehicles);
                 } else {
-                    listener.onLoadVehiclesError("Error: La respuesta está vacía");
+                    listener.onLoadVehiclesError("Error en la respuesta: " + response.message());
                 }
             }
 
@@ -57,6 +74,4 @@ public class VehicleListModel implements VehicleListContract.Model {
             }
         });
     }
-
 }
-

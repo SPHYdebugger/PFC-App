@@ -33,7 +33,7 @@ public class StationRegisterModel implements StationRegisterContract.Model {
 
     @Override
     public void insertStation(Station station, OnStationInsertedListener listener) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<Station> addStationCall = api.addStation(station);
         addStationCall.enqueue(new Callback<Station>() {
 

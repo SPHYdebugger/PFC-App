@@ -26,7 +26,7 @@ public class SelectionVehicleListModel implements SelectionVehicleListContract.M
 
     @Override
     public void loadAllVehicles(OnLoadVehicleListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<List<VehicleDTO>> getVehiclesCall = api.getVehicles();
         getVehiclesCall.enqueue(new Callback<List<VehicleDTO>>() {
             @Override

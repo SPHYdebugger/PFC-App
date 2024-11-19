@@ -25,7 +25,7 @@ public class RefuelListModel implements RefuelListContract.Model {
 
     @Override
     public void findRefuelByIdentifier(String identifier, OnLoadRefuelListener listener) {
-        RefuelApiInterface api = RefuelApi.buildInstance();
+        RefuelApiInterface api = RefuelApi.buildInstance(context);
         Call<List<Refuel>> getRefuelsCall = api.findRefuelByIdentifier(identifier);
         getRefuelsCall.enqueue(new Callback<List<Refuel>>() {
             @Override

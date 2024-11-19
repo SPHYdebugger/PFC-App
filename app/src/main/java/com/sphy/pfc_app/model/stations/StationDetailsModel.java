@@ -29,7 +29,7 @@ public class StationDetailsModel implements StationDetailsContract.Model {
 
     @Override
     public void getStationDetails(long stationId, OnStationDetailsListener listener) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<StationDTO> getStationCall = api.getStationDTOById(stationId);
         getStationCall.enqueue(new Callback<StationDTO>() {
             @Override
@@ -49,7 +49,7 @@ public class StationDetailsModel implements StationDetailsContract.Model {
 
     @Override
     public void getStationDTO(long stationId, OnStationDetailsListener listener) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<StationDTO> getStationCall = api.getStationDTOById(stationId);
         getStationCall.enqueue(new Callback<StationDTO>() {
             @Override
@@ -69,7 +69,7 @@ public class StationDetailsModel implements StationDetailsContract.Model {
 
     @Override
     public void deleteStation(long stationId, OnDeleteListener listener) {
-        StationApiInterface api = StationApi.buildInstance();
+        StationApiInterface api = StationApi.buildInstance(context);
         Call<Void> deleteStationCall = api.deleteStation(stationId);
         deleteStationCall.enqueue(new Callback<Void>() {
             @Override

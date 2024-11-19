@@ -25,7 +25,7 @@ public class VehicleDetailsModel implements VehicleDetailsContract.Model {
 
     @Override
     public void getVehicleDetails(long vehicleId, OnVehicleDetailsListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<VehicleDTO> getVehicleCall = api.getVehicleDTOById(vehicleId);
         getVehicleCall.enqueue(new Callback<VehicleDTO>() {
             @Override
@@ -45,7 +45,7 @@ public class VehicleDetailsModel implements VehicleDetailsContract.Model {
 
     @Override
     public void getVehicleDTO(long vehicleId, OnVehicleDetailsListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<VehicleDTO> getVehicleCall = api.getVehicleDTOById(vehicleId);
         getVehicleCall.enqueue(new Callback<VehicleDTO>() {
             @Override
@@ -65,7 +65,7 @@ public class VehicleDetailsModel implements VehicleDetailsContract.Model {
 
     @Override
     public void deleteVehicle(long vehicleId, OnDeleteListener listener) {
-        VehicleApiInterface api = VehicleApi.buildInstance();
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
         Call<Void> deleteVehicleCall = api.deleteVehicle(vehicleId);
         deleteVehicleCall.enqueue(new Callback<Void>() {
             @Override

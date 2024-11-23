@@ -14,10 +14,13 @@ public class VehicleDTO {
     private String registrationDate;
     private int refuels;
     private boolean hide;
+    private long userId;
 
     public VehicleDTO() {}
 
-    public VehicleDTO(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, int refuels, boolean hide) {
+
+
+    public VehicleDTO(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, int refuels, boolean hide, long userId) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -29,6 +32,7 @@ public class VehicleDTO {
         this.registrationDate = registrationDate;
         this.refuels = refuels;
         this.hide = hide;
+        this.userId = userId;
     }
 
     public boolean isHide() {
@@ -118,4 +122,8 @@ public class VehicleDTO {
     public void setRefuels(int refuels) {
         this.refuels = refuels;
     }
+
+    public long getUserId() {return userId;}
+
+    public void setUserId(long userId) {this.userId = userId;}
 }

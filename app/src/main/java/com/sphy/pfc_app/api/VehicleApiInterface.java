@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface VehicleApiInterface {
     @GET("vehicles")
-    Call<List<VehicleDTO>> getVehicles();
+    Call<List<VehicleDTO>> getVehiclesByUserId(@Query("id") long id);
 
     @GET("vehicles/{id}")
     Call<Vehicle> getVehicleById(@Path("id") long id);

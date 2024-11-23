@@ -16,10 +16,11 @@ public class Vehicle {
     private String registrationDate;
     private boolean hide;
     private List<Refuel> refuels;
+    private long userId;
 
     public Vehicle() {}
 
-    public Vehicle(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, boolean hide, List<Refuel> refuels) {
+    public Vehicle(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, boolean hide, List<Refuel> refuels, long userId) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -31,6 +32,7 @@ public class Vehicle {
         this.registrationDate = registrationDate;
         this.hide = hide;
         this.refuels = refuels;
+        this.userId = userId;
     }
 
     public long getId() {
@@ -121,4 +123,8 @@ public class Vehicle {
     public void setHide(boolean hide) {
         this.hide = hide;
     }
+
+    public long getUserId() {return userId;}
+
+    public void setUserId(long userId) {this.userId = userId;}
 }

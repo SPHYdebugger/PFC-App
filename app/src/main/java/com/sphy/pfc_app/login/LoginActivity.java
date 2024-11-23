@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sphy.pfc_app.MainActivity;
 import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        AuthService authService = UserApi.getUser().create(AuthService.class);
+        AuthService authService = UserApiSecurity.getUser().create(AuthService.class);
         LoginRequest loginRequest = new LoginRequest(email, password);
 
         authService.login(loginRequest).enqueue(new Callback<JwtResponse>() {

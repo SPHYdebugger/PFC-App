@@ -1,8 +1,11 @@
 package com.sphy.pfc_app.view.vehicles;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,10 +18,12 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.refuels.RefuelDetailsContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.view.BaseActivity;
 
 import java.text.SimpleDateFormat;
@@ -37,17 +42,33 @@ public class VehiclePruebasConsumDetailsView extends BaseActivity implements Veh
     private Vehicle temporalVehicle;
     private int vehicleRefuels;
     private long refuelsLong;
+    private TextView username;
+    private Button backButton;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consum_vehicle_pruebas);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
+        username = findViewById(R.id.userNameTextView);
 
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
 
         // Inicializar la gráfica
         BarChart barChart = findViewById(R.id.barCha);
@@ -154,7 +175,10 @@ public class VehiclePruebasConsumDetailsView extends BaseActivity implements Veh
         Toast.makeText(this, "Error al eliminar el vehículo", Toast.LENGTH_LONG).show();
     }
 
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 
 
 

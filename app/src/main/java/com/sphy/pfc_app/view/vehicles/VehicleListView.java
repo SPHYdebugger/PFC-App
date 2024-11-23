@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.VehicleDTOAdapter;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.vehicles.VehicleListPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
@@ -31,16 +33,26 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
     private ImageButton menuButton;
     private Button backButton;
 
+    private TextView username;
+
+    private SharedPreferencesManager sharedPreferencesManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_vehicles);
 
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         backButton = findViewById(R.id.backButton);
+        username = findViewById(R.id.userNameTextView);
 
-        presenter = new VehicleListPresenter(this);  // Inicializamos el Presenter
+        presenter = new VehicleListPresenter(this);
+
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         vehicles = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.vehicles_list);
@@ -49,6 +61,13 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
         recyclerView.setLayoutManager(layoutManager);
         adapter = new VehicleDTOAdapter(vehicles);
         recyclerView.setAdapter(adapter);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
     }
 
     @Override

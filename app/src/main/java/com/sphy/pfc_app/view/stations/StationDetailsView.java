@@ -11,9 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.DTO.StationDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.stations.StationDetailsContract;
 import com.sphy.pfc_app.domain.Station;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Stations.StationDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
@@ -34,7 +36,9 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
 
     private Button goRefuels;
 
+    private TextView username;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
 
     private StationDetailsContract.Presenter presenter;
@@ -48,16 +52,19 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
     private int stationRefuels;
     private long refuelsLong;
 
-
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_station);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
-
+        username = findViewById(R.id.userNameTextView);
         tvName = findViewById(R.id.detail_name);
         tvAddress = findViewById(R.id.detail_address);
         tvSite = findViewById(R.id.detail_site);
@@ -65,9 +72,14 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
         tvGlp = findViewById(R.id.detail_glp);
         tvRefuels = findViewById(R.id.detail_refuels);
         goRefuels = findViewById(R.id.goRefuels);
-
+        backButton = findViewById(R.id.backButton);
 
         presenter = new StationDetailsPresenter(this);
+
+
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         Intent intent = getIntent();
         stationId = intent.getLongExtra("Id", stationId);
@@ -81,6 +93,13 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
             @Override
             public void onClick(View v) {
                 goStationRefuels();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
             }
         });
     }
@@ -149,7 +168,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
         builder.setTitle("ALERTA, CONFIRMACIÓN");
         builder.setMessage("¿EStá seguro de querer borrar la estación?");
 
-        // Botón confirmar
+
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -157,7 +176,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
             }
         });
 
-        // Botón cancelar
+
         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -169,5 +188,8 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,9 +23,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.refuels.RefuelListContract;
 import com.sphy.pfc_app.domain.Refuel;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Refuels.RefuelListPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
@@ -57,10 +60,18 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
     private Spinner filterSpinner;
     private List<Refuel> originalRefuels;
 
+    private TextView username;
+    private Button backButton;
+
+    private SharedPreferencesManager sharedPreferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consum_vehicle);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         scrollView = findViewById(R.id.scrollGraf);
         tvDetalleDE = findViewById(R.id.detalleDE);
         tvRealConsum = findViewById(R.id.realConsum);
@@ -73,14 +84,27 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         tvTextBestStation = findViewById(R.id.textBestStation);
         combinedChart = findViewById(R.id.combinedChart);
         filterSpinner = findViewById(R.id.filterSpinner);
+        username = findViewById(R.id.userNameTextView);
+        backButton = findViewById(R.id.backButton);
 
         Intent intent = getIntent();
         String license = intent.getStringExtra("identifier");
         System.out.println("La matrícula que se recoge en la gráfica por identifier es: " + license);
 
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(license);
+
         presenter = new RefuelListPresenter(this);
         presenter.findRefuelByIdentifier(license);
         setupFilterSpinner();
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
     }
 
     private void setupFilterSpinner() {
@@ -196,11 +220,11 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
                 lineEntries1.add(new Entry(i, realConsumption));
             }
 
-            if(i > 0){
-                // Segunda línea: promedio de consumo
-                float medConsumption = refuel.getMedConsumption();
-                lineEntries2.add(new Entry(i, medConsumption));
-            }
+
+            // Segunda línea: promedio de consumo
+            float medConsumption = refuel.getMedConsumption();
+            lineEntries2.add(new Entry(i, medConsumption));
+
         }
 
 
@@ -352,7 +376,6 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
 
 
-        // Mejor estación (opcional, puedes ajustar según tus criterios)
         if (refuels == null || refuels.size() < 2) {
             tvBestStation.setText("Mejor estación: No disponible");
         } else {
@@ -383,6 +406,11 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
     @Override
     public void showMessage(String message) {
         // Mostrar mensajes
+    }
+
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 }
 

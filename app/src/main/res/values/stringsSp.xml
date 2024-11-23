@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="AppDesc">Lleve un control total de los consumos de sus vehículos, tanto particulares como de empresa.\n\nCon PFC usted podrá:\n- Registrar sus vehículos.\n- Registrar sus gasolineras favoritas.\n- Registrar el repostaje de cualquiera de sus vehículos.\n- Consultar el historial de los repostajes.\n- Ver el momento la media de consumo, kilómetros realizados y de todos sus vehículos</string>
+    <string name="AppDesc">Lleve un control total de los consumos de sus vehículos, tanto particulares como de empresa.\n\nCon PFC usted podrá:\n- Registrar sus vehículos.\n- Registrar sus gasolineras favoritas.\n- Registrar el repostaje de cualquiera de sus vehículos.\n- Consultar el historial de los repostajes.\n- Ver la media de consumo y kilómetros realizados y de todos sus vehículos</string>
     <string name="vehiculo_matricula">Matrícula del vehículo</string>
     <string name="vehicle_model">Modelo del vehículo</string>
     <string name="license_plate">Matrícula del vehículo</string>

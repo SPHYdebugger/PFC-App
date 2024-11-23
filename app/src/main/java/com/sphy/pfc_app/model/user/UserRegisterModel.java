@@ -29,6 +29,7 @@ public class UserRegisterModel {
                 if (response.isSuccessful() && response.body() != null) {
                     JwtResponse tokenDTO = response.body();
                     listener.onUserRegisterSuccess(tokenDTO.getToken());
+                    System.out.println("el token es..." + tokenDTO.getToken());
                 } else {
                     listener.onUserRegisterError("Error: " + response.message());
                 }

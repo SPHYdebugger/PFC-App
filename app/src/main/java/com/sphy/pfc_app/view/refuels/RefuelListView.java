@@ -2,17 +2,21 @@ package com.sphy.pfc_app.view.refuels;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.RefuelAdapter;
 import com.sphy.pfc_app.contract.refuels.RefuelListContract;
 import com.sphy.pfc_app.domain.Refuel;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Refuels.RefuelListPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
@@ -28,17 +32,22 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     private ImageButton menuButton;
     private Button buttonGraf;
 
-
+    private TextView username;
+    private Button backButton;
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_refuels);
 
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         buttonGraf = findViewById(R.id.button_graf);
-
+        username = findViewById(R.id.userNameTextView);
+        backButton = findViewById(R.id.backButton);
 
 
         presenter = new RefuelListPresenter(this);
@@ -50,6 +59,9 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         adapter = new RefuelAdapter(refuels);
         recyclerView.setAdapter(adapter);
 
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         buttonGraf.setOnClickListener(v -> {
             String identifier = getIntent().getStringExtra("identifier");
@@ -73,6 +85,13 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         String identifier = getIntent().getStringExtra("identifier");
         System.out.println("El identifier es: " + identifier);
         presenter.findRefuelByIdentifier(identifier);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
     }
 
     @Override
@@ -94,7 +113,10 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 
 
 }

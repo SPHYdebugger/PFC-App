@@ -16,6 +16,7 @@ public class Station {
     private boolean favorite = false;
     private boolean glpFuel = false;
     private boolean hide;
+    private long userId;
     private List<Refuel> refuels;
 
     public long getId() {
@@ -96,6 +97,14 @@ public class Station {
 
     public void setSite(String site) {
         this.site = site;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }
 

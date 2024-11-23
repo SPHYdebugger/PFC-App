@@ -12,11 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.refuels.RefuelDetailsContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Refuel;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Refuels.RefuelDetailsPresenter;
 import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
@@ -46,7 +48,9 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
     private CheckBox cbFulled;
 
 
+    private TextView username;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
 
 
@@ -56,7 +60,7 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
     private long refuelId;
 
     private ImageButton menuButton;
-
+    private Button backButton;
 
 
 
@@ -64,10 +68,13 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_refuel);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
-
+        username = findViewById(R.id.userNameTextView);
         tvRegisterDate = findViewById(R.id.detail_date);
         tvVehicleLicense = findViewById(R.id.detail_vehicle);
         tvStationName = findViewById(R.id.detail_station);
@@ -80,8 +87,12 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
         tvRefuelConsumption = findViewById(R.id.detail_refuelConsumption);
         tvVehicleConsumption = findViewById(R.id.detail_consum);
         cbFulled = findViewById(R.id.fulled);
-
+        backButton = findViewById(R.id.backButton);
         presenter = new RefuelDetailsPresenter(this);
+
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         Intent intent = getIntent();
         refuelId = intent.getLongExtra("refuelId", 0);
@@ -93,6 +104,12 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
             presenter.getRefuel(refuelIdString);
         }
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
     }
 
     @Override
@@ -134,6 +151,11 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
     @Override
     public void displayRefuelGrafDetails(List<Refuel> refuel) {
 
+    }
+
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 
 }

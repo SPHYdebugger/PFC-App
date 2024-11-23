@@ -34,7 +34,7 @@ public class VehicleApi {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
-                            String token = sharedPreferencesManager.getAuthToken(); // Obtener el token del SharedPreferences
+                            String token = sharedPreferencesManager.getAuthToken();
 
                             Request originalRequest = chain.request();
                             Request.Builder requestBuilder = originalRequest.newBuilder();
@@ -54,7 +54,7 @@ public class VehicleApi {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)  // Usa el cliente con el interceptor
+                    .client(client)
                     .build();
 
             instance = retrofit.create(VehicleApiInterface.class);

@@ -2,19 +2,25 @@ package com.sphy.pfc_app.view.vehicles;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.VehicleDTOAdapter;
 import com.sphy.pfc_app.adapter.VehicleSelectionAdapter;
 import com.sphy.pfc_app.contract.vehicles.SelectionVehicleListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.vehicles.SelectionVehicleListPresenter;
 import com.sphy.pfc_app.presenter.vehicles.VehicleListPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
@@ -30,18 +36,27 @@ public class SelectionVehicleListView extends BaseActivity implements SelectionV
 
     private ImageButton menuButton;
 
+    private TextView username;
+    private Button backButton;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection_vehicles);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
-
+        username = findViewById(R.id.userNameTextView);
+        backButton = findViewById(R.id.backButton);
         presenter = new SelectionVehicleListPresenter(this);
 
-
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         vehicles = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.vehicles_list);
@@ -50,6 +65,13 @@ public class SelectionVehicleListView extends BaseActivity implements SelectionV
         recyclerView.setLayoutManager(layoutManager);
         adapter = new VehicleSelectionAdapter(vehicles);
         recyclerView.setAdapter(adapter);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
     }
 
     @Override
@@ -76,5 +98,8 @@ public class SelectionVehicleListView extends BaseActivity implements SelectionV
 
     }
 
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 }

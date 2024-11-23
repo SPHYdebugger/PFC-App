@@ -18,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface StationApiInterface {
     @GET("stations")
-    Call<List<StationDTO>> getStations();
+    Call<List<StationDTO>> getStationsByUserId(@Query("id") long id);
 
     @GET("stations/{id}")
     Call<Station> getStationById(@Path("id") long id);

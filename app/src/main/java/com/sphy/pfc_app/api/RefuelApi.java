@@ -24,7 +24,7 @@ public class RefuelApi {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
-                        String token = sharedPreferencesManager.getAuthToken();  // Obtener el token desde SharedPreferences
+                        String token = sharedPreferencesManager.getAuthToken();
 
                         Request originalRequest = chain.request();
                         Request.Builder requestBuilder = originalRequest.newBuilder();

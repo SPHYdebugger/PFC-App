@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.sphy.pfc_app.api.Constants;
 
-public class UserApi {
+public class UserApiSecurity {
     private static final String BASE_URL = Constants.BASE_URL;
     private static Retrofit retrofit = null;
 

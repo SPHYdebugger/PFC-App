@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
@@ -52,17 +54,28 @@ public class VehicleConsumDetailsView extends BaseActivity implements VehicleDet
     private int vehicleRefuels;
     private long refuelsLong;
 
+    private TextView username;
+    private Button backButton;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consum_vehicle);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
-
+        username = findViewById(R.id.userNameTextView);
+        backButton = findViewById(R.id.backButton);
         BarChart barChart = findViewById(R.id.barCha);
+
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(1f, 10f));
@@ -76,19 +89,14 @@ public class VehicleConsumDetailsView extends BaseActivity implements VehicleDet
         barChart.setData(barData);
         barChart.invalidate();
 
-/*
-        presenter = new VehicleDetailsPresenter(this);
-
-        Intent intent = getIntent();
-        vehicleId = intent.getLongExtra("id", vehicleId);
-        licensePlateGet = intent.getStringExtra("licensePlate");
-        System.out.println("valor que se recoge " + licensePlateGet);
-        presenter.getVehicle(vehicleId);*/
-
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
 
     }
-
 
 
     @Override
@@ -133,7 +141,10 @@ public class VehicleConsumDetailsView extends BaseActivity implements VehicleDet
         Toast.makeText(this, "Error al eliminar el vehículo", Toast.LENGTH_LONG).show();
     }
 
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 
 
 

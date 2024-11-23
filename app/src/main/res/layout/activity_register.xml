@@ -34,7 +34,7 @@
             android:text="Personal Fuel Control"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -133,11 +133,12 @@
     <!-- Botón de registro -->
     <Button
         android:id="@+id/register_button"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/colorFondoOscuro"
-        android:text="Registrar" />
+        android:text="Registrar"
+        android:translationX="20dp" />
 
     <!-- Mensajes de error -->
     <TextView

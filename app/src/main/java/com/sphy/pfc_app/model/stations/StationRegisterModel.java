@@ -3,6 +3,7 @@ package com.sphy.pfc_app.model.stations;
 import android.content.Context;
 import android.util.Log;
 
+import com.sphy.pfc_app.DTO.StationDTO;
 import com.sphy.pfc_app.api.StationApi;
 import com.sphy.pfc_app.api.StationApiInterface;
 import com.sphy.pfc_app.api.VehicleApi;
@@ -11,11 +12,13 @@ import com.sphy.pfc_app.contract.stations.StationRegisterContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleRegisterContract;
 import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +37,14 @@ public class StationRegisterModel implements StationRegisterContract.Model {
     @Override
     public void insertStation(Station station, OnStationInsertedListener listener) {
         StationApiInterface api = StationApi.buildInstance(context);
+
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        String token = sharedPreferencesManager.getAuthToken();
+
+        long id = sharedPreferencesManager.getUserIdFromJWT(token);
+        station.setUserId(id);
+
+        // Llamada al API filtrando por UserId
         Call<Station> addStationCall = api.addStation(station);
         addStationCall.enqueue(new Callback<Station>() {
 

@@ -52,33 +52,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/rounded_background2"
-        android:gravity="center"
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/userNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="217dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:text="SANTIAGO"
+            android:gravity="center_horizontal"
             android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:translationX="-25dp"
-            app:layout_constraintBottom_toBottomOf="@id/logoImageView"
-            app:layout_constraintStart_toEndOf="@id/logoImageView"
-            app:layout_constraintTop_toTopOf="@id/logoImageView" />
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/menuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/menu"
             android:translationX="25dp" />

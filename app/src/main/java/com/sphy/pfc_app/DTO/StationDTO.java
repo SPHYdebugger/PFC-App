@@ -16,6 +16,7 @@ public class StationDTO {
     private boolean favorite = false;
 
     private boolean glpFuel = false;
+    private long userId;
 
     private int refuels = 0;
 
@@ -97,5 +98,13 @@ public class StationDTO {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

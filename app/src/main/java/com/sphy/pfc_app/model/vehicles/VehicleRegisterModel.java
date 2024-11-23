@@ -8,6 +8,7 @@ import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.contract.vehicles.VehicleRegisterContract;
 import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,16 @@ public class VehicleRegisterModel implements VehicleRegisterContract.Model {
     @Override
     public void insertVehicle(Vehicle vehicle, OnVehicleInsertedListener listener) {
         VehicleApiInterface api = VehicleApi.buildInstance(context);
+
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        String token = sharedPreferencesManager.getAuthToken();
+
+        long id = sharedPreferencesManager.getUserIdFromJWT(token);
+
+        vehicle.setUserId(id);
+        vehicle.setMedConsumption(5);
+
+
         Call<Vehicle> addVehicleCall = api.addVehicle(vehicle);
         addVehicleCall.enqueue(new Callback<Vehicle>() {
             @Override

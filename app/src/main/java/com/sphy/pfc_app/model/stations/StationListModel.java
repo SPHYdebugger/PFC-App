@@ -11,6 +11,7 @@ import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.contract.stations.StationListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,18 @@ public class StationListModel implements StationListContract.Model {
     @Override
     public void loadAllStations(OnLoadStationListener listener) {
         StationApiInterface api = StationApi.buildInstance(context);
-        Call<List<StationDTO>> getStationsCall = api.getStations();
+
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        String token = sharedPreferencesManager.getAuthToken();
+
+        System.out.println("el token es.... " + token);
+
+        long id = sharedPreferencesManager.getUserIdFromJWT(token);
+
+        System.out.println("el userId es .... " + id);
+
+        // Llamada al API filtrando por UserId
+        Call<List<StationDTO>> getStationsCall = api.getStationsByUserId(id);
         getStationsCall.enqueue(new Callback<List<StationDTO>>() {
             @Override
             public void onResponse(Call<List<StationDTO>> call, Response<List<StationDTO>> response) {

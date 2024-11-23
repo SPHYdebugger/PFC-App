@@ -8,6 +8,7 @@ import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.contract.vehicles.SelectionVehicleListContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,16 @@ public class SelectionVehicleListModel implements SelectionVehicleListContract.M
     @Override
     public void loadAllVehicles(OnLoadVehicleListener listener) {
         VehicleApiInterface api = VehicleApi.buildInstance(context);
-        Call<List<VehicleDTO>> getVehiclesCall = api.getVehicles();
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        long id = sharedPreferencesManager.getUserIdFromJWT(sharedPreferencesManager.getAuthToken());
+
+        if (id == 0) {
+            listener.onLoadVehiclesError("No se encontró el email del usuario");
+            return;
+        }
+
+        // Llamada al API filtrando por UserId
+        Call<List<VehicleDTO>> getVehiclesCall = api.getVehiclesByUserId(id);
         getVehiclesCall.enqueue(new Callback<List<VehicleDTO>>() {
             @Override
             public void onResponse(Call<List<VehicleDTO>> call, Response<List<VehicleDTO>> response) {

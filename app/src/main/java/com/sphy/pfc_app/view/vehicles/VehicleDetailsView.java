@@ -17,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.contract.vehicles.VehicleDetailsContract;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.vehicles.VehicleDetailsPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 import com.sphy.pfc_app.view.refuels.RefuelListView;
@@ -57,15 +59,23 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     private int vehicleRefuels;
     private long refuelsLong;
 
+    private TextView username;
+    private Button backButton;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_vehicle);
+
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         setupMenuButton(menuButton);
         tvDetalleDE = findViewById(R.id.detalleDE);
+        username = findViewById(R.id.userNameTextView);
+        backButton = findViewById(R.id.backButton);
 
         tvLicense = findViewById(R.id.detail_license);
         tvBrand = findViewById(R.id.detail_brand);
@@ -77,6 +87,10 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         tvConsum = findViewById(R.id.consum);
         tvDate = findViewById(R.id.date);
 
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
+
 
         presenter = new VehicleDetailsPresenter(this);
 
@@ -86,6 +100,12 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         System.out.println("valor que se recoge " + licensePlateGet);
         presenter.getVehicle(vehicleId);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);  // Llamamos al método backMain cuando el botón es presionado
+            }
+        });
 
         goRefuels.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,5 +195,8 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
 }

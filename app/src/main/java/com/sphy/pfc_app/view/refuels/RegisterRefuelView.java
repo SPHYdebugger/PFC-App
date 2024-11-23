@@ -23,6 +23,7 @@ import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.SpinnerAdapter;
 import com.sphy.pfc_app.domain.Refuel;
 import com.sphy.pfc_app.domain.Station;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Refuels.RefuelRegisterPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
@@ -45,21 +46,28 @@ public class RegisterRefuelView extends BaseActivity {
     private TextView selectedVehicleTextView;
     private CheckBox full;
 
+    private TextView username;
 
+    private SharedPreferencesManager sharedPreferencesManager;
 
     private long vehicleId;
     private long stationId;
     private String license;
     private String kms;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_refuel);
 
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         vehicleId = getIntent().getLongExtra("vehicleId", -1);
         license = getIntent().getStringExtra("vehicleLicense");
         kms = getIntent().getStringExtra("vehicleKms");
+
+        username = findViewById(R.id.userNameTextView);
 
 
         if (vehicleId == -1) {
@@ -67,6 +75,13 @@ public class RegisterRefuelView extends BaseActivity {
             finish();
             return;
         }
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
 
         menuButton = findViewById(R.id.menuButton);
         create_button = findViewById(R.id.create_button);
@@ -80,6 +95,9 @@ public class RegisterRefuelView extends BaseActivity {
         selectedVehicleTextView = findViewById(R.id.selectedVehicleTextView);
         selectedVehicleTextView.setText(license);
 
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         vehicleKmEditText.setText(String.valueOf(kms));
         vehicleKmEditText.setTextColor(Color.GRAY);
@@ -167,7 +185,6 @@ public class RegisterRefuelView extends BaseActivity {
             refuel.setKmTotal(vehicleKm);
             refuel.setFulled(full.isChecked());
 
-            // Llamar al presenter para registrar el repostaje
             presenter.insertRefuel(vehicleId, stationId, refuel);
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Por favor, complete todos los campos correctamente.", Toast.LENGTH_LONG).show();
@@ -209,6 +226,11 @@ public class RegisterRefuelView extends BaseActivity {
 
     public void showRefuelErrorMessage() {
         Toast.makeText(this, "Error al registrar el repostaje", Toast.LENGTH_LONG).show();
+    }
+
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 }
 

@@ -8,6 +8,7 @@ import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.contract.vehicles.VehicleListContract;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,9 +38,20 @@ public class VehicleListModel implements VehicleListContract.Model {
 
     @Override
     public void loadAllVehicles(OnLoadVehicleListener listener) {
-        // Usamos el VehicleApi con el token en las solicitudes
+
         VehicleApiInterface api = VehicleApi.buildInstance(context);
-        Call<List<VehicleDTO>> getVehiclesCall = api.getVehicles();
+
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        String token = sharedPreferencesManager.getAuthToken();
+
+        System.out.println("el token es.... " + token);
+
+        long id = sharedPreferencesManager.getUserIdFromJWT(token);
+
+        System.out.println("el userId es .... " + id);
+
+        // Llamada al API filtrando por UserId
+        Call<List<VehicleDTO>> getVehiclesCall = api.getVehiclesByUserId(id);
 
         getVehiclesCall.enqueue(new Callback<List<VehicleDTO>>() {
             @Override

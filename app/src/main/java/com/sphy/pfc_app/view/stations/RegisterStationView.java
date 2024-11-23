@@ -1,5 +1,6 @@
 package com.sphy.pfc_app.view.stations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,14 +8,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.SpinnerAdapter;
 import com.sphy.pfc_app.contract.stations.StationRegisterContract;
 import com.sphy.pfc_app.contract.vehicles.VehicleRegisterContract;
 import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.presenter.Stations.StationRegisterPresenter;
 import com.sphy.pfc_app.presenter.vehicles.VehicleRegisterPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
@@ -31,17 +35,28 @@ public class RegisterStationView extends BaseActivity implements StationRegister
     private Spinner provinceSpinner;
     private CheckBox ckStation_glp;
 
+    private TextView username;
+    private Button backButton;
+
+    private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_station);
 
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         menuButton = findViewById(R.id.menuButton);
         create_button = findViewById(R.id.register_station_button);
         setupMenuButton(menuButton);
+        username = findViewById(R.id.userNameTextView);
 
         presenter = new StationRegisterPresenter(this);
+
+        String token = sharedPreferencesManager.getAuthToken();
+        String user = sharedPreferencesManager.getUsernameFromJWT(token);
+        username.setText(user);
 
         etStation_name = findViewById((R.id.station_name));
         etAddress = findViewById(R.id.station_address);
@@ -51,6 +66,12 @@ public class RegisterStationView extends BaseActivity implements StationRegister
 
         SpinnerAdapter.populateProvinceSpinner(this,provinceSpinner);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backMain(v);
+            }
+        });
 
     }
 
@@ -66,6 +87,7 @@ public class RegisterStationView extends BaseActivity implements StationRegister
         station.setName(stationName);
         station.setAddress(address);
         station.setSite(site);
+
         if (province.equals("Elige una de la lista...")){
             station.setProvince("No definida");
         }else {
@@ -93,5 +115,9 @@ public class RegisterStationView extends BaseActivity implements StationRegister
     @Override
     public void clearFields() {
 
+    }
+    public void backMain(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 }

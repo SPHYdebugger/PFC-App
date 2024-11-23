@@ -13,6 +13,7 @@ import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.domain.Vehicle;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,14 @@ public class SpinnerAdapter {
 
     public static void populateStationSpinner(Context context, Spinner stationSpinner) {
         StationApiInterface api = StationApi.buildInstance(context);
-        Call<List<StationDTO>> stationsCall = api.getStations();
+
+
+        SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(context);
+        String token = sharedPreferencesManager.getAuthToken();
+
+        long id = sharedPreferencesManager.getUserIdFromJWT(token);
+
+        Call<List<StationDTO>> stationsCall = api.getStationsByUserId(id);
 
         stationsCall.enqueue(new Callback<List<StationDTO>>() {
             @Override
@@ -103,6 +111,17 @@ public class SpinnerAdapter {
         provinceSpinner.setAdapter(provinceAdapter);
     }
 
+    public static void populateFuelsSpinner(Context context, Spinner fuelSpinner) {
+
+        String[] fuels = {
+                "Elige uno de la lista...", "Gasolina", "Diesel", "GLP", "Recarga eléctrica"
+        };
+
+        ArrayAdapter<String> fuelsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, fuels);
+        fuelsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        fuelSpinner.setAdapter(fuelsAdapter);
+    }
 
 
 

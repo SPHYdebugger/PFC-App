@@ -215,16 +215,17 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
             barEntries.add(new BarEntry(i, consumption));
 
             // Primera línea: consumo real
-            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
+            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled() && refuel.getKmTraveled() <= 1200) {
                 float realConsumption = refuel.getRefuelConsumption();
                 lineEntries1.add(new Entry(i, realConsumption));
             }
 
 
             // Segunda línea: promedio de consumo
-            float medConsumption = refuel.getMedConsumption();
-            lineEntries2.add(new Entry(i, medConsumption));
-
+            if (refuel.getKmTraveled() <= 1200) {
+                float medConsumption = refuel.getMedConsumption();
+                lineEntries2.add(new Entry(i, medConsumption));
+            }
         }
 
 
@@ -314,15 +315,12 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
             return;
         }
 
-        // Variables para almacenar el mejor y peor repostaje
         Refuel bestRefuel = null;
         Refuel worstRefuel = null;
 
-        // Encontrar el mejor y peor repostaje
-        for (int i = 1; i < refuels.size(); i++) { // Empezamos en 1 porque usamos refuel-1
+        for (int i = 1; i < refuels.size(); i++) {
             Refuel current = refuels.get(i);
 
-            // Comprobamos que tiene valores válidos
             if (current == null || current.getRefuelConsumption() == 0 || i - 1 < 0) continue;
 
             if (bestRefuel == null || current.getRefuelConsumption() < bestRefuel.getRefuelConsumption()) {
@@ -353,8 +351,8 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         }
 
         // Mostrar el consumo real promedio (opcional)
-        float totalConsumption = 0f; // Para almacenar la suma de los consumos reales
-        int countRealConsumptions = 0; // Contador de repostajes reales
+        float totalConsumption = 0f;
+        int countRealConsumptions = 0;
 
         for (int i = 0; i < refuels.size(); i++) {
             Refuel refuel = refuels.get(i);
@@ -405,7 +403,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
     @Override
     public void showMessage(String message) {
-        // Mostrar mensajes
+
     }
 
     public void backMain(View view) {

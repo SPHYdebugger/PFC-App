@@ -55,7 +55,6 @@ public class RegisterRefuelView extends BaseActivity {
     private long stationId;
     private String license;
     private String kms;
-    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +76,7 @@ public class RegisterRefuelView extends BaseActivity {
             return;
         }
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backMain(v);
-            }
-        });
+
 
         menuButton = findViewById(R.id.menuButton);
         create_button = findViewById(R.id.create_button);
@@ -91,7 +85,6 @@ public class RegisterRefuelView extends BaseActivity {
         vehicleKmEditText = findViewById(R.id.vehicleKmEditText);
         fuelTypeSpinner = findViewById(R.id.fuelTypeSpinner);
         stationSpinner = findViewById(R.id.stationSpinner);
-
         full = findViewById(R.id.checkBox2);
         selectedVehicleTextView = findViewById(R.id.selectedVehicleTextView);
         selectedVehicleTextView.setText(license);
@@ -127,8 +120,8 @@ public class RegisterRefuelView extends BaseActivity {
                         return false;
                     }
 
-                    if (enteredKm > Integer.parseInt(kms) + 1500) {
-                        vehicleKmEditText.setError("No puede superar los " + (Integer.parseInt(kms) + 1500) + " km.");
+                    if (enteredKm > Integer.parseInt(kms) + 1200) {
+                        confirmRegisterKms();
                         return false;
                     }
                 }
@@ -221,7 +214,26 @@ public class RegisterRefuelView extends BaseActivity {
         dialog.show();
     }
 
+    private void confirmRegisterKms() {
 
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ALERTA, CONFIRMACIÓN DE KILÓMETROS");
+        String message = "<b>Los kilómetros actuales del vehículo, superan los 1200Kms desde el anterior repostaje. </b>" + "<br>" +
+                "<p>Si sigue adelante, las mediciones de este repostaje no se tendrán en cuenta a la hora de calcular las medias de consumos.";
+
+        builder.setMessage(Html.fromHtml(message));
+
+
+
+
+
+        builder.setNegativeButton("OK", (dialog, which) -> dialog.dismiss());
+
+        // Mostrar el aviso
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     public void showRefuelSuccessMessage() {
         Toast.makeText(this, "Repostaje registrado exitosamente", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
@@ -233,9 +245,6 @@ public class RegisterRefuelView extends BaseActivity {
         Toast.makeText(this, "Error al registrar el repostaje", Toast.LENGTH_LONG).show();
     }
 
-    public void backMain(View view) {
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
-    }
+
 }
 

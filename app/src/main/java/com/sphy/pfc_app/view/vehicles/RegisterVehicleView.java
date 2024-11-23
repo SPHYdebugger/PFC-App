@@ -44,7 +44,6 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
         create_button = findViewById(R.id.create_button);
         setupMenuButton(menuButton);
         username = findViewById(R.id.userNameTextView);
-
         presenter = new VehicleRegisterPresenter(this);
 
         Spinner fuel1 = findViewById(R.id.fuelTypeSpinner1);
@@ -67,12 +66,7 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
             fuel2.setEnabled(isChecked);
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backMain(v);
-            }
-        });
+
     }
 
 
@@ -96,15 +90,31 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
             fuel2.setEnabled(isChecked);
         });
 
-
         String license = etLicense.getText().toString();
+        if (!license.matches("\\d{4}[A-Z]{3}")) { // 4 números + 3 letras en mayúsculas
+            Toast.makeText(this, "La matrícula debe tener el formato 4 números seguidos de 3 letras (e.g., 1234ABC).", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (license.length() != 7) {
+            Toast.makeText(this, "La matrícula debe tener exactamente 7 caracteres.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        int kms;
+        try {
+            kms = Integer.parseInt(etKms.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Los kilómetros deben ser un número válido.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         String brand = etBrand.getText().toString();
         String model = etModel.getText().toString();
         String pFuel = fuel1.getSelectedItem().toString();
         String sFuel = fuel2.getSelectedItem().toString();
 
 
-        int kms = Integer.parseInt(etKms.getText().toString());
 
         Vehicle vehicle = new Vehicle(0, license, brand, model, pFuel, sFuel, kms, 0, null, false, null,0);
         presenter.insertVehicle(vehicle);
@@ -126,8 +136,4 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
 
     }
 
-    public void backMain(View view) {
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
-    }
 }

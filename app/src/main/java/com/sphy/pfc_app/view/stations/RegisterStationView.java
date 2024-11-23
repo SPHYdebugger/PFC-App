@@ -51,7 +51,6 @@ public class RegisterStationView extends BaseActivity implements StationRegister
         create_button = findViewById(R.id.register_station_button);
         setupMenuButton(menuButton);
         username = findViewById(R.id.userNameTextView);
-
         presenter = new StationRegisterPresenter(this);
 
         String token = sharedPreferencesManager.getAuthToken();
@@ -66,12 +65,7 @@ public class RegisterStationView extends BaseActivity implements StationRegister
 
         SpinnerAdapter.populateProvinceSpinner(this,provinceSpinner);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backMain(v);
-            }
-        });
+
 
     }
 
@@ -116,8 +110,5 @@ public class RegisterStationView extends BaseActivity implements StationRegister
     public void clearFields() {
 
     }
-    public void backMain(View view) {
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
-    }
+
 }

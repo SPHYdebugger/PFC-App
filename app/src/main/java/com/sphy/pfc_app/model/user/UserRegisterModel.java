@@ -46,4 +46,6 @@ public class UserRegisterModel {
         void onUserRegisterSuccess(String token);
         void onUserRegisterError(String errorMessage);
     }
+
+
 }

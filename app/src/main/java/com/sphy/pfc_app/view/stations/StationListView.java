@@ -58,7 +58,7 @@ public class StationListView extends BaseActivity implements StationListContract
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         stations = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.stations_list);

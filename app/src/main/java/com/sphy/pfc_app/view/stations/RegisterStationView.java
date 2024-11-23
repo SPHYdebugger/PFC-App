@@ -56,7 +56,7 @@ public class RegisterStationView extends BaseActivity implements StationRegister
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         etStation_name = findViewById((R.id.station_name));
         etAddress = findViewById(R.id.station_address);

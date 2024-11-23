@@ -56,7 +56,7 @@ public class SelectionVehicleListView extends BaseActivity implements SelectionV
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         vehicles = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.vehicles_list);

@@ -67,6 +67,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/colorFondoOscuro"
+            android:onClick="goLogin"
             android:text="ACCEDER"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -75,6 +76,7 @@
     <!-- Título de la pantalla -->
 
     <!-- Campos de texto -->
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -156,6 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:indeterminate="true"
+        android:translationX="100dp"
         android:visibility="gone" />
 
 </LinearLayout>

@@ -89,7 +89,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
 
         presenter = new VehicleDetailsPresenter(this);

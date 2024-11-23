@@ -12,8 +12,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sphy.pfc_app.MainActivity;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.MenuAdapter;
+import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafByVehicleView;
 import com.sphy.pfc_app.view.stations.StationListView;
 import com.sphy.pfc_app.view.vehicles.VehicleConsumDetailsView;
@@ -39,7 +41,7 @@ public class BaseActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_menu);
 
 
-        List<String> options = Arrays.asList("VEHICULOS", "GASOLINERAS", "CONSUMOS", "PRUEBAS", "SALIR");
+        List<String> options = Arrays.asList("VEHICULOS", "GASOLINERAS", "HISTORIAL", "", "SALIR");
         ListView listView = dialog.findViewById(R.id.listViewOptions);
         MenuAdapter adapter = new MenuAdapter(this, options);
         listView.setAdapter(adapter);
@@ -60,18 +62,21 @@ public class BaseActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(BaseActivity.this, StationListView.class);
                     startActivity(intent);
-                } else if ("CONSUMOS".equals(selectedOption)) {
+                } else if ("HISTORIAL".equals(selectedOption)) {
 
-                    Intent intent = new Intent(BaseActivity.this, VehicleConsumDetailsView.class);
+                    /*Intent intent = new Intent(BaseActivity.this, VehicleConsumDetailsView.class);
+                    startActivity(intent);*/
+
+                } else if ("SALIR".equals(selectedOption)) {
+                    //borrar el token
+                    SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(BaseActivity.this);
+                    sharedPreferencesManager.clear();
+
+                    // Redirigir a MainActivity
+                    Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+                    //borrar toda información deautentifacacion
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-
-                }else if ("PRUEBAS".equals(selectedOption)) {
-
-                    Intent intent = new Intent(BaseActivity.this, RefuelDetailsGrafByVehicleView.class);
-                    startActivity(intent);
-                }
-                else if ("SALIR".equals(selectedOption)) {
-
                     finish();
                 } else {
 

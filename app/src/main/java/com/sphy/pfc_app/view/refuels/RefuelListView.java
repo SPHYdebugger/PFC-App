@@ -33,6 +33,8 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
     private Button buttonGraf;
 
     private TextView username;
+    private TextView tvDetalleDE;
+
     private Button backButton;
     private SharedPreferencesManager sharedPreferencesManager;
 
@@ -48,6 +50,7 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         buttonGraf = findViewById(R.id.button_graf);
         username = findViewById(R.id.userNameTextView);
         backButton = findViewById(R.id.backButton);
+        tvDetalleDE = findViewById(R.id.detalleDE);
 
 
         presenter = new RefuelListPresenter(this);
@@ -61,7 +64,8 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
+
 
         buttonGraf.setOnClickListener(v -> {
             String identifier = getIntent().getStringExtra("identifier");
@@ -85,7 +89,7 @@ public class RefuelListView extends BaseActivity implements RefuelListContract.V
         String identifier = getIntent().getStringExtra("identifier");
         System.out.println("El identifier es: " + identifier);
         presenter.findRefuelByIdentifier(identifier);
-
+        tvDetalleDE.setText("Listado de repostajes de " + identifier);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

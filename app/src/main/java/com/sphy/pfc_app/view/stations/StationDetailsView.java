@@ -79,7 +79,7 @@ public class StationDetailsView extends BaseActivity implements StationDetailsCo
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         Intent intent = getIntent();
         stationId = intent.getLongExtra("Id", stationId);

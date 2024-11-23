@@ -92,7 +92,8 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
+
 
         Intent intent = getIntent();
         refuelId = intent.getLongExtra("refuelId", 0);

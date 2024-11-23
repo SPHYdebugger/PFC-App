@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
+import com.sphy.pfc_app.view.users.UserRegisterView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,6 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void goRegister(View view) {
+        Intent intent = new Intent(this, UserRegisterView.class);
+        startActivity(intent);
     }
 }
 

@@ -39,7 +39,7 @@ public class MainMenu extends BaseActivity {
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         setupMenuButton(menuButton);
 

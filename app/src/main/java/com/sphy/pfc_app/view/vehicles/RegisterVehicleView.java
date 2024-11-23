@@ -54,7 +54,7 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         CheckBox checkFuel2 = findViewById(R.id.vehicle_fuel2check);
         TextView sFuelText = findViewById(R.id.textView9);

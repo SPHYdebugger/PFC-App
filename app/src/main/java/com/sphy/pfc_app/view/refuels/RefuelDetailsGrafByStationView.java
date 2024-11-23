@@ -98,7 +98,8 @@ public class RefuelDetailsGrafByStationView extends BaseActivity implements Refu
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(license);
+        username.setText(license.toUpperCase());
+
 
         presenter = new RefuelListPresenter(this);
         presenter.findRefuelByIdentifier(license);

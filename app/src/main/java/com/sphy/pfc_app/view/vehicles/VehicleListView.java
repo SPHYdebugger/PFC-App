@@ -52,7 +52,7 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         vehicles = new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.vehicles_list);

@@ -75,7 +75,7 @@ public class VehicleConsumDetailsView extends BaseActivity implements VehicleDet
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(1f, 10f));

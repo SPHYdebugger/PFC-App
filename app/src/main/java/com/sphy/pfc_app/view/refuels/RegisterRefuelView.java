@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -97,7 +98,7 @@ public class RegisterRefuelView extends BaseActivity {
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
-        username.setText(user);
+        username.setText(user.toUpperCase());
 
         vehicleKmEditText.setText(String.valueOf(kms));
         vehicleKmEditText.setTextColor(Color.GRAY);
@@ -196,13 +197,17 @@ public class RegisterRefuelView extends BaseActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ALERTA, CONFIRMACIÓN");
-        builder.setMessage("¿SON ESTOS DATOS CORRECTOS? \n" +
-                "Vehículo: " + license + "\n" +
-                "Combustible: " + fuelTypeSpinner.getSelectedItem().toString() + "\n" +
-                "Euros repostados: " + eurosRepostadosEditText.getText().toString() + "\n" +
-                "Precio del combustible: " + fuelPriceEditText.getText().toString() + "\n" +
-                "Kilómetros actuales del vehículo: " + vehicleKmEditText.getText().toString() + "\n" +
-                "Llenado de depósito: " + llenado);
+        String message = "<b>¿SON ESTOS DATOS CORRECTOS?</b><br>" +
+                "<b>Vehículo:</b> " + license + "<br>" +
+                "<b>Combustible:</b> " + fuelTypeSpinner.getSelectedItem().toString() + "<br>" +
+                "<b>Euros repostados:</b> " + eurosRepostadosEditText.getText().toString() + "<br>" +
+                "<b>Precio del combustible:</b> " + fuelPriceEditText.getText().toString() + "<br>" +
+                "<b>Kilómetros actuales del vehículo:</b> " + vehicleKmEditText.getText().toString() + "<br>" +
+                "<b>Llenado de depósito:</b> " + llenado;
+
+        builder.setMessage(Html.fromHtml(message));
+
+
 
         builder.setPositiveButton("Sí", (dialog, which) -> {
             registerRefuel(create_button);

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CBD5D4"
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
+
+    <!-- Logo Superior y Nombre de la App -->
+
+    <LinearLayout
+        android:layout_width="712dp"
+        android:layout_height="392dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.157">
+
+        <LinearLayout
+            android:layout_width="283dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="257dp"
+                android:layout_height="146dp"
+                android:background="@drawable/rounded_background"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:translationY="15dp">
+
+                <ImageView
+                    android:id="@+id/logoImageView"
+                    android:layout_width="84dp"
+                    android:layout_height="68dp"
+                    android:contentDescription="@string/logo"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logosin" />
+
+                <TextView
+                    android:id="@+id/appNameTextView"
+                    android:layout_width="219dp"
+                    android:layout_height="58dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Personal Fuel Control"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="260dp"
+                android:layout_height="116dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_background2"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/menuButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/menu" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/addRefuel"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/boton_repostaje"
+                tools:src="@drawable/boton_repostaje" />
+
+            <ImageButton
+                android:id="@+id/addVehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/boton_vehiculo"
+                tools:src="@drawable/boton_vehiculo" />
+
+            <ImageButton
+                android:id="@+id/addStation"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/boton_gasolinera"
+                tools:src="@drawable/boton_gasolinera" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Botones de Registro y Acceso -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

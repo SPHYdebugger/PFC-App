@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Columna izquierda: Registro y formulario -->
+
+    <LinearLayout
+        android:layout_width="231dp"
+        android:layout_height="349dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Logo y Nombre de la App -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:background="@drawable/rounded_background"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="84dp"
+                android:layout_height="68dp"
+                android:contentDescription="@string/logo"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logosin" />
+
+            <TextView
+                android:id="@+id/appNameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Personal Fuel Control"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Botones de Registro y Acceso -->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_background2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="167dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/menu" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/colorFondoOscuro"
+            android:text="VOLVER A PANTALLA PRINCIPAL" />
+
+        <!-- Formulario -->
+    </LinearLayout>
+
+    <!-- Columna derecha: Lista de vehículos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vehicles_list"
+        android:layout_width="501dp"
+        android:layout_height="338dp"
+        android:background="@color/white" />
+
+</LinearLayout>

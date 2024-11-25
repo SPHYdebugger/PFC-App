@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,6 @@
     tools:ignore="ExtraText">
 
     <!-- Logo Superior y Nombre de la App -->
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -45,7 +45,6 @@
     </LinearLayout>
 
     <!-- Botones de Registro y Acceso -->
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
@@ -79,151 +78,147 @@
             android:translationX="25dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="406dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:scaleX="0.9"
-        android:translationY="5dp"
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="5dp"
-            android:text="Ingrese los detalles del repostaje"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/create_button">
 
         <LinearLayout
-            android:id="@+id/repostajeDetailsLayout"
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="476dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:scaleX="0.9"
+            android:translationY="5dp">
 
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Ingrese los detalles del repostaje"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <LinearLayout
+                android:id="@+id/repostajeDetailsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp">
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vehículo seleccionado: "
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/selectedVehicleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Matrícula"
+                        android:textColor="@android:color/holo_blue_dark"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vehículo seleccionado: "
+                    android:text="Combustible repostado"
                     android:textSize="18sp" />
 
+                <Spinner
+                    android:id="@+id/fuelTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp" />
+
                 <TextView
-                    android:id="@+id/selectedVehicleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Matrícula"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:text="Euros repostados"
                     android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/eurosRepostadosEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Ingrese la cantidad en €"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio actual del combustible (€/l)"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/fuelPriceEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="€/L"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kilómetros del vehículo al repostar"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/vehicleKmEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:inputType="number"
+                    android:textColor="#00000F" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estación de servicio"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/stationSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp" />
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Llenado" />
             </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Combustible repostado"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/fuelTypeSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Euros repostados"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/eurosRepostadosEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="Ingrese la cantidad en €"
-                android:inputType="numberDecimal" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Precio actual del combustible (€/l)"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/fuelPriceEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="€/L"
-                android:inputType="numberDecimal" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kilómetros del vehículo al repostar"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/vehicleKmEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:inputType="number"
-                android:textColor="#00000F" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Estación de servicio"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/stationSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp" />
-
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Llenado" />
-
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
-    <LinearLayout
-        android:layout_width="406dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorFondoOscuro"
+        android:onClick="createVehicle"
+        android:text="@string/create"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp">
-
-        <Button
-            android:id="@+id/create_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorFondoOscuro"
-            android:onClick="createVehicle"
-            android:text="@string/create" />
-    </LinearLayout>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

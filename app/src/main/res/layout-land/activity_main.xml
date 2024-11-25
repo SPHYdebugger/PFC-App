@@ -1,0 +1,117 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CBD5D4"
+    tools:context=".MainActivity">
+
+    <!-- Logo Superior y Nombre de la App -->
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="84dp"
+            android:layout_height="68dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logosin" />
+
+        <TextView
+            android:id="@+id/appNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Personal Fuel Control"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Botones de Registro y Acceso -->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="732dp"
+        android:layout_height="59dp"
+        android:background="@drawable/rounded_background2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3">
+
+        <Button
+            android:id="@+id/btnRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/colorFondoOscuro"
+            android:text="REGISTRO"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnAcceder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/colorFondoOscuro"
+            android:text="ACCEDER"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Texto informativo -->
+    <ScrollView
+        android:layout_width="736dp"
+        android:layout_height="252dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="298dp"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/AppDesc"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/logoBottomImageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:contentDescription="@string/bottom_logo"
+                android:scaleType="fitStart"
+                android:src="@drawable/logoapp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Logo Inferior -->
+</androidx.constraintlayout.widget.ConstraintLayout>

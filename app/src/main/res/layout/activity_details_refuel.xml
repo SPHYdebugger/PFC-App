@@ -82,7 +82,7 @@
         android:id="@+id/detalleDE"
         android:layout_width="331dp"
         android:layout_height="29dp"
-        android:text="TextView"
+        android:text="Detalle del repostaje"
         android:textAlignment="center"
         android:textSize="18dp"
         android:textStyle="bold"

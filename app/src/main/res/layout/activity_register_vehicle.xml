@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,6 @@
     tools:ignore="ExtraText">
 
     <!-- Logo Superior y Nombre de la App -->
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -45,7 +45,6 @@
     </LinearLayout>
 
     <!-- Botones de Registro y Acceso -->
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
@@ -79,97 +78,102 @@
             android:translationX="25dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:scaleX="0.9"
-        android:translationY="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@id/bottomLayout">
 
-        <EditText
-            android:id="@+id/license_plate"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/license_plate"
-            android:inputType="text" />
+            android:orientation="vertical"
+            android:scaleX="0.9"
+            android:translationY="30dp">
 
-        <EditText
-            android:id="@+id/vehicle_brand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/vehicle_brand"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/license_plate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/license_plate"
+                android:inputType="text" />
 
-        <EditText
-            android:id="@+id/vehicle_model"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/vehicle_model"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/vehicle_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/vehicle_brand"
+                android:inputType="text" />
 
+            <EditText
+                android:id="@+id/vehicle_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/vehicle_model"
+                android:inputType="text" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Combustible"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Combustible"
+                android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/fuelTypeSpinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            <Spinner
+                android:id="@+id/fuelTypeSpinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
 
-        <EditText
-            android:id="@+id/vehicle_kms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Kilómetros actuales"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/vehicle_kms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Kilómetros actuales"
+                android:inputType="text" />
 
-        <CheckBox
-            android:id="@+id/vehicle_fuel2check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/has_fuel2"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="312dp" />
+            <CheckBox
+                android:id="@+id/vehicle_fuel2check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/has_fuel2"
+                tools:layout_editor_absoluteX="51dp"
+                tools:layout_editor_absoluteY="312dp" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Segundo combustible"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Segundo combustible"
+                android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/fuelTypeSpinner2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            <Spinner
+                android:id="@+id/fuelTypeSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
 
+        </LinearLayout>
+    </ScrollView>
 
-
-
-    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
         android:translationY="-20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
             android:id="@+id/create_button"
@@ -178,6 +182,5 @@
             android:onClick="createVehicle"
             android:text="@string/create" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

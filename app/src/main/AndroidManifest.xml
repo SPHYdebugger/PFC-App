@@ -78,9 +78,11 @@
             android:exported="false"/>
         <activity
             android:name=".login.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
         <activity
             android:name=".view.users.UserRegisterView"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
 
 

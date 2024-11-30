@@ -113,10 +113,16 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
         String model = etModel.getText().toString();
         String pFuel = fuel1.getSelectedItem().toString();
         String sFuel = fuel2.getSelectedItem().toString();
+        String sFuelType;
+        if (sFuel.equals("Elige uno de la lista...")){
+            sFuelType = null;
+        } else {
+            sFuelType = sFuel;
+        }
 
 
 
-        Vehicle vehicle = new Vehicle(0, license, brand, model, pFuel, sFuel, kms, 0, null, false, null,0);
+        Vehicle vehicle = new Vehicle(0, license, brand, model, pFuel, sFuelType, kms, 0, null, false, null,0);
         presenter.insertVehicle(vehicle);
     }
 

@@ -1,12 +1,15 @@
 package com.sphy.pfc_app.model.refuels;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.sphy.pfc_app.api.RefuelApi;
 import com.sphy.pfc_app.api.RefuelApiInterface;
 import com.sphy.pfc_app.contract.refuels.RefuelRegisterContract;
 import com.sphy.pfc_app.domain.Refuel;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +36,13 @@ public class RefuelRegisterModel implements RefuelRegisterContract.Model {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, "Repostaje registrado correctamente", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context, "Error al registrar el repostaje", Toast.LENGTH_LONG).show();
+                    String errorMessage = null;
+                    try {
+                        errorMessage = response.errorBody().string();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Log.e("RefuelError", "Error al registrar: " + errorMessage);
                 }
             }
 

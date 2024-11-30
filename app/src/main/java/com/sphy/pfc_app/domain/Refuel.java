@@ -23,15 +23,28 @@ public class Refuel {
     private float medConsumption;
 
 
+
+    private boolean doubleRefuel;
+    private String secondFuel;
+    private float secondAmount;
+    private float secondPrice;
+    private boolean secondFulled;
+    private int kmsTraveledSecondrefuel;
+    private float secondRefuelConsumption;
+    private float secondRefueledLiters;
+    private float secondMedConsumption;
+
+
     private long vehicleId;
     private long stationId;
 
+    private long userId;
 
-    public Refuel() {}
 
-    public Refuel(long id, String nameStation, String nameVehicle, String fuel, float amount, float price, int kmTotal,
-                  int kmTraveled, boolean fulled, String creationDate, float refuelConsumption, float refueledLiters,
-                  float medConsumption, long vehicleId, long stationId) {
+    public Refuel() {
+    }
+
+    public Refuel(long id, String nameStation, String nameVehicle, String fuel, float amount, float price, int kmTotal, int kmTraveled, boolean fulled, String creationDate, float refuelConsumption, float refueledLiters, float medConsumption, boolean doubleRefuel, String secondFuel, float secondAmount, float secondPrice, boolean secondFulled, int kmsTraveledSecondrefuel, float secondRefuelConsumption, float secondRefueledLiters, float secondMedConsumption, long vehicleId, long stationId, long userId) {
         this.id = id;
         this.nameStation = nameStation;
         this.nameVehicle = nameVehicle;
@@ -45,11 +58,19 @@ public class Refuel {
         this.refuelConsumption = refuelConsumption;
         this.refueledLiters = refueledLiters;
         this.medConsumption = medConsumption;
+        this.doubleRefuel = doubleRefuel;
+        this.secondFuel = secondFuel;
+        this.secondAmount = secondAmount;
+        this.secondPrice = secondPrice;
+        this.secondFulled = secondFulled;
+        this.kmsTraveledSecondrefuel = kmsTraveledSecondrefuel;
+        this.secondRefuelConsumption = secondRefuelConsumption;
+        this.secondRefueledLiters = secondRefueledLiters;
+        this.secondMedConsumption = secondMedConsumption;
         this.vehicleId = vehicleId;
         this.stationId = stationId;
+        this.userId = userId;
     }
-
-
 
     public long getId() {
         return id;
@@ -124,7 +145,7 @@ public class Refuel {
     }
 
     public String getCreationDate() {
-        return creationDate.toString();
+        return creationDate;
     }
 
     public void setCreationDate(String creationDate) {
@@ -155,6 +176,78 @@ public class Refuel {
         this.medConsumption = medConsumption;
     }
 
+    public boolean isDoubleRefuel() {
+        return doubleRefuel;
+    }
+
+    public void setDoubleRefuel(boolean doubleRefuel) {
+        this.doubleRefuel = doubleRefuel;
+    }
+
+    public String getSecondFuel() {
+        return secondFuel;
+    }
+
+    public void setSecondFuel(String secondFuel) {
+        this.secondFuel = secondFuel;
+    }
+
+    public float getSecondAmount() {
+        return secondAmount;
+    }
+
+    public void setSecondAmount(float secondAmount) {
+        this.secondAmount = secondAmount;
+    }
+
+    public float getSecondPrice() {
+        return secondPrice;
+    }
+
+    public void setSecondPrice(float secondPrice) {
+        this.secondPrice = secondPrice;
+    }
+
+    public boolean isSecondFulled() {
+        return secondFulled;
+    }
+
+    public void setSecondFulled(boolean secondFulled) {
+        this.secondFulled = secondFulled;
+    }
+
+    public int getKmsTraveledSecondrefuel() {
+        return kmsTraveledSecondrefuel;
+    }
+
+    public void setKmsTraveledSecondrefuel(int kmsTraveledSecondrefuel) {
+        this.kmsTraveledSecondrefuel = kmsTraveledSecondrefuel;
+    }
+
+    public float getSecondRefuelConsumption() {
+        return secondRefuelConsumption;
+    }
+
+    public void setSecondRefuelConsumption(float secondRefuelConsumption) {
+        this.secondRefuelConsumption = secondRefuelConsumption;
+    }
+
+    public float getSecondRefueledLiters() {
+        return secondRefueledLiters;
+    }
+
+    public void setSecondRefueledLiters(float secondRefueledLiters) {
+        this.secondRefueledLiters = secondRefueledLiters;
+    }
+
+    public float getSecondMedConsumption() {
+        return secondMedConsumption;
+    }
+
+    public void setSecondMedConsumption(float secondMedConsumption) {
+        this.secondMedConsumption = secondMedConsumption;
+    }
+
     public long getVehicleId() {
         return vehicleId;
     }
@@ -169,5 +262,13 @@ public class Refuel {
 
     public void setStationId(long stationId) {
         this.stationId = stationId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

@@ -123,7 +123,41 @@ public class SpinnerAdapter {
         fuelSpinner.setAdapter(fuelsAdapter);
     }
 
+    public static void populateFuelType2Spinner(Context context, Spinner fuelTypeSpinner, long vehicleId) {
 
+        VehicleApiInterface api = VehicleApi.buildInstance(context);
+        Call<Vehicle> vehicleSelected = api.getVehicleById(vehicleId);
+
+        vehicleSelected.enqueue(new Callback<Vehicle>() {
+            @Override
+            public void onResponse(Call<Vehicle> call, Response<Vehicle> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    Vehicle vehicle = response.body();
+
+                    List<String> fuelTypes = new ArrayList<>();
+
+
+                    if (vehicle.getFuel2() != null && !vehicle.getFuel2().isEmpty()) {
+                        fuelTypes.add(vehicle.getFuel2());
+                    }
+
+
+                    ArrayAdapter<String> fuelTypeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, fuelTypes);
+                    fuelTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    fuelTypeSpinner.post(() -> fuelTypeSpinner.setAdapter(fuelTypeAdapter));
+
+                } else {
+                    Log.e("Vehicle", "Error al obtener el vehículo: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Vehicle> call, Throwable t) {
+                Log.e("hideVehicle", "Error al conectar con el servidor para obtener el vehículo: " + t.getMessage());
+            }
+        });
+    }
 
 }
 

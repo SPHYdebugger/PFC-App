@@ -24,14 +24,16 @@ public class RefuelRegisterPresenter implements RefuelRegisterContract.Presenter
         model.insertRefuel(vehicleId, stationId, refuel, new RefuelRegisterModel.OnRefuelInsertedListener() {
             @Override
             public void onRefuelInsertedSuccess() {
-                //view.showInsertSuccessMessage();
+                view.showRefuelSuccessMessage();
                 //view.clearFields();
             }
 
             @Override
             public void onRefuelInsertedError(String message) {
-                //view.showInsertErrorMessage();
+                view.showRefuelErrorMessage();
             }
         });
     }
+
+
 }

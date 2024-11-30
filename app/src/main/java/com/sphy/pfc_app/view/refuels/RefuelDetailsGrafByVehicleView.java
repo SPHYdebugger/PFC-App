@@ -135,6 +135,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
     public void listRefuels(List<Refuel> refuels) {
         System.out.println("Matrícula del primer Refuel recibido: " + refuels.get(0).getNameVehicle());
         originalRefuels = new ArrayList<>(refuels);
+
         updateGraph(refuels);
 
     }

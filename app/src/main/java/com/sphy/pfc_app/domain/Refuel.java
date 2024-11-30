@@ -15,7 +15,8 @@ public class Refuel {
     private float amount;
     private float price;
     private int kmTotal;
-    private int kmTraveled;
+    private int kmTraveled1;
+    private int kmTraveled2;
     private boolean fulled;
     private String creationDate;
     private float refuelConsumption;
@@ -44,7 +45,12 @@ public class Refuel {
     public Refuel() {
     }
 
-    public Refuel(long id, String nameStation, String nameVehicle, String fuel, float amount, float price, int kmTotal, int kmTraveled, boolean fulled, String creationDate, float refuelConsumption, float refueledLiters, float medConsumption, boolean doubleRefuel, String secondFuel, float secondAmount, float secondPrice, boolean secondFulled, int kmsTraveledSecondrefuel, float secondRefuelConsumption, float secondRefueledLiters, float secondMedConsumption, long vehicleId, long stationId, long userId) {
+    public Refuel(long id, String nameStation, String nameVehicle, String fuel, float amount, float price, int kmTotal,
+                  int kmTraveled1, int kmTraveled2, boolean fulled, String creationDate, float refuelConsumption,
+                  float refueledLiters, float medConsumption, boolean doubleRefuel, String secondFuel,
+                  float secondAmount, float secondPrice, boolean secondFulled, int kmsTraveledSecondrefuel,
+                  float secondRefuelConsumption, float secondRefueledLiters, float secondMedConsumption,
+                  long vehicleId, long stationId, long userId) {
         this.id = id;
         this.nameStation = nameStation;
         this.nameVehicle = nameVehicle;
@@ -52,7 +58,8 @@ public class Refuel {
         this.amount = amount;
         this.price = price;
         this.kmTotal = kmTotal;
-        this.kmTraveled = kmTraveled;
+        this.kmTraveled1 = kmTraveled1;
+        this.kmTraveled2 = kmTraveled2;
         this.fulled = fulled;
         this.creationDate = creationDate;
         this.refuelConsumption = refuelConsumption;
@@ -128,12 +135,20 @@ public class Refuel {
         this.kmTotal = kmTotal;
     }
 
-    public int getKmTraveled() {
-        return kmTraveled;
+    public int getKmTraveled1() {
+        return kmTraveled1;
     }
 
-    public void setKmTraveled(int kmTraveled) {
-        this.kmTraveled = kmTraveled;
+    public void setKmTraveled1(int kmTraveled1) {
+        this.kmTraveled1 = kmTraveled1;
+    }
+
+    public int getKmTraveled2() {
+        return kmTraveled2;
+    }
+
+    public void setKmTraveled2(int kmTraveled2) {
+        this.kmTraveled2 = kmTraveled2;
     }
 
     public boolean isFulled() {

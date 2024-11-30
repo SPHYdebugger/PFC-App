@@ -141,7 +141,7 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
         tvPrice.setText(String.valueOf(refuel.getPrice()));
         tvFuel.setText(refuel.getFuel());
         tvRefueledLiters.setText(String.valueOf(refuel.getRefueledLiters()));
-        tvKmsTraveled.setText(String.valueOf(refuel.getKmTraveled()));
+        //tvKmsTraveled.setText(String.valueOf(refuel.getKmTraveled()));
         //tvKmsVehicle.setText(String.valueOf(refuel.getKmTotal()));
         tvRefuelConsumption.setText(String.valueOf(refuel.getRefuelConsumption()));
         tvVehicleConsumption.setText(String.valueOf(refuel.getMedConsumption()));

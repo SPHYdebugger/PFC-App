@@ -160,7 +160,7 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
                         vehicleTemp.setKmActual(vehicleToHide.getKmActual());
                         vehicleTemp.setMedConsumption(vehicleToHide.getMedConsumption());
                         vehicleTemp.setRegistrationDate(vehicleToHide.getRegistrationDate());
-                        vehicleTemp.setHide(vehicleToHide.getHide());
+                        vehicleTemp.setHide(vehicleToHide.isHide());
 
                         vehicleToHide.setHide(true);
 

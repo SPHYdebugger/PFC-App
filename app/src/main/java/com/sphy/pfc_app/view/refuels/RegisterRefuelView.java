@@ -1,13 +1,10 @@
 package com.sphy.pfc_app.view.refuels;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,13 +22,11 @@ import com.sphy.pfc_app.MainMenu;
 import com.sphy.pfc_app.R;
 import com.sphy.pfc_app.adapter.SpinnerAdapter;
 import com.sphy.pfc_app.domain.Refuel;
-import com.sphy.pfc_app.domain.Station;
 import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.model.vehicles.VehicleDetailsModel;
 import com.sphy.pfc_app.presenter.Refuels.RefuelRegisterPresenter;
 import com.sphy.pfc_app.view.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterRefuelView extends BaseActivity {
@@ -43,8 +38,10 @@ public class RegisterRefuelView extends BaseActivity {
 
     private EditText eurosRepostadosEditText;
     private EditText fuelPriceEditText;
-    private EditText vehicleKmEditText;
+    private EditText vehicleKmFuel1EditText;
     private Spinner fuelTypeSpinner;
+    private int selectedPosition;
+    private int totalPositions;
     private Spinner stationSpinner;
 
     private TextView selectedVehicleTextView;
@@ -90,7 +87,7 @@ public class RegisterRefuelView extends BaseActivity {
         vehicleId = getIntent().getLongExtra("vehicleId", -1);
         license = getIntent().getStringExtra("vehicleLicense");
         kms = getIntent().getStringExtra("vehicleKms");
-        
+
         username = findViewById(R.id.userNameTextView);
 
         if (vehicleId == -1) {
@@ -105,7 +102,7 @@ public class RegisterRefuelView extends BaseActivity {
         create_button = findViewById(R.id.create_button);
         eurosRepostadosEditText = findViewById(R.id.eurosRepostadosEditText);
         fuelPriceEditText = findViewById(R.id.fuelPriceEditText);
-        vehicleKmEditText = findViewById(R.id.vehicleKmEditText);
+        vehicleKmFuel1EditText = findViewById(R.id.vehicleKmEditText);
         fuelTypeSpinner = findViewById(R.id.fuelTypeSpinner);
         stationSpinner = findViewById(R.id.stationSpinner);
         full = findViewById(R.id.checkBox2);
@@ -175,52 +172,74 @@ public class RegisterRefuelView extends BaseActivity {
         });
 
 
-
-
-        vehicleKmEditText.setText(String.valueOf(kms));
-        vehicleKmEditText.setTextColor(Color.GRAY);
-        vehicleKmEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    vehicleKmEditText.setTextColor(Color.BLACK);
-                } else {
-                    if (vehicleKmEditText.getText().toString().isEmpty()) {
-                        vehicleKmEditText.setTextColor(Color.GRAY);
-                    }
-                }
-            }
-        });
-
-        vehicleKmEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String enteredKmText = vehicleKmEditText.getText().toString();
-
-                if (!enteredKmText.isEmpty()) {
-                    int enteredKm = Integer.parseInt(enteredKmText);
-                    if (enteredKm <= Integer.parseInt(kms)) {
-                        vehicleKmEditText.setError("El valor no puede ser menor o igual al actual.");
-                        return false;
-                    }
-
-                    if (enteredKm > Integer.parseInt(kms) + 1500) {
-                        confirmRegisterKms();
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        });
-
-
         SpinnerAdapter.populateFuelTypeSpinner(this, fuelTypeSpinner, vehicleId);
         SpinnerAdapter.populateFuelType2Spinner(this, fuelTypeSpinner2, vehicleId);
         SpinnerAdapter.populateStationSpinner(this,stationSpinner);
 
+        fuelTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                System.out.println("posicion del spinner..." + selectedPosition);
+                totalPositions = parent.getCount();
+                System.out.println("posiciones totales..." + totalPositions);
 
-        //Recoger el objeto de la station
+                if (selectedPosition == 1) { // Si está en la posición 1, ocultar los campos del segundo repostaje
+                    doubleRefuel.setVisibility(View.INVISIBLE);
+                    textView7.setVisibility(View.INVISIBLE);
+                    textView8.setVisibility(View.INVISIBLE);
+                    textView9.setVisibility(View.INVISIBLE);
+                    textView10.setVisibility(View.INVISIBLE);
+                    textView11.setVisibility(View.INVISIBLE);
+                    eurosRepostadosEditText2.setVisibility(View.INVISIBLE);
+                    fuelPriceEditText2.setVisibility(View.INVISIBLE);
+                    vehicleKmEditText2.setVisibility(View.INVISIBLE);
+                    fuelTypeSpinner2.setVisibility(View.INVISIBLE);
+                    full2.setVisibility(View.INVISIBLE);
+
+                    // Limpia los valores de los campos del segundo repostaje
+                    eurosRepostadosEditText2.setText("");
+                    fuelPriceEditText2.setText("");
+                    vehicleKmEditText2.setText("");
+                    fuelTypeSpinner2.setSelection(0);
+                    full2.setChecked(false);
+
+
+                    LinearLayout linearLayout = findViewById(R.id.repostajeDetailsLayout);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+                    layoutParams.height = 1500;
+                    linearLayout.setLayoutParams(layoutParams);
+
+                } else {
+                    doubleRefuel.setVisibility(View.VISIBLE);
+                    textView7.setVisibility(View.VISIBLE);
+                    textView8.setVisibility(View.VISIBLE);
+                    textView9.setVisibility(View.VISIBLE);
+                    textView10.setVisibility(View.VISIBLE);
+                    textView11.setVisibility(View.VISIBLE);
+                    eurosRepostadosEditText2.setVisibility(View.VISIBLE);
+                    fuelPriceEditText2.setVisibility(View.VISIBLE);
+                    vehicleKmEditText2.setVisibility(View.VISIBLE);
+                    fuelTypeSpinner2.setVisibility(View.VISIBLE);
+                    full2.setVisibility(View.VISIBLE);
+
+                    LinearLayout linearLayout = findViewById(R.id.repostajeDetailsLayout);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+                    layoutParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
+                    linearLayout.setLayoutParams(layoutParams);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "¡Por favor, selecciona una opción!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
         stationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -250,86 +269,206 @@ public class RegisterRefuelView extends BaseActivity {
     public void registerRefuel(View view) {
         try {
 
-            Refuel refuel = new Refuel();
+            if (selectedPosition == 0 && totalPositions > 1){
+                Refuel refuel = new Refuel();
 
-            if (eurosRepostadosEditText.getText().toString().isEmpty() ||
-                    fuelPriceEditText.getText().toString().isEmpty() ||
-                    vehicleKmEditText.getText().toString().isEmpty()){
-                Toast.makeText(this, "Por favor, complete todos los campos obligatorios del primer repostaje.", Toast.LENGTH_LONG).show();
-                return;
-            }
 
-            float amount = Float.parseFloat(eurosRepostadosEditText.getText().toString());
-            float fuelPrice = Float.parseFloat(fuelPriceEditText.getText().toString());
-            int vehicleKm = Integer.parseInt(vehicleKmEditText.getText().toString());
-            String fuelType = fuelTypeSpinner.getSelectedItem().toString();
-
-            if (amount <= 0 || fuelPrice <= 0 || vehicleKm <= 0) {
-                Toast.makeText(this, "Por favor, ingrese valores válidos para el primer repostaje.", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            refuel.setFuel(fuelType);
-            refuel.setAmount(amount);
-            refuel.setPrice(fuelPrice);
-            refuel.setKmTotal(vehicleKm);
-
-            float amount2 = 0, fuelPrice2 = 0;
-            int vehicleKm2 = 0;
-            String fuelType2 = "";
-            boolean fulled2 = false;
-
-            if (doubleRefuel.isChecked()) {
-                if (eurosRepostadosEditText2.getText().toString().isEmpty() ||
-                        fuelPriceEditText2.getText().toString().isEmpty() ||
-                        vehicleKmEditText2.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Por favor, complete todos los campos del segundo repostaje.", Toast.LENGTH_LONG).show();
+                if (eurosRepostadosEditText.getText().toString().isEmpty() ||
+                        fuelPriceEditText.getText().toString().isEmpty() ||
+                        vehicleKmFuel1EditText.getText().toString().isEmpty()) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, complete todos los campos obligatorios.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                amount2 = Float.parseFloat(eurosRepostadosEditText2.getText().toString());
-                fuelPrice2 = Float.parseFloat(fuelPriceEditText2.getText().toString());
-                vehicleKm2 = Integer.parseInt(vehicleKmEditText2.getText().toString());
-                fuelType2 = fuelTypeSpinner2.getSelectedItem().toString();
-                fulled2 = full2.isChecked();
 
-                if (amount2 <= 0 || fuelPrice2 <= 0 || vehicleKm2 <= 0) {
-                    Toast.makeText(this, "Por favor, ingrese valores válidos para el segundo repostaje.", Toast.LENGTH_LONG).show();
+                float amount = Float.parseFloat(eurosRepostadosEditText.getText().toString());
+                float fuelPrice = Float.parseFloat(fuelPriceEditText.getText().toString());
+                int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
+                String fuelType = fuelTypeSpinner.getSelectedItem().toString();
+
+                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                // Solo asignar los valores del segundo repostaje si está habilitado
-                refuel.setSecondFuel(fuelType2);
-                refuel.setSecondAmount(amount2);
-                refuel.setSecondPrice(fuelPrice2);
-                refuel.setKmsTraveledSecondrefuel(vehicleKm2);
-                refuel.setSecondFulled(fulled2);
-            } else {
 
-                refuel.setSecondFuel("None");
+
+                refuel.setFuel(fuelType);
+                refuel.setAmount(amount);
+                refuel.setPrice(fuelPrice);
+                refuel.setKmTraveled1(kmFuel);
+
+                float amount2 = 0, fuelPrice2 = 0;
+                int vehicleKm2 = 0;
+                String fuelType2 = "";
+                boolean fulled2 = false;
+
+                if (doubleRefuel.isChecked()) {
+                    if (eurosRepostadosEditText2.getText().toString().isEmpty() ||
+                            fuelPriceEditText2.getText().toString().isEmpty() ||
+                            vehicleKmEditText2.getText().toString().isEmpty()) {
+                        Toast.makeText(this, "Por favor, complete todos los campos del segundo repostaje.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    amount2 = Float.parseFloat(eurosRepostadosEditText2.getText().toString());
+                    fuelPrice2 = Float.parseFloat(fuelPriceEditText2.getText().toString());
+                    vehicleKm2 = Integer.parseInt(vehicleKmEditText2.getText().toString());
+                    fuelType2 = fuelTypeSpinner2.getSelectedItem().toString();
+                    fulled2 = full2.isChecked();
+
+                    if (amount2 <= 0 || fuelPrice2 <= 0 || vehicleKm2 <= 0) {
+                        Toast.makeText(this, "Por favor, ingrese valores válidos para el segundo repostaje.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    // Solo asignar los valores del segundo repostaje si está habilitado
+                    refuel.setSecondFuel(fuelType2);
+                    refuel.setSecondAmount(amount2);
+                    refuel.setSecondPrice(fuelPrice2);
+                    refuel.setKmsTraveledSecondrefuel(vehicleKm2);
+                    refuel.setSecondFulled(fulled2);
+                } else {
+
+                    refuel.setSecondFuel(null);
+                    refuel.setSecondAmount(0);
+                    refuel.setSecondPrice(0);
+                    refuel.setKmsTraveledSecondrefuel(0);
+                    refuel.setSecondFulled(false);
+                }
+
+
+
+                refuel.setUserId(userId);
+                refuel.setNameStation(stationName);
+                refuel.setNameVehicle(license);
+                refuel.setFulled(full.isChecked());
+                refuel.setDoubleRefuel(doubleRefuel.isChecked());
+
+
+                presenter.insertRefuel(vehicleId, stationId, refuel);
+                Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
+                startActivity(intent);
+                finish();
+
+            } else if (selectedPosition == 0 && totalPositions == 1){
+                Refuel refuel = new Refuel();
+
+
+                if (eurosRepostadosEditText.getText().toString().isEmpty() ||
+                        fuelPriceEditText.getText().toString().isEmpty() ||
+                        vehicleKmFuel1EditText.getText().toString().isEmpty()) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, complete todos los campos obligatorios.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                float amount = Float.parseFloat(eurosRepostadosEditText.getText().toString());
+                float fuelPrice = Float.parseFloat(fuelPriceEditText.getText().toString());
+                int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
+                String fuelType = fuelTypeSpinner.getSelectedItem().toString();
+
+                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+                refuel.setFuel(fuelType);
+                refuel.setAmount(amount);
+                refuel.setPrice(fuelPrice);
+                refuel.setKmTraveled1(kmFuel);
+
+
+                refuel.setSecondFuel(null);
                 refuel.setSecondAmount(0);
                 refuel.setSecondPrice(0);
                 refuel.setKmsTraveledSecondrefuel(0);
                 refuel.setSecondFulled(false);
+
+                refuel.setUserId(userId);
+                refuel.setNameStation(stationName);
+                refuel.setNameVehicle(license);
+                refuel.setFulled(full.isChecked());
+                refuel.setDoubleRefuel(doubleRefuel.isChecked());
+
+
+
+
+                presenter.insertRefuel(vehicleId, stationId, refuel);
+                Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
+                startActivity(intent);
+                finish();
+
+            } else if (selectedPosition == 1){
+                Refuel refuel = new Refuel();
+
+                doubleRefuel.setVisibility(View.INVISIBLE);
+                textView7.setVisibility(View.INVISIBLE);
+                textView8.setVisibility(View.INVISIBLE);
+                textView9.setVisibility(View.INVISIBLE);
+                textView10.setVisibility(View.INVISIBLE);
+                textView11.setVisibility(View.INVISIBLE);
+                eurosRepostadosEditText2.setVisibility(View.INVISIBLE);
+                fuelPriceEditText2.setVisibility(View.INVISIBLE);
+                vehicleKmEditText2.setVisibility(View.INVISIBLE);
+                fuelTypeSpinner2.setVisibility(View.INVISIBLE);
+                full2.setVisibility(View.INVISIBLE);
+
+
+
+
+                if (eurosRepostadosEditText.getText().toString().isEmpty() ||
+                        fuelPriceEditText.getText().toString().isEmpty() ||
+                        vehicleKmFuel1EditText.getText().toString().isEmpty()) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, complete todos los campos obligatorios.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                float amount = Float.parseFloat(eurosRepostadosEditText.getText().toString());
+                float fuelPrice = Float.parseFloat(fuelPriceEditText.getText().toString());
+                int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
+                String fuelType = fuelTypeSpinner.getSelectedItem().toString();
+
+                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
+                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+                refuel.setFuel(null);
+                refuel.setAmount(0);
+                refuel.setPrice(0);
+                refuel.setKmTraveled1(0);
+                refuel.setFulled(false);
+
+
+                refuel.setSecondFuel(fuelType);
+                refuel.setSecondAmount(amount);
+                refuel.setSecondPrice(fuelPrice);
+                refuel.setKmsTraveledSecondrefuel(kmFuel);
+                refuel.setSecondFulled(full.isChecked());
+
+                refuel.setUserId(userId);
+                refuel.setNameStation(stationName);
+                refuel.setNameVehicle(license);
+                refuel.setFulled(full.isChecked());
+                refuel.setDoubleRefuel(doubleRefuel.isChecked());
+
+
+                presenter.insertRefuel(vehicleId, stationId, refuel);
+
+
+                Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
+                startActivity(intent);
+                finish();
+
             }
 
 
-
-            refuel.setUserId(userId);
-            refuel.setNameStation(stationName);
-            refuel.setNameVehicle(license);
-            refuel.setFulled(full.isChecked());
-            refuel.setDoubleRefuel(doubleRefuel.isChecked());
-
-            Log.d("Refuel Data", "Primer repostaje: Combustible=" + fuelType + ", Euros=" + amount + ", Precio=" + fuelPrice + ", KM=" + vehicleKm);
-
-            Log.d("Refuel2 Data", "Segundo repostaje: Combustible=" + fuelType2 + ", Euros=" + amount2 + ", Precio=" + fuelPrice2 + ", KM=" + vehicleKm2);
-
-
-            presenter.insertRefuel(vehicleId, stationId, refuel);
-            Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
-            startActivity(intent);
-            finish();
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Por favor, complete todos los campos correctamente.", Toast.LENGTH_LONG).show();
         }
@@ -346,7 +485,7 @@ public class RegisterRefuelView extends BaseActivity {
                 //"<b>Combustible:</b> " + fuelTypeSpinner.getSelectedItem().toString() + "<br>" +
                 "<b>Euros repostados:</b> " + eurosRepostadosEditText.getText().toString() + "<br>" +
                 "<b>Precio del combustible:</b> " + fuelPriceEditText.getText().toString() + "<br>" +
-                "<b>Kilómetros actuales del vehículo:</b> " + vehicleKmEditText.getText().toString() + "<br>" +
+                "<b>Kilómetros actuales del vehículo:</b> " + vehicleKmFuel1EditText.getText().toString() + "<br>" +
                 "<b>Llenado de depósito:</b> " + llenado;
 
         builder.setMessage(Html.fromHtml(message));
@@ -423,4 +562,3 @@ public class RegisterRefuelView extends BaseActivity {
 
 
 }
-

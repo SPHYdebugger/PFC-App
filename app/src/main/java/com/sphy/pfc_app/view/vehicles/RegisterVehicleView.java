@@ -122,7 +122,7 @@ public class RegisterVehicleView extends BaseActivity implements VehicleRegister
 
 
 
-        Vehicle vehicle = new Vehicle(0, license, brand, model, pFuel, sFuelType, kms, 0, null, false, null,0);
+        Vehicle vehicle = new Vehicle(0, license, brand, model, pFuel, sFuelType, kms,0,0, 0, null, false, null,0);
         presenter.insertVehicle(vehicle);
     }
 

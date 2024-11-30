@@ -12,15 +12,23 @@ public class Vehicle {
     private String fuel1;
     private String fuel2;
     private int kmActual;
+    private int kmFuel1;
+    private int kmFuel2;
     private float medConsumption;
     private String registrationDate;
     private boolean hide;
     private List<Refuel> refuels;
     private long userId;
 
-    public Vehicle() {}
 
-    public Vehicle(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, boolean hide, List<Refuel> refuels, long userId) {
+
+
+    public Vehicle() {
+    }
+
+    public Vehicle(long id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual,
+                   int kmFuel1, int kmFuel2, float medConsumption, String registrationDate, boolean hide,
+                   List<Refuel> refuels, long userId) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -28,6 +36,8 @@ public class Vehicle {
         this.fuel1 = fuel1;
         this.fuel2 = fuel2;
         this.kmActual = kmActual;
+        this.kmFuel1 = kmFuel1;
+        this.kmFuel2 = kmFuel2;
         this.medConsumption = medConsumption;
         this.registrationDate = registrationDate;
         this.hide = hide;
@@ -35,11 +45,12 @@ public class Vehicle {
         this.userId = userId;
     }
 
+
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -91,6 +102,22 @@ public class Vehicle {
         this.kmActual = kmActual;
     }
 
+    public int getKmFuel1() {
+        return kmFuel1;
+    }
+
+    public void setKmFuel1(int kmFuel1) {
+        this.kmFuel1 = kmFuel1;
+    }
+
+    public int getKmFuel2() {
+        return kmFuel2;
+    }
+
+    public void setKmFuel2(int kmFuel2) {
+        this.kmFuel2 = kmFuel2;
+    }
+
     public float getMedConsumption() {
         return medConsumption;
     }
@@ -107,6 +134,14 @@ public class Vehicle {
         this.registrationDate = registrationDate;
     }
 
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
+    }
+
     public List<Refuel> getRefuels() {
         return refuels;
     }
@@ -115,16 +150,11 @@ public class Vehicle {
         this.refuels = refuels;
     }
 
-
-    public boolean getHide() {
-        return hide;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setHide(boolean hide) {
-        this.hide = hide;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
-
-    public long getUserId() {return userId;}
-
-    public void setUserId(long userId) {this.userId = userId;}
 }

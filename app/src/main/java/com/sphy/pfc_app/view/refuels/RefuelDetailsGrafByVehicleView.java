@@ -211,19 +211,21 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         for (int i = 0; i < refuels.size(); i++) {
             Refuel refuel = refuels.get(i);
 
+            int diferenceKms = refuel.getKmTraveled1()+refuel.getKmTraveled2();
+
             // Datos para las barras
             float consumption = refuel.getRefuelConsumption();
             barEntries.add(new BarEntry(i, consumption));
 
             // Primera línea: consumo real
-            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled() && refuel.getKmTraveled() <= 1200) {
+            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled() && diferenceKms <= 1200) {
                 float realConsumption = refuel.getRefuelConsumption();
                 lineEntries1.add(new Entry(i, realConsumption));
             }
 
 
             // Segunda línea: promedio de consumo
-            if (refuel.getKmTraveled() <= 1200) {
+            if (diferenceKms <= 1200) {
                 float medConsumption = refuel.getMedConsumption();
                 lineEntries2.add(new Entry(i, medConsumption));
             }

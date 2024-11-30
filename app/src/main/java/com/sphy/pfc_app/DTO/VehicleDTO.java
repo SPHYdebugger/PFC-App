@@ -10,6 +10,8 @@ public class VehicleDTO {
     private String fuel1;
     private String fuel2;
     private int kmActual;
+    private int kmFuel1;
+    private int kmFuel2;
     private float medConsumption;
     private String registrationDate;
     private int refuels;
@@ -18,9 +20,9 @@ public class VehicleDTO {
 
     public VehicleDTO() {}
 
-
-
-    public VehicleDTO(int id, String licensePlate, String brand, String model, String fuel1, String fuel2, int kmActual, float medConsumption, String registrationDate, int refuels, boolean hide, long userId) {
+    public VehicleDTO(long id, String licensePlate, String brand, String model, String fuel1, String fuel2,
+                      int kmActual, int kmFuel1, int kmFuel2, float medConsumption, String registrationDate,
+                      int refuels, boolean hide, long userId) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -28,6 +30,8 @@ public class VehicleDTO {
         this.fuel1 = fuel1;
         this.fuel2 = fuel2;
         this.kmActual = kmActual;
+        this.kmFuel1 = kmFuel1;
+        this.kmFuel2 = kmFuel2;
         this.medConsumption = medConsumption;
         this.registrationDate = registrationDate;
         this.refuels = refuels;
@@ -35,19 +39,11 @@ public class VehicleDTO {
         this.userId = userId;
     }
 
-    public boolean isHide() {
-        return hide;
-    }
-
-    public void setHide(boolean hide) {
-        this.hide = hide;
-    }
-
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -99,6 +95,22 @@ public class VehicleDTO {
         this.kmActual = kmActual;
     }
 
+    public int getKmFuel1() {
+        return kmFuel1;
+    }
+
+    public void setKmFuel1(int kmFuel1) {
+        this.kmFuel1 = kmFuel1;
+    }
+
+    public int getKmFuel2() {
+        return kmFuel2;
+    }
+
+    public void setKmFuel2(int kmFuel2) {
+        this.kmFuel2 = kmFuel2;
+    }
+
     public float getMedConsumption() {
         return medConsumption;
     }
@@ -123,7 +135,19 @@ public class VehicleDTO {
         this.refuels = refuels;
     }
 
-    public long getUserId() {return userId;}
+    public boolean isHide() {
+        return hide;
+    }
 
-    public void setUserId(long userId) {this.userId = userId;}
+    public void setHide(boolean hide) {
+        this.hide = hide;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 }

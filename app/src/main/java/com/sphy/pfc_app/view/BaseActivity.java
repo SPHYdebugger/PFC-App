@@ -18,6 +18,7 @@ import com.sphy.pfc_app.adapter.MenuAdapter;
 import com.sphy.pfc_app.login.SharedPreferencesManager;
 import com.sphy.pfc_app.view.refuels.RefuelDetailsGrafByVehicleView;
 import com.sphy.pfc_app.view.stations.StationListView;
+import com.sphy.pfc_app.view.users.UserDetailsView;
 import com.sphy.pfc_app.view.vehicles.VehicleConsumDetailsView;
 import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
@@ -64,8 +65,8 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if ("HISTORIAL".equals(selectedOption)) {
 
-                    /*Intent intent = new Intent(BaseActivity.this, VehicleConsumDetailsView.class);
-                    startActivity(intent);*/
+                    Intent intent = new Intent(BaseActivity.this, UserDetailsView.class);
+                    startActivity(intent);
 
                 } else if ("SALIR".equals(selectedOption)) {
                     //borrar el token

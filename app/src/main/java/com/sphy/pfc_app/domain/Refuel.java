@@ -79,6 +79,39 @@ public class Refuel {
         this.userId = userId;
     }
 
+    @Override
+    public String toString() {
+        return "Refuel{" +
+                "id=" + id +
+                ", nameStation='" + nameStation + '\'' +
+                ", nameVehicle='" + nameVehicle + '\'' +
+                ", fuel='" + fuel + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", kmTotal=" + kmTotal +
+                ", kmTraveled1=" + kmTraveled1 +
+                ", kmTraveled2=" + kmTraveled2 +
+                ", fulled=" + fulled +
+                ", creationDate='" + creationDate + '\'' +
+                ", refuelConsumption=" + refuelConsumption +
+                ", refueledLiters=" + refueledLiters +
+                ", medConsumption=" + medConsumption +
+                ", doubleRefuel=" + doubleRefuel +
+                ", secondFuel='" + secondFuel + '\'' +
+                ", secondAmount=" + secondAmount +
+                ", secondPrice=" + secondPrice +
+                ", secondFulled=" + secondFulled +
+                ", kmsTraveledSecondrefuel=" + kmsTraveledSecondrefuel +
+                ", secondRefuelConsumption=" + secondRefuelConsumption +
+                ", secondRefueledLiters=" + secondRefueledLiters +
+                ", secondMedConsumption=" + secondMedConsumption +
+                ", vehicleId=" + vehicleId +
+                ", stationId=" + stationId +
+                ", userId=" + userId +
+                '}';
+    }
+
+
     public long getId() {
         return id;
     }

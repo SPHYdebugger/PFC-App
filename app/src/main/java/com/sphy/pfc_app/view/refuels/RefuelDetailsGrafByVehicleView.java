@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -38,6 +41,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class RefuelDetailsGrafByVehicleView extends BaseActivity implements RefuelListContract.View {
@@ -53,12 +57,27 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
     private TextView tvBestStation;
     private TextView tvTextBestStation;
 
+    private TextView tvDetalleDE2;
+
+    private TextView tvRealConsum2;
+    private TextView tvTextRealConsum2;
+    private TextView tvBestConsum2;
+    private TextView tvTextBestConsum2;
+    private TextView tvWorstConsum2;
+    private TextView tvTextWorstConsum2;
+    private TextView tvBestStation2;
+    private TextView tvTextBestStation2;
+
     private ScrollView scrollView;
 
     private CombinedChart combinedChart;
+    private CombinedChart combinedChart2;
     private RefuelListPresenter presenter;
     private Spinner filterSpinner;
+    private Spinner filterSpinner2;
     private List<Refuel> originalRefuels;
+    private List<Refuel> filteredRefuelsByFuel1;
+    private List<Refuel> filteredRefuelsByFuel2;
 
     private TextView username;
     private Button backButton;
@@ -84,6 +103,18 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         tvTextBestStation = findViewById(R.id.textBestStation);
         combinedChart = findViewById(R.id.combinedChart);
         filterSpinner = findViewById(R.id.filterSpinner);
+
+        tvDetalleDE2 = findViewById(R.id.detalleDE2);
+        tvRealConsum2 = findViewById(R.id.realConsum2);
+        tvBestConsum2 = findViewById(R.id.bestConsum2);
+        tvWorstConsum2 = findViewById(R.id.worstConsum2);
+        tvBestStation2 = findViewById(R.id.bestStation2);
+        tvTextRealConsum2 = findViewById(R.id.textRealConsum2);
+        tvTextBestConsum2 = findViewById(R.id.textBestConsum2);
+        tvTextWorstConsum2 = findViewById(R.id.textWorstConsum2);
+        tvTextBestStation2 = findViewById(R.id.textBestStation2);
+        combinedChart2 = findViewById(R.id.combinedChart2);
+
         username = findViewById(R.id.userNameTextView);
         backButton = findViewById(R.id.backButton);
 
@@ -133,19 +164,57 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
     @Override
     public void listRefuels(List<Refuel> refuels) {
-        System.out.println("Matrícula del primer Refuel recibido: " + refuels.get(0).getNameVehicle());
+
         originalRefuels = new ArrayList<>(refuels);
 
-        updateGraph(refuels);
+        filteredRefuelsByFuel1 = originalRefuels.stream()
+                .filter(refuel -> refuel.getFuel() != null)
+                .collect(Collectors.toList());
+        if (!filteredRefuelsByFuel1.isEmpty()) {
+            System.out.println("Matrícula del primer Refuel recibido: " + filteredRefuelsByFuel1.get(0).getNameVehicle());
+        } else {
+            System.out.println("No hay repostajes con un valor válido en 'fuel'.");
+        }
+        System.out.println("Refuels filtrados por fuel1");
+        for (Refuel refuel : filteredRefuelsByFuel1) {
+            System.out.println("Fuel1: " + refuel.getFuel() + ", CreationDate: " + refuel.getCreationDate());
+        }
+        updateGraph(filteredRefuelsByFuel1);
 
+        filteredRefuelsByFuel2 = originalRefuels.stream()
+                .filter(refuel -> refuel.getSecondFuel() != null)
+                .collect(Collectors.toList());
+        if (!filteredRefuelsByFuel2.isEmpty()) {
+            System.out.println("Matrícula del primer Refuel recibido: " + filteredRefuelsByFuel1.get(0).getNameVehicle());
+        } else {
+            System.out.println("No hay repostajes con un valor válido en 'fuel'.");
+            tvDetalleDE2.setVisibility(View.GONE);
+            combinedChart2.setVisibility(View.GONE);
+            tvRealConsum2.setVisibility(View.GONE);
+            tvBestConsum2.setVisibility(View.GONE);
+            tvWorstConsum2.setVisibility(View.GONE);
+            tvBestStation2.setVisibility(View.GONE);
+            tvTextRealConsum2.setVisibility(View.GONE);
+            tvTextBestConsum2.setVisibility(View.GONE);
+            tvTextWorstConsum2.setVisibility(View.GONE);
+            tvTextBestStation2.setVisibility(View.GONE);
+
+
+
+
+
+        }
+        updateGraph2(filteredRefuelsByFuel2);
     }
 
+
     private void filterGraphData(String filter) {
-        if (originalRefuels == null || originalRefuels.isEmpty()) {
+        if (filteredRefuelsByFuel1 == null || filteredRefuelsByFuel1.isEmpty()) {
             return;
         }
 
-        List<Refuel> filteredRefuels = new ArrayList<>();
+        List<Refuel> filteredRefuels1 = new ArrayList<>();
+        List<Refuel> filteredRefuels2 = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         long currentTime = calendar.getTimeInMillis();
 
@@ -153,9 +222,14 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
             case "ÚLTIMOS 12 MESES":
                 calendar.add(Calendar.YEAR, -1);
                 long lastYearTime = calendar.getTimeInMillis();
-                for (Refuel refuel : originalRefuels) {
+                for (Refuel refuel : filteredRefuelsByFuel1) {
                     if (isWithinRange(refuel.getCreationDate(), lastYearTime, currentTime)) {
-                        filteredRefuels.add(refuel);
+                        filteredRefuels1.add(refuel);
+                    }
+                }
+                for (Refuel refuel : filteredRefuelsByFuel2) {
+                    if (isWithinRange(refuel.getCreationDate(), lastYearTime, currentTime)) {
+                        filteredRefuels2.add(refuel);
                     }
                 }
                 break;
@@ -163,20 +237,35 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
             case "ÚLTIMOS 6 MESES":
                 calendar.add(Calendar.MONTH, -6);
                 long lastSixMonthsTime = calendar.getTimeInMillis();
-                for (Refuel refuel : originalRefuels) {
+                for (Refuel refuel : filteredRefuelsByFuel1) {
                     if (isWithinRange(refuel.getCreationDate(), lastSixMonthsTime, currentTime)) {
-                        filteredRefuels.add(refuel);
+                        filteredRefuels1.add(refuel);
+                    }
+                }
+                for (Refuel refuel : filteredRefuelsByFuel2) {
+                    if (isWithinRange(refuel.getCreationDate(), lastSixMonthsTime, currentTime)) {
+                        filteredRefuels2.add(refuel);
                     }
                 }
                 break;
 
             default: // "TODOS"
-                filteredRefuels = originalRefuels;
+                filteredRefuels1 = filteredRefuelsByFuel1;
+                filteredRefuels2 = filteredRefuelsByFuel2;
                 break;
         }
+        System.out.println("Refuels filtrados por fuel1 y por fecha");
+        for (Refuel refuel : filteredRefuels1) {
+            System.out.println("Fuel1: " + refuel.getFuel() + ", CreationDate: " + refuel.getCreationDate());
+        }
 
+        System.out.println("Refuels filtrados por fuel2 y por fecha");
+        for (Refuel refuel : filteredRefuels2) {
+            System.out.println("Fuel2: " + refuel.getSecondFuel() + ", CreationDate: " + refuel.getCreationDate());
+        }
         // Actualiza la gráfica con los datos filtrados
-        updateGraph(filteredRefuels);
+        updateGraph(filteredRefuels1);
+        updateGraph2(filteredRefuels2);
     }
 
     private boolean isWithinRange(String dateString, long startTime, long endTime) {
@@ -210,25 +299,23 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         for (int i = 0; i < refuels.size(); i++) {
             Refuel refuel = refuels.get(i);
-
-            int diferenceKms = refuel.getKmTraveled1()+refuel.getKmTraveled2();
-
+            System.out.println("Iteración " + i + ": Fuel1 = " + refuel.getFuel() + ": refuelConsumption = " + refuel.getRefuelConsumption() + ", CreationDate = " + refuel.getCreationDate());
             // Datos para las barras
             float consumption = refuel.getRefuelConsumption();
             barEntries.add(new BarEntry(i, consumption));
 
             // Primera línea: consumo real
-            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled() && diferenceKms <= 1200) {
+            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
                 float realConsumption = refuel.getRefuelConsumption();
                 lineEntries1.add(new Entry(i, realConsumption));
             }
 
 
             // Segunda línea: promedio de consumo
-            if (diferenceKms <= 1200) {
-                float medConsumption = refuel.getMedConsumption();
-                lineEntries2.add(new Entry(i, medConsumption));
-            }
+
+            float medConsumption = refuel.getMedConsumption();
+            lineEntries2.add(new Entry(i, medConsumption));
+
         }
 
 
@@ -280,6 +367,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         YAxis leftAxis = combinedChart.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(10f);
         leftAxis.setGranularity(1f);
         combinedChart.getAxisRight().setEnabled(false);
         combinedChart.getDescription().setEnabled(false);
@@ -300,11 +388,120 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         combinedChart.invalidate();
     }
 
+    private void updateGraph2(List<Refuel> refuels) {
+        List<BarEntry> barEntries2 = new ArrayList<>();
+        List<Entry> lineEntries3 = new ArrayList<>();
+        List<Entry> lineEntries4 = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Collections.sort(refuels, (r1, r2) -> {
+            try {
+                Date date1 = dateFormat.parse(r1.getCreationDate());
+                Date date2 = dateFormat.parse(r2.getCreationDate());
+                return date1.compareTo(date2);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+
+        for (int i = 0; i < refuels.size(); i++) {
+            Refuel refuel = refuels.get(i);
+            System.out.println("Iteración " + i + ": Fuel2 = " + refuel.getSecondFuel() + ": SecondrefuelConsumption = " + refuel.getSecondRefuelConsumption() + ", CreationDate = " + refuel.getCreationDate());
+
+            // Datos para las barras
+            float consumption = refuel.getSecondRefuelConsumption();
+            barEntries2.add(new BarEntry(i, consumption));
+
+            // Primera línea: consumo real
+            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
+                float realConsumption = refuel.getSecondRefuelConsumption();
+                lineEntries3.add(new Entry(i, realConsumption));
+            }
+
+
+            // Segunda línea: promedio de consumo
+
+            float medConsumption = refuel.getSecondMedConsumption();
+            lineEntries4.add(new Entry(i, medConsumption));
+
+        }
+
+
+        showData2(refuels);
+
+        BarDataSet barDataSet = new BarDataSet(barEntries2, "Consumo del repostaje");
+        barDataSet.setColor(Color.parseColor("#156082"));
+        barDataSet.setValueTextSize(16f);
+
+        LineDataSet lineDataSet1 = new LineDataSet(lineEntries3, "Consumo real");
+        lineDataSet1.setColor(Color.GREEN);
+        lineDataSet1.setCircleColor(Color.GREEN);
+        lineDataSet1.setLineWidth(4f);
+        lineDataSet1.setDrawValues(false);
+
+        LineDataSet lineDataSet2 = new LineDataSet(lineEntries4, "Consumo Promedio");
+        lineDataSet2.setColor(Color.RED);
+        lineDataSet2.setCircleColor(Color.RED);
+        lineDataSet2.setLineWidth(4f);
+        lineDataSet2.setDrawValues(false);
+
+        // Configuración del eje X para mostrar fechas
+        XAxis xAxis = combinedChart2.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            SimpleDateFormat displayFormat = new SimpleDateFormat("dd/MM/yyyy");
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                int index = (int) value;
+                if (index >= 0 && index < refuels.size()) {
+                    try {
+                        Date date = dateFormat.parse(refuels.get(index).getCreationDate());
+                        return displayFormat.format(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return "";
+            }
+        });
+
+        // Configuración adicional
+        xAxis.setPosition(XAxis.XAxisPosition.TOP);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(90f);
+        xAxis.setTextSize(14f);
+        // Añadir espacio extra en los extremos para evitar que las barras queden cortadas
+        xAxis.setAxisMinimum(-0.5f); // Un poco antes de la primera barra
+        xAxis.setAxisMaximum(barEntries2.size() - 0.5f); // Un poco después de la última barra
+
+        YAxis leftAxis = combinedChart2.getAxisLeft();
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(10f);
+        leftAxis.setGranularity(1f);
+        combinedChart2.getAxisRight().setEnabled(false);
+        combinedChart2.getDescription().setEnabled(false);
+        combinedChart2.setDragEnabled(true);
+        combinedChart2.setScaleEnabled(true);
+
+
+        // Crear los objetos BarData y LineData
+        BarData barData = new BarData(barDataSet);
+        LineData lineData = new LineData(lineDataSet1, lineDataSet2);
+
+        // Crear el gráfico combinado y añadir los conjuntos de datos
+        CombinedData combinedData = new CombinedData();
+        combinedData.setData(barData);  // Añadir barras
+        combinedData.setData(lineData); // Añadir las dos líneas
+
+        combinedChart2.setData(combinedData);
+        combinedChart2.invalidate();
+    }
+
 
     public void showData(List<Refuel> refuels){
 
         List<Entry> lineEntries1 = new ArrayList<>();
-
+        tvDetalleDE.setText("Consumos con " + refuels.get(0).getFuel());
         tvTextRealConsum.setText("Consumo real del vehículo:");
         tvTextBestConsum.setText("Fecha del repostaje con mejor consumo:");
         tvTextWorstConsum.setText("Fecha del repostaje con peor consumo:");
@@ -400,6 +597,109 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
                 tvBestStation.setText(previousRefuel.getNameStation());
             } else {
                 tvBestStation.setText("Mejor estación: No disponible");
+            }
+        }
+    }
+
+    public void showData2(List<Refuel> refuels){
+
+        List<Entry> lineEntries2 = new ArrayList<>();
+        tvDetalleDE2.setText("Consumos con " + refuels.get(0).getSecondFuel());
+        tvTextRealConsum2.setText("Consumo real del vehículo:");
+        tvTextBestConsum2.setText("Fecha del repostaje con mejor consumo:");
+        tvTextWorstConsum2.setText("Fecha del repostaje con peor consumo:");
+        tvTextBestStation2.setText("Estación con el mejor consumo:");
+
+        if (refuels == null || refuels.isEmpty()) {
+            tvRealConsum2.setText("Sin datos disponibles");
+            tvBestConsum2.setText("Sin datos disponibles");
+            tvWorstConsum2.setText("Sin datos disponibles");
+            tvBestStation2.setText("Sin datos disponibles");
+            return;
+        }
+
+        Refuel bestRefuel = null;
+        Refuel worstRefuel = null;
+
+        for (int i = 1; i < refuels.size(); i++) {
+            Refuel current = refuels.get(i);
+
+            if (current == null || current.getSecondRefuelConsumption() == 0 || i - 1 < 0) continue;
+
+            if (bestRefuel == null || current.getSecondRefuelConsumption() < bestRefuel.getSecondRefuelConsumption()) {
+                bestRefuel = current;
+            }
+
+            if (worstRefuel == null || current.getSecondRefuelConsumption() > worstRefuel.getSecondRefuelConsumption()) {
+                worstRefuel = current;
+            }
+        }
+
+        // Mostrar el mejor repostaje
+        if (bestRefuel != null) {
+            Refuel previousRefuel = refuels.get(refuels.indexOf(bestRefuel) - 1);
+            String bestText = String.format("%.2f", bestRefuel.getSecondRefuelConsumption()) + " / " + previousRefuel.getCreationDate();
+            tvBestConsum2.setText(bestText);
+        } else {
+            tvBestConsum2.setText("No hay datos para el mejor repostaje");
+        }
+
+        // Mostrar el peor repostaje
+        if (worstRefuel != null) {
+            Refuel previousRefuel = refuels.get(refuels.indexOf(worstRefuel) - 1);
+            String worstText = String.format("%.2f", worstRefuel.getSecondRefuelConsumption()) + " / " + previousRefuel.getCreationDate();
+            tvWorstConsum2.setText(worstText);
+        } else {
+            tvWorstConsum2.setText("No hay datos para el peor repostaje");
+        }
+
+        // Mostrar el consumo real promedio (opcional)
+        float totalConsumption = 0f;
+        int countRealConsumptions = 0;
+
+        for (int i = 0; i < refuels.size(); i++) {
+            Refuel refuel = refuels.get(i);
+
+            // Primera línea: consumo real
+            if (refuel.isSecondFulled() && i > 0 && refuels.get(i - 1).isSecondFulled()) {
+                float realConsumption = refuel.getSecondRefuelConsumption();
+                lineEntries2.add(new Entry(i, realConsumption));
+
+                // Sumar el consumo real y contar el repostaje
+                totalConsumption += realConsumption;
+                countRealConsumptions++;
+            }
+        }
+
+
+        float averageConsumption = countRealConsumptions > 0 ? totalConsumption / countRealConsumptions : 0f;
+        tvRealConsum2.setText(String.format("%.2f", averageConsumption));
+
+
+
+        if (refuels == null || refuels.size() < 2) {
+            tvBestStation2.setText("Mejor estación: No disponible");
+        } else {
+            Refuel bestRefuel2 = null;
+            int bestRefuelIndex = -1;
+            float bestConsumption = Float.MAX_VALUE;
+
+            // Buscar el repostaje con el mejor consumo
+            for (int i = 1; i < refuels.size(); i++) {
+                Refuel currentRefuel = refuels.get(i);
+                if (currentRefuel.isSecondFulled() && currentRefuel.getSecondRefuelConsumption() < bestConsumption) {
+                    bestConsumption = currentRefuel.getSecondRefuelConsumption();
+                    bestRefuel2 = currentRefuel;
+                    bestRefuelIndex = i;
+                }
+            }
+
+            // Buscar el nombre de la estación del repostaje anterior
+            if (bestRefuel2 != null && bestRefuelIndex > 0) {
+                Refuel previousRefuel = refuels.get(bestRefuelIndex - 1);
+                tvBestStation2.setText(previousRefuel.getNameStation());
+            } else {
+                tvBestStation2.setText("Mejor estación: No disponible");
             }
         }
     }

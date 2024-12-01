@@ -134,43 +134,6 @@ public class RegisterRefuelView extends BaseActivity {
         fuelTypeSpinner2.setEnabled(false);
         full2.setEnabled(false);
 
-        checkIfVehicleHasFuel2(vehicleId, hasFuel2 -> {
-            System.out.println("el valor de hasFuel2 es..." + hasFuel2);
-            if (hasFuel2) {
-                doubleRefuel.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    eurosRepostadosEditText2.setEnabled(isChecked);
-                    fuelPriceEditText2.setEnabled(isChecked);
-                    vehicleKmEditText2.setEnabled(isChecked);
-                    fuelTypeSpinner2.setEnabled(isChecked);
-                    full2.setEnabled(isChecked);
-
-                    if (!isChecked) {
-                        eurosRepostadosEditText2.setText("");
-                        fuelPriceEditText2.setText("");
-                        vehicleKmEditText2.setText("");
-                        fuelTypeSpinner2.setSelection(0);
-                        full2.setChecked(false);
-                    }
-                });
-            } else {
-                doubleRefuel.setVisibility(View.INVISIBLE);
-                textView7.setVisibility(View.INVISIBLE);
-                textView8.setVisibility(View.INVISIBLE);
-                textView9.setVisibility(View.INVISIBLE);
-                textView10.setVisibility(View.INVISIBLE);
-                textView11.setVisibility(View.INVISIBLE);
-                eurosRepostadosEditText2.setVisibility(View.INVISIBLE);
-                fuelPriceEditText2.setVisibility(View.INVISIBLE);
-                vehicleKmEditText2.setVisibility(View.INVISIBLE);
-                fuelTypeSpinner2.setVisibility(View.INVISIBLE);
-                full2.setVisibility(View.INVISIBLE);
-                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-                layoutParams.height = 1500;
-
-
-            }
-        });
-
 
         SpinnerAdapter.populateFuelTypeSpinner(this, fuelTypeSpinner, vehicleId);
         SpinnerAdapter.populateFuelType2Spinner(this, fuelTypeSpinner2, vehicleId);
@@ -184,7 +147,35 @@ public class RegisterRefuelView extends BaseActivity {
                 totalPositions = parent.getCount();
                 System.out.println("posiciones totales..." + totalPositions);
 
-                if (selectedPosition == 1) { // Si está en la posición 1, ocultar los campos del segundo repostaje
+
+                if (selectedPosition == 0 && totalPositions == 1) {
+                    // Oculta los campos del segundo repostaje
+                    doubleRefuel.setVisibility(View.INVISIBLE);
+                    textView7.setVisibility(View.INVISIBLE);
+                    textView8.setVisibility(View.INVISIBLE);
+                    textView9.setVisibility(View.INVISIBLE);
+                    textView10.setVisibility(View.INVISIBLE);
+                    textView11.setVisibility(View.INVISIBLE);
+                    eurosRepostadosEditText2.setVisibility(View.INVISIBLE);
+                    fuelPriceEditText2.setVisibility(View.INVISIBLE);
+                    vehicleKmEditText2.setVisibility(View.INVISIBLE);
+                    fuelTypeSpinner2.setVisibility(View.INVISIBLE);
+                    full2.setVisibility(View.INVISIBLE);
+
+                    // Limpia los valores de los campos del segundo repostaje
+                    eurosRepostadosEditText2.setText("");
+                    fuelPriceEditText2.setText("");
+                    vehicleKmEditText2.setText("");
+                    fuelTypeSpinner2.setSelection(0);
+                    full2.setChecked(false);
+
+                    // Ajusta el tamaño del layout si es necesario
+                    LinearLayout linearLayout = findViewById(R.id.repostajeDetailsLayout);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+                    layoutParams.height = 1500; // Ajusta según tus necesidades
+                    linearLayout.setLayoutParams(layoutParams);
+
+                } else if (selectedPosition == 1) { // Si está en la posición 1, ocultar los campos del segundo repostaje
                     doubleRefuel.setVisibility(View.INVISIBLE);
                     textView7.setVisibility(View.INVISIBLE);
                     textView8.setVisibility(View.INVISIBLE);
@@ -353,6 +344,8 @@ public class RegisterRefuelView extends BaseActivity {
 
             } else if (selectedPosition == 0 && totalPositions == 1){
                 Refuel refuel = new Refuel();
+
+
 
 
                 if (eurosRepostadosEditText.getText().toString().isEmpty() ||
@@ -535,22 +528,6 @@ public class RegisterRefuelView extends BaseActivity {
         Toast.makeText(this, "Error al registrar el repostaje", Toast.LENGTH_LONG).show();
     }
 
-    public void checkIfVehicleHasFuel2(long vehicleId, OnFuel2CheckListener listener) {
-        VehicleDetailsModel vehicleDetailsModel = new VehicleDetailsModel(this);
-        vehicleDetailsModel.getVehicleDetails(vehicleId, new VehicleDetailsModel.OnVehicleDetailsListener() {
-            @Override
-            public void onVehicleDetailsSuccess(VehicleDTO vehicle) {
-                System.out.println("se ha obtenido este vehicle..." + vehicle.getLicensePlate());
-                boolean hasFuel2 = vehicle != null && vehicle.getFuel2() != null;
-                listener.onFuel2CheckComplete(hasFuel2);
-            }
-
-            @Override
-            public void onVehicleDetailsError(String errorMessage) {
-                listener.onFuel2CheckComplete(false);
-            }
-        });
-    }
 
     public interface OnFuel2CheckListener {
         void onFuel2CheckComplete(boolean hasFuel2);

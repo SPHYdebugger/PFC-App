@@ -54,8 +54,8 @@ public class UserDetailsView extends BaseActivity {
     private boolean vehiclesLoaded = false;
     private boolean stationsLoaded = false;
     private boolean refuelsLoaded = false;
-    private int totalRefuelsToLoad = 0;  // Contador de repostajes por cargar
-    private int refuelsLoadedCount = 0;   // Contador de repostajes cargados
+    private int totalRefuelsToLoad = 0;
+    private int refuelsLoadedCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class UserDetailsView extends BaseActivity {
     }
 
     private void loadUserData(long userId) {
-        // Obtener los vehículos del usuario
+        // Obtener los vehículos
         getUserVehicles(userId, new SelectionVehicleListContract.Model.OnLoadVehicleListener() {
             @Override
             public void onLoadVehiclesSuccess(List<VehicleDTO> vehicles) {
@@ -98,10 +98,10 @@ public class UserDetailsView extends BaseActivity {
                 vehiclesLoaded = true;
                 detailNumberVehicles.setText(String.valueOf(vehicleList.size()));
 
-                totalRefuelsToLoad = vehicleList.size();  // Establecer cuántos repostajes necesitamos cargar
-                refuelsLoadedCount = 0;  // Reiniciar el contador de repostajes cargados
+                totalRefuelsToLoad = vehicleList.size();
+                refuelsLoadedCount = 0;
 
-                // Cargar los repostajes de cada vehículo
+
                 for (VehicleDTO vehicle : vehicleList) {
                     getRefuelsForVehicle(vehicle.getLicensePlate());
                 }
@@ -115,7 +115,7 @@ public class UserDetailsView extends BaseActivity {
             }
         });
 
-        // Obtener las estaciones del usuario
+        // Obtener las estaciones
         getUserStations(userId, new StationListContract.Model.OnLoadStationListener() {
             @Override
             public void onLoadStationsSuccess(List<StationDTO> stations) {
@@ -134,7 +134,7 @@ public class UserDetailsView extends BaseActivity {
         });
     }
 
-    // Método para obtener los vehículos del usuario
+
     public void getUserVehicles(long userId, SelectionVehicleListContract.Model.OnLoadVehicleListener listener) {
         VehicleApiInterface api = VehicleApi.buildInstance(this);
         Call<List<VehicleDTO>> getVehiclesCall = api.getVehiclesByUserId(userId);
@@ -162,7 +162,6 @@ public class UserDetailsView extends BaseActivity {
         });
     }
 
-    // Método para obtener las estaciones del usuario
     public void getUserStations(long userId, StationListContract.Model.OnLoadStationListener listener) {
         StationApiInterface api = StationApi.buildInstance(this);
         Call<List<StationDTO>> getStationsCall = api.getStationsByUserId(userId);
@@ -183,7 +182,7 @@ public class UserDetailsView extends BaseActivity {
         });
     }
 
-    // Método para obtener los repostajes para un vehículo
+
     public void getRefuelsForVehicle(String vehicleIdentifier) {
         RefuelApiInterface api = RefuelApi.buildInstance(this);
         Call<List<Refuel>> getRefuelsCall = api.findRefuelByIdentifier(vehicleIdentifier);
@@ -199,10 +198,8 @@ public class UserDetailsView extends BaseActivity {
                     Log.e("UserDetailsView", "Repostajes obtenidos para el vehículo " + vehicleIdentifier + ": " + refuels.size());
                     detailNumberRefuels.setText(String.valueOf(refuelList.size()));
 
-                    refuelsLoadedCount++;  // Incrementar el contador de repostajes cargados
-
-                    // Verificar si todos los repostajes han sido cargados
-                    checkDataLoaded();  // Verificar si todos los repostajes están cargados
+                    refuelsLoadedCount++;
+                    checkDataLoaded();
                 } else {
                     Log.e("UserDetailsView", "Error al obtener repostajes para el vehículo: " + vehicleIdentifier);
                 }
@@ -218,7 +215,6 @@ public class UserDetailsView extends BaseActivity {
     private void checkDataLoaded() {
         // Verificar si todos los datos están listos
         if (vehiclesLoaded && stationsLoaded && refuelsLoadedCount == totalRefuelsToLoad) {
-
             updateMostUsedVehicle();
             updateMostUsedStation();
         }
@@ -228,28 +224,22 @@ public class UserDetailsView extends BaseActivity {
         if (vehicleList.isEmpty() || refuelList.isEmpty()) {
             return;
         }
-
-        // Mapa que almacena el número de repostajes por matrícula del vehículo
         Map<String, Integer> vehicleCountMap = new HashMap<>();
-
-        // Contamos los repostajes por cada vehículo (según la matrícula)
         for (Refuel refuel : refuelList) {
-            String vehicleName = refuel.getNameVehicle();  // Suponemos que 'nameVehicle' es la matrícula
+            String vehicleName = refuel.getNameVehicle();
             vehicleCountMap.put(vehicleName, vehicleCountMap.getOrDefault(vehicleName, 0) + 1);
         }
 
-        // Buscar la matrícula del vehículo con más repostajes
         String mostUsedVehicleName = vehicleCountMap.entrySet().stream()
-                .max(Map.Entry.comparingByValue())  // Encontrar la matrícula con más repostajes
+                .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
         if (mostUsedVehicleName != null) {
-            // Buscamos el vehículo con esa matrícula y mostramos su placa
             vehicleList.stream()
-                    .filter(vehicle -> vehicle.getLicensePlate().equals(mostUsedVehicleName)) // Usamos 'equals' para comparar cadenas
+                    .filter(vehicle -> vehicle.getLicensePlate().equals(mostUsedVehicleName))
                     .findFirst()
-                    .ifPresent(vehicle -> detailMostUsedVehicle.setText(vehicle.getLicensePlate())); // Mostrar la placa
+                    .ifPresent(vehicle -> detailMostUsedVehicle.setText(vehicle.getLicensePlate()));
         }
     }
 
@@ -261,23 +251,17 @@ public class UserDetailsView extends BaseActivity {
             return;
         }
 
-        // Mapa que almacena el número de repostajes por nombre de estación
         Map<String, Integer> stationCountMap = new HashMap<>();
-
-        // Contamos los repostajes por cada estación (según el nombre de la estación)
         for (Refuel refuel : refuelList) {
-            String stationName = refuel.getNameStation();  // Suponemos que 'nameStation' es el nombre de la estación
+            String stationName = refuel.getNameStation();
             stationCountMap.put(stationName, stationCountMap.getOrDefault(stationName, 0) + 1);
         }
-
-        // Buscar el nombre de la estación con más repostajes
         String mostUsedStationName = stationCountMap.entrySet().stream()
-                .max(Map.Entry.comparingByValue())  // Encontrar el nombre de la estación con más repostajes
+                .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
         if (mostUsedStationName != null) {
-            // Buscamos la estación con ese nombre y mostramos su nombre
             for (StationDTO station : stationList) {
                 if (station.getName().equals(mostUsedStationName)) {
                     detailMostUsedStation.setText(station.getName());

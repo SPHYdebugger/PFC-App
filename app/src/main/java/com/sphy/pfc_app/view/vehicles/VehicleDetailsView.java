@@ -133,7 +133,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     @Override
     public void displayVehicleDetails(VehicleDTO vehicle) {
 
-        String text = "DETALLE DEL VEHÍCULO: " + vehicle.getLicensePlate();
+        String text = getString(R.string.details_of_vehicle) + vehicle.getLicensePlate();
         tvDetalleDE.setText(text);
 
         tvLicense.setText(vehicle.getLicensePlate());
@@ -172,8 +172,8 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
 
     private void confirmDeleteVehicle() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("ALERTA, CONFIRMACIÓN");
-        builder.setMessage("¿EStá seguro de querer borrar el vehículo?");
+        builder.setTitle(R.string.alert);
+        builder.setMessage(R.string.are_you_sure);
 
         // Botón confirmar
         builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {

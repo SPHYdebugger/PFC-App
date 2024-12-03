@@ -26,7 +26,7 @@
                 android:id="@+id/detail_date_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register date"
+                android:text="@string/register_date"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 android:id="@+id/detail_vehicle_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vehicle"
+                android:text="@string/vehicle"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/detail_station_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Station"
+                android:text="@string/station"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -93,7 +93,7 @@
                 android:id="@+id/detail_amount_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Amount"
+                android:text="@string/amount"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -115,7 +115,7 @@
                 android:id="@+id/detail_fuel_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fuel"
+                android:text="@string/fuel"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -137,7 +137,7 @@
                 android:id="@+id/detail_price_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="liter price"
+                android:text="@string/liter_price"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -159,7 +159,7 @@
                 android:id="@+id/detail_liters_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Liters refueled"
+                android:text="@string/liters_refueled"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -182,7 +182,7 @@
                 android:id="@+id/fulled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Llenado" />
+                android:text="@string/fulled" />
 
             <View
                 android:layout_width="match_parent"
@@ -195,7 +195,7 @@
                 android:id="@+id/detail_kmsTraveled_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="KMs Traveled"
+                android:text="@string/km_travelled"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -219,7 +219,7 @@
                 android:id="@+id/detail_refuelConsumption_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refuel consumption"
+                android:text="@string/refuel_consumption"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -241,7 +241,7 @@
                 android:id="@+id/detail_vehicle_consumption_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vehicle consumption"
+                android:text="@string/vehicle_consumption"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

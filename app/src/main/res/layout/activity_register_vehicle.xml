@@ -37,9 +37,9 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Personal Fuel Control"
+            android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -124,7 +124,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Combustible"
+                android:text="@string/fuel"
                 android:textSize="18sp" />
 
             <Spinner
@@ -138,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Kilómetros actuales"
+                android:hint="@string/actual_kms"
                 android:inputType="text" />
 
             <CheckBox
@@ -153,7 +153,7 @@
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Segundo combustible"
+                android:text="@string/second_fuel"
                 android:textSize="18sp" />
 
             <Spinner

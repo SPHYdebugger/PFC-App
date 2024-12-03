@@ -30,7 +30,6 @@ public class UserRegisterView extends AppCompatActivity implements UserRegisterC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Inicializamos los elementos de la vista
         progressBar = findViewById(R.id.progressBar);
         registerButton = findViewById(R.id.register_button);
         usernameEditText = findViewById(R.id.username);
@@ -42,9 +41,7 @@ public class UserRegisterView extends AppCompatActivity implements UserRegisterC
 
         presenter = new UserRegisterPresenter(this, this);
 
-        // Configuración para el botón de registro
         registerButton.setOnClickListener(v -> {
-            // Recoger los datos del formulario
             String username = usernameEditText.getText().toString();
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
@@ -54,7 +51,6 @@ public class UserRegisterView extends AppCompatActivity implements UserRegisterC
 
 
                 UserDTO userDTO = new UserDTO(username, password, name, surname, email);
-                // Iniciar el registro
                 presenter.registerUser(userDTO);
 
         });

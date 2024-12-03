@@ -31,9 +31,9 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Personal Fuel Control"
+            android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/colorFondoOscuro"
-            android:text="REGISTRO"
+            android:text="@string/register"
             android:textColor="@color/white" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/colorFondoOscuro"
             android:onClick="goLogin"
-            android:text="ACCEDER"
+            android:text="@string/access"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:gravity="center_horizontal"
-                android:text="Registro de Usuario"
+                android:text="@string/register_user"
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="text"
                 android:padding="10dp" />
 
@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:padding="10dp" />
 
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:inputType="text"
                 android:padding="10dp" />
 
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:hint="Surname"
+                android:hint="@string/surname"
                 android:inputType="text"
                 android:padding="10dp" />
 
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="Registrar"
+                android:text="@string/go_register"
                 android:translationX="20dp" />
 
             <TextView

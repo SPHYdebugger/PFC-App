@@ -5,37 +5,144 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="#E4DEDE">
+    android:background="@drawable/rounded_background_grey"
+    android:foregroundGravity="left">
 
     <LinearLayout
         android:layout_width="349dp"
-        android:layout_height="135dp"
+        android:layout_height="262dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
-            android:text="Nombre de estación"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="123dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/station_name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="332dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#000000" />
 
         <LinearLayout
-            android:layout_width="329dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="123dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/location"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="332dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="123dp"
+                android:layout_height="match_parent"
+                android:text="@string/number_of_refuels"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/refuels"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="TextView"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="332dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="157dp"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:text="@string/station_has_glp"
+                android:textSize="22dp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="166dp"
+                android:layout_height="39dp"
+                android:layout_weight="1"
+                tools:srcCompat="@android:drawable/checkbox_off_background" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="331dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="5dp">
@@ -48,7 +155,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="DETALLES"
+                android:text="@string/details"
                 android:translationX="-10dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="BORRAR" />
+                android:text="@string/delete" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

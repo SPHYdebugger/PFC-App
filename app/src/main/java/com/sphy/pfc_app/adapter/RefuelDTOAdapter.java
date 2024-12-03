@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,11 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
         holder.creationDate.setText(refuels.get(position).getCreationDate());
         holder.amount.setText(String.valueOf(refuels.get(position).getAmount()));
         holder.stationName.setText(refuels.get(position).getStationName());
-        holder.fulled.setChecked(refuels.get(position).isFulled());
+        if (refuels.get(position).isFulled()) {
+            holder.fulledIcon.setImageResource(R.drawable.comprobado);
+        } else {
+            holder.fulledIcon.setImageResource(R.drawable.eliminar);
+        }
 
 
     }
@@ -60,7 +65,7 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
         public TextView amount;
         public TextView stationName;
         public Button detailsButton;
-        public CheckBox fulled;
+        public ImageView fulledIcon;
 
 
         public RefuelHolder(@NonNull View itemView) {
@@ -70,7 +75,7 @@ public class RefuelDTOAdapter extends RecyclerView.Adapter<RefuelDTOAdapter.Refu
             amount = itemView.findViewById(R.id.amount);
             stationName = itemView.findViewById(R.id.station);
             detailsButton = itemView.findViewById(R.id.detailsButton);
-            fulled = itemView.findViewById(R.id.fulledCheck);
+            fulledIcon = itemView.findViewById(R.id.fulledIcon);
 
             detailsButton = itemView.findViewById(R.id.detailsButton);
 

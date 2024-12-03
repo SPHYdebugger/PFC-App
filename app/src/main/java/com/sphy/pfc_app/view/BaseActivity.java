@@ -2,6 +2,8 @@ package com.sphy.pfc_app.view;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class BaseActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_menu);
 
 
-        List<String> options = Arrays.asList("VEHICULOS", "GASOLINERAS", "HISTORIAL", "", "SALIR");
+        List<String> options = Arrays.asList(getString(R.string.vehicles), getString(R.string.stations), getString(R.string.history),getString(R.string.change_language), "", getString(R.string.exit));
         ListView listView = dialog.findViewById(R.id.listViewOptions);
         MenuAdapter adapter = new MenuAdapter(this, options);
         listView.setAdapter(adapter);
@@ -55,20 +58,22 @@ public class BaseActivity extends AppCompatActivity {
 
                 dialog.dismiss(); // Cierra el diálogo después de seleccionar
 
-                if ("VEHICULOS".equals(selectedOption)) {
+                if (getString(R.string.vehicles).equals(selectedOption)) {
 
                     Intent intent = new Intent(BaseActivity.this, VehicleListView.class);
                     startActivity(intent);
-                } else if ("GASOLINERAS".equals(selectedOption)) {
+                } else if (getString(R.string.stations).equals(selectedOption)) {
 
                     Intent intent = new Intent(BaseActivity.this, StationListView.class);
                     startActivity(intent);
-                } else if ("HISTORIAL".equals(selectedOption)) {
+                } else if (getString(R.string.history).equals(selectedOption)) {
 
                     Intent intent = new Intent(BaseActivity.this, UserDetailsView.class);
                     startActivity(intent);
+                } else if (getString(R.string.change_language).equals(selectedOption)) {
 
-                } else if ("SALIR".equals(selectedOption)) {
+                    toggleLanguage();
+                } else if (getString(R.string.exit).equals(selectedOption)) {
                     //borrar el token
                     SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(BaseActivity.this);
                     sharedPreferencesManager.clear();
@@ -113,4 +118,24 @@ public class BaseActivity extends AppCompatActivity {
             dialog.getWindow().getDecorView().startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_down));
         });
     }
+
+    private void toggleLanguage() {
+        Locale currentLocale = getResources().getConfiguration().locale;
+        Locale newLocale;
+        if (currentLocale.getLanguage().equals("es")) {
+            newLocale = Locale.ENGLISH;
+        } else {
+            newLocale = new Locale("es");
+        }
+        changeLanguage(newLocale);
+        recreate();
+    }
+
+    private void changeLanguage(Locale locale) {
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+    }
+
 }

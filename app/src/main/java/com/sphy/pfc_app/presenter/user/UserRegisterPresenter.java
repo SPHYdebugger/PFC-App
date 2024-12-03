@@ -5,8 +5,15 @@ import android.content.Intent;
 
 import com.sphy.pfc_app.DTO.UserDTO;
 import com.sphy.pfc_app.MainActivity;
+import com.sphy.pfc_app.api.UserApi;
+import com.sphy.pfc_app.api.UserApiInterface;
+import com.sphy.pfc_app.domain.EmailRequest;
 import com.sphy.pfc_app.model.user.UserRegisterModel;
 import com.sphy.pfc_app.view.users.UserRegisterView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class UserRegisterPresenter {
 
@@ -28,6 +35,8 @@ public class UserRegisterPresenter {
                 view.showLoading(false);
                 view.showMessage("Usuario registrado con éxito");
 
+
+
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
             }
@@ -39,4 +48,6 @@ public class UserRegisterPresenter {
             }
         });
     }
+
+
 }

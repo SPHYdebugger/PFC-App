@@ -29,7 +29,7 @@
                 android:id="@+id/detail_license_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="License Plate"
+                android:text="@string/license_plate"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
                 android:id="@+id/detail_brand_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Brand"
+                android:text="@string/vehicle_brand"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:id="@+id/detail_model_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Model"
+                android:text="@string/vehicle_model"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                 android:id="@+id/detail_kms_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="KMs"
+                android:text="@string/actual_kms"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -119,7 +119,7 @@
                 android:id="@+id/detail_fuel_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refuels"
+                android:text="@string/refuels"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorFondoOscuro"
-                    android:text="VER" />
+                    android:text="@string/see" />
 
             </LinearLayout>
 
@@ -156,7 +156,7 @@
                 android:id="@+id/detail_brand_label2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fuel"
+                android:text="@string/fuel"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -178,7 +178,7 @@
                 android:id="@+id/detail_brand_label3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Med consumption"
+                android:text="@string/med_consumption"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -201,7 +201,7 @@
                 android:id="@+id/detail_brand_label4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register date"
+                android:text="@string/register_date"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

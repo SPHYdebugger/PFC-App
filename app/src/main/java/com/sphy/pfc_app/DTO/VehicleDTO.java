@@ -13,6 +13,8 @@ public class VehicleDTO {
     private int kmFuel1;
     private int kmFuel2;
     private float medConsumption;
+    private float realConsumption1;
+    private float realConsumption2;
     private String registrationDate;
     private int refuels;
     private boolean hide;
@@ -21,8 +23,8 @@ public class VehicleDTO {
     public VehicleDTO() {}
 
     public VehicleDTO(long id, String licensePlate, String brand, String model, String fuel1, String fuel2,
-                      int kmActual, int kmFuel1, int kmFuel2, float medConsumption, String registrationDate,
-                      int refuels, boolean hide, long userId) {
+                      int kmActual, int kmFuel1, int kmFuel2, float medConsumption, float realConsumption1,
+                      float realConsumption2, String registrationDate, int refuels, boolean hide, long userId) {
         this.id = id;
         this.licensePlate = licensePlate;
         this.brand = brand;
@@ -33,6 +35,8 @@ public class VehicleDTO {
         this.kmFuel1 = kmFuel1;
         this.kmFuel2 = kmFuel2;
         this.medConsumption = medConsumption;
+        this.realConsumption1 = realConsumption1;
+        this.realConsumption2 = realConsumption2;
         this.registrationDate = registrationDate;
         this.refuels = refuels;
         this.hide = hide;
@@ -117,6 +121,22 @@ public class VehicleDTO {
 
     public void setMedConsumption(float medConsumption) {
         this.medConsumption = medConsumption;
+    }
+
+    public float getRealConsumption1() {
+        return realConsumption1;
+    }
+
+    public void setRealConsumption1(float realConsumption1) {
+        this.realConsumption1 = realConsumption1;
+    }
+
+    public float getRealConsumption2() {
+        return realConsumption2;
+    }
+
+    public void setRealConsumption2(float realConsumption2) {
+        this.realConsumption2 = realConsumption2;
     }
 
     public String getRegistrationDate() {

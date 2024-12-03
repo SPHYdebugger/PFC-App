@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Personal Fuel Control</string>
+    <string name="logo">App Logo</string>
+    <string name="bottom_logo">App Logo without names</string>
+    <string name="no_have_an_account">Don\'t have an account? Register</string>
+    <string name="username">Username</string>
+    <string name="name">First Name</string>
+    <string name="surname">Last Name</string>
+    <string name="vehicle">Vehicle</string>
+    <string name="liter_price">Price per liter</string>
+    <string name="liters_refueled">Liters refueled</string>
+    <string name="refuel_consumption">Refuel consumption</string>
+    <string name="vehicle_consumption">Vehicle consumption</string>
+    <string name="glp">LPG</string>
+    <string name="refuels">Refuels</string>
+    <string name="station_has_glp">Has LPG:</string>
+    <string name="delete">DELETE</string>
+    <string name="med_consumption">Average consumption</string>
+    <string name="AppDesc">Keep complete control of your vehicle\'s consumption, whether personal or business.\n\nWith PFC you can:\n- Register your vehicles.\n- Register your favorite gas stations.\n- Log the refueling of any of your vehicles.\n- Review refueling history.\n- View the average consumption and kilometers traveled for all your vehicles.</string>
+    <string name="vehiculo_matricula">Vehicle license plate</string>
+    <string name="vehicle_model">Vehicle model</string>
+    <string name="license_plate">Vehicle license plate</string>
+    <string name="vehicle_brand">Vehicle brand</string>
+    <string name="vehicle_fuel1">Fuel type</string>
+    <string name="vehicle_fuel2">Auxiliary fuel (LPG, electric, etc.)</string>
+    <string name="create">REGISTER</string>
+    <string name="has_fuel2">Dual fuel</string>
+    <string name="AppName">Personal Fuel Control</string>
+    <string name="consumption_statistics">Consumption Statistics</string>
+    <string name="filter_results">Filter results</string>
+    <string name="return_to_mainMenu">RETURN TO MAIN MENU</string>
+    <string name="refueling_detail">Refueling details</string>
+    <string name="main_menu">MAIN MENU</string>
+    <string name="user_summary">User summary</string>
+    <string name="see_graphics">SEE GRAPHS</string>
+    <string name="register">REGISTER</string>
+    <string name="access">ACCESS</string>
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register_user">User Registration</string>
+    <string name="go_register">Sign Up</string>
+    <string name="insert_refuel_details">Enter refueling details</string>
+    <string name="vehicle_selected">Selected vehicle:</string>
+    <string name="license">License plate</string>
+    <string name="fuel_refueled">Fuel refueled</string>
+    <string name="amount">Euros refueled</string>
+    <string name="insert_amount">Enter the amount in €</string>
+    <string name="actual_price">Current fuel price (€/l)</string>
+    <string name="e_l">€/L</string>
+    <string name="km_travelled">Kilometers driven on this fuel</string>
+    <string name="station">Gas station</string>
+    <string name="fulled">Filled</string>
+    <string name="only_double_refuel">Fill out the following only for dual refueling</string>
+    <string name="double_refuel">Dual refueling</string>
+    <string name="second_fuel_refueled">Second fuel refueled</string>
+    <string name="second_fulled">Second tank filled</string>
+    <string name="station_name">Station Name</string>
+    <string name="station_adress">Address</string>
+    <string name="location">City</string>
+    <string name="province">Province</string>
+    <string name="station_with_GLP">Station with LPG</string>
+    <string name="register_station">Register Station</string>
+    <string name="fuel">Fuel</string>
+    <string name="actual_kms">Current kilometers</string>
+    <string name="second_fuel">Second fuel</string>
+    <string name="select_refuel_vehicle">Select the vehicle for refueling</string>
+    <string name="register_date">Register date</string>
+    <string name="refuel_data">Refuel date</string>
+    <string name="amount_refueled">Refueling amount</string>
+    <string name="price">Price</string>
+    <string name="station_refuel">Refueling station</string>
+    <string name="tank_fulled">Tank filled</string>
+    <string name="details">DETAILS</string>
+    <string name="address">Address</string>
+    <string name="see">SEE</string>
+    <string name="number_of_refuels">Number of refuels</string>
+    <string name="user_name">Username</string>
+    <string name="registers_vehicles">Registered vehicles</string>
+    <string name="refuels_registers">Registered gas stations</string>
+    <string name="refuels_last_year">Number of refuels last year</string>
+    <string name="most_used_vehicle">Most used vehicle</string>
+    <string name="station_most_used">Most visited gas station</string>
+    <string name="double_fuel">Dual fuel</string>
+    <string name="register_refuel">REGISTER REFUEL</string>
+    <string name="register_vehicle">REGISTER VEHICLE</string>
+    <string name="register_station2">REGISTER STATION</string>
+    <string name="details_of_vehicle">"DETAILS OF VEHICLE :</string>
+    <string name="are_you_sure">Are yo sure delete vehicle?</string>
+    <string name="vehicles">VEHICLES</string>
+    <string name="stations">STATIONS</string>
+    <string name="history">HISTORY</string>
+    <string name="exit">EXIT</string>
+    <string name="change_language">IDIOMA</string>
+    <string name="alert">ALERT, CONFIRMATION</string>
+
+
+    <string-array name="filter_options">
+        <item>ALL</item>
+        <item>LAST 12 MONTHS</item>
+        <item>LAST 6 MONTHS</item>
+    </string-array>
+
+
+
+
+</resources>

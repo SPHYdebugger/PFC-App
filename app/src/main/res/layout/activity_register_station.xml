@@ -34,9 +34,9 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Personal Fuel Control"
+            android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -99,7 +99,7 @@
                 android:id="@+id/station_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre de la Estación"
+                android:hint="@string/station_name"
                 android:inputType="text" />
 
 
@@ -107,7 +107,7 @@
                 android:id="@+id/station_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Dirección"
+                android:hint="@string/station_adress"
                 android:inputType="textPostalAddress" />
 
 
@@ -115,7 +115,7 @@
                 android:id="@+id/station_site"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Localidad"
+                android:hint="@string/location"
                 android:inputType="textPostalAddress" />
 
 
@@ -123,7 +123,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Provincia"
+                android:text="@string/province"
                 android:textSize="20sp" />
 
             <Spinner
@@ -137,7 +137,7 @@
                 android:id="@+id/station_glp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estación con GLP" />
+                android:text="@string/station_with_GLP" />
         </LinearLayout>
     </ScrollView>
 
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorFondoOscuro"
-            android:text="Registrar Estación"
+            android:text="@string/register_station"
             android:onClick="registerStation" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@
                     android:layout_height="58dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Personal Fuel Control"
+                    android:text="@string/app_name"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="PANTALLA PRINCIPAL" />
+                android:text="@string/main_menu" />
 
         </LinearLayout>
 
@@ -115,7 +115,7 @@
                     android:id="@+id/detalleDE"
                     android:layout_width="match_parent"
                     android:layout_height="29dp"
-                    android:text="Detalles del usuario"
+                    android:text="@string/user_summary"
                     android:textAlignment="center"
                     android:textSize="18dp"
                     android:textStyle="bold"

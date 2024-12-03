@@ -18,7 +18,7 @@
                 android:id="@+id/detail_name_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="@string/name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
                 android:id="@+id/detail_address_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dirección"
+                android:text="@string/address"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                 android:id="@+id/detail_site_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Localidad"
+                android:text="@string/location"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                 android:id="@+id/detail_province_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Provincia"
+                android:text="@string/province"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                 android:id="@+id/detail_glp_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Glp"
+                android:text="@string/glp"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                 android:id="@+id/detail_refuels_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refuels"
+                android:text="@string/refuels"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -152,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:backgroundTint="@color/colorFondoOscuro"
                     android:layout_height="wrap_content"
-                    android:text="VER" />
+                    android:text="@string/see" />
 
             </LinearLayout>
 

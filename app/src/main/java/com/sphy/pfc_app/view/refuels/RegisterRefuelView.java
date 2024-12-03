@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -228,6 +229,27 @@ public class RegisterRefuelView extends BaseActivity {
             }
         });
 
+        doubleRefuel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    eurosRepostadosEditText2.setEnabled(true);
+                    fuelPriceEditText2.setEnabled(true);
+                    vehicleKmEditText2.setEnabled(true);
+                    fuelTypeSpinner2.setEnabled(true);
+                    full2.setEnabled(true);
+
+                } else {
+                    eurosRepostadosEditText2.setEnabled(false);
+                    fuelPriceEditText2.setEnabled(false);
+                    vehicleKmEditText2.setEnabled(false);
+                    fuelTypeSpinner2.setEnabled(false);
+                    full2.setEnabled(false);
+
+                }
+            }
+        });
 
 
 
@@ -295,6 +317,9 @@ public class RegisterRefuelView extends BaseActivity {
                 boolean fulled2 = false;
 
                 if (doubleRefuel.isChecked()) {
+
+
+
                     if (eurosRepostadosEditText2.getText().toString().isEmpty() ||
                             fuelPriceEditText2.getText().toString().isEmpty() ||
                             vehicleKmEditText2.getText().toString().isEmpty()) {
@@ -430,8 +455,6 @@ public class RegisterRefuelView extends BaseActivity {
                     return;
                 }
 
-
-
                 refuel.setFuel(null);
                 refuel.setAmount(0);
                 refuel.setPrice(0);
@@ -448,7 +471,6 @@ public class RegisterRefuelView extends BaseActivity {
                 refuel.setUserId(userId);
                 refuel.setNameStation(stationName);
                 refuel.setNameVehicle(license);
-                refuel.setFulled(full.isChecked());
                 refuel.setDoubleRefuel(doubleRefuel.isChecked());
 
 

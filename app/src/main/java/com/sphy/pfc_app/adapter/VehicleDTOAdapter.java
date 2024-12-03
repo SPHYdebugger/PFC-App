@@ -20,6 +20,7 @@ import com.sphy.pfc_app.api.VehicleApi;
 import com.sphy.pfc_app.api.VehicleApiInterface;
 import com.sphy.pfc_app.domain.Vehicle;
 import com.sphy.pfc_app.view.vehicles.VehicleDetailsView;
+import com.sphy.pfc_app.view.vehicles.VehicleListView;
 
 import java.util.List;
 
@@ -30,16 +31,19 @@ import retrofit2.Response;
 public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.TaskHolder> {
 
     private List<VehicleDTO> vehicles;
+    private VehicleListView vehicleListView;
 
 
-    public VehicleDTOAdapter(List<VehicleDTO> vehicles) {
+    public VehicleDTOAdapter(VehicleListView vehicleListView, List<VehicleDTO> vehicles) {
+        this.vehicleListView = vehicleListView;
         this.vehicles = vehicles;
     }
+
 
     @NonNull
     @Override
     public TaskHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(vehicleListView)
                 .inflate(R.layout.vehicle_item, parent, false);
         return new TaskHolder(view);
     }
@@ -52,7 +56,13 @@ public class VehicleDTOAdapter extends RecyclerView.Adapter<VehicleDTOAdapter.Ta
         holder.brand.setText(vehicles.get(position).getBrand());
         holder.model.setText(vehicles.get(position).getModel());
         holder.kms.setText(String.valueOf(vehicles.get(position).getKmActual()));
-        holder.consum.setText(String.valueOf(vehicles.get(position).getMedConsumption()));
+
+        if(vehicles.get(position).getFuel2() != null){
+            holder.consum.setText("SI");
+        } else {
+            holder.consum.setText("NO");
+        }
+
 
 
 

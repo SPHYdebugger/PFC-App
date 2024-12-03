@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sphy.pfc_app.login.SharedPreferencesManager;
@@ -17,9 +18,10 @@ import com.sphy.pfc_app.view.vehicles.VehicleListView;
 public class MainMenu extends BaseActivity {
 
     private ImageButton menuButton;
-    private ImageButton addRefuelButton;
-    private ImageButton addVehicleButton;
-    private ImageButton addStationButton;
+    private LinearLayout linearButton1;
+    private LinearLayout linearButton2;
+    private LinearLayout linearButton3;
+
     private TextView username;
 
     private SharedPreferencesManager sharedPreferencesManager;
@@ -32,9 +34,9 @@ public class MainMenu extends BaseActivity {
         sharedPreferencesManager = new SharedPreferencesManager(this);
 
         menuButton = findViewById(R.id.menuButton);
-        addVehicleButton = findViewById(R.id.addVehicle);
-        addRefuelButton = findViewById(R.id.addRefuel);
-        addStationButton = findViewById(R.id.addStation);
+        linearButton1 = findViewById(R.id.linearButton1);
+        linearButton2 = findViewById(R.id.linearButton2);
+        linearButton3 = findViewById(R.id.linearButton3);
         username = findViewById(R.id.userNameTextView);
 
         String token = sharedPreferencesManager.getAuthToken();
@@ -43,19 +45,19 @@ public class MainMenu extends BaseActivity {
 
         setupMenuButton(menuButton);
 
-        addVehicleButton.setOnClickListener(v -> {
+        linearButton1.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenu.this, RegisterVehicleView.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
         });
 
-        addRefuelButton.setOnClickListener(v -> {
+        linearButton2.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenu.this, SelectionVehicleListView.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
         });
 
-        addStationButton.setOnClickListener(v -> {
+        linearButton3.setOnClickListener(v -> {
             Intent intent = new Intent(MainMenu.this, RegisterStationView.class);
             startActivity(intent);
             overridePendingTransition(0, 0);

@@ -49,7 +49,7 @@
                     android:layout_height="58dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Personal Fuel Control"
+                    android:text="@string/app_name"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="PANTALLA PRINCIPAL" />
+                android:text="@string/main_menu" />
 
         </LinearLayout>
 
@@ -113,7 +113,7 @@
                     android:id="@+id/detalleDE"
                     android:layout_width="match_parent"
                     android:layout_height="29dp"
-                    android:text="Detalle del repostaje"
+                    android:text="@string/refueling_detail"
                     android:textAlignment="center"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -138,7 +138,7 @@
                     android:layout_height="41dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/colorFondoOscuro"
-                    android:text="VER GRÁFICAS"
+                    android:text="@string/see_graphics"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/refuels_list" />

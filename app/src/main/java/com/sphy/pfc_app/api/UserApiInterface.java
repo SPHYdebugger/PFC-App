@@ -2,6 +2,7 @@ package com.sphy.pfc_app.api;
 
 import com.sphy.pfc_app.DTO.UserDTO;
 import com.sphy.pfc_app.DTO.VehicleDTO;
+import com.sphy.pfc_app.domain.EmailRequest;
 import com.sphy.pfc_app.login.JwtResponse;
 import com.sphy.pfc_app.login.LoginRequest;
 
@@ -17,6 +18,9 @@ public interface UserApiInterface {
 
     @GET("/userDTO/{id}")
     Call<UserDTO> getUsernameDTOById(@Path("id") String email);
+
+    @POST("/email/send")
+    Call<String> sendWelcomeEmail(@Body EmailRequest emailRequest);
 
 }
 

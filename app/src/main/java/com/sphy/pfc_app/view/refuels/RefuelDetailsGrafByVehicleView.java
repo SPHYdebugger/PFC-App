@@ -82,6 +82,14 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
     private TextView username;
     private Button backButton;
 
+    private float realConsumTotal = 0;
+    private int realEntries = 0;
+    private float realConsumTotal2 = 0;
+    private int realEntries2 = 0;
+
+    private float realConsum;
+    private float realConsum2;
+
     private SharedPreferencesManager sharedPreferencesManager;
 
     @Override
@@ -185,9 +193,10 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
                 .filter(refuel -> refuel.getSecondFuel() != null)
                 .collect(Collectors.toList());
         if (!filteredRefuelsByFuel2.isEmpty()) {
+            updateGraph2(filteredRefuelsByFuel2);
             System.out.println("Matrícula del primer Refuel recibido: " + filteredRefuelsByFuel1.get(0).getNameVehicle());
         } else {
-            System.out.println("No hay repostajes con un valor válido en 'fuel'.");
+            System.out.println("No hay repostajes con un valor válido en 'fuel2'.");
             tvDetalleDE2.setVisibility(View.GONE);
             combinedChart2.setVisibility(View.GONE);
             tvRealConsum2.setVisibility(View.GONE);
@@ -204,7 +213,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
 
         }
-        updateGraph2(filteredRefuelsByFuel2);
+
     }
 
 
@@ -265,7 +274,10 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         }
         // Actualiza la gráfica con los datos filtrados
         updateGraph(filteredRefuels1);
-        updateGraph2(filteredRefuels2);
+        if (!filteredRefuels2.isEmpty()){
+            updateGraph2(filteredRefuels2);
+        }
+
     }
 
     private boolean isWithinRange(String dateString, long startTime, long endTime) {
@@ -284,6 +296,9 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         List<BarEntry> barEntries = new ArrayList<>();
         List<Entry> lineEntries1 = new ArrayList<>();
         List<Entry> lineEntries2 = new ArrayList<>();
+
+        float realConsumTotal = 0;
+        int realEntries = 0;
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Collections.sort(refuels, (r1, r2) -> {
@@ -306,10 +321,11 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
             // Primera línea: consumo real
             if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
-                float realConsumption = refuel.getRefuelConsumption();
-                lineEntries1.add(new Entry(i, realConsumption));
+                realConsumTotal += refuel.getRefuelConsumption();
+                realEntries ++;
+                lineEntries1.add(new Entry(i, realConsumTotal/realEntries));
             }
-
+            realConsum = realConsumTotal/realEntries;
 
             // Segunda línea: promedio de consumo
 
@@ -367,7 +383,6 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         YAxis leftAxis = combinedChart.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(10f);
         leftAxis.setGranularity(1f);
         combinedChart.getAxisRight().setEnabled(false);
         combinedChart.getDescription().setEnabled(false);
@@ -414,11 +429,12 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
             barEntries2.add(new BarEntry(i, consumption));
 
             // Primera línea: consumo real
-            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
-                float realConsumption = refuel.getSecondRefuelConsumption();
-                lineEntries3.add(new Entry(i, realConsumption));
+            if (refuel.isSecondFulled() && i > 0 && refuels.get(i - 1).isSecondFulled()) {
+                realConsumTotal2 += refuel.getSecondRefuelConsumption();
+                realEntries2 ++;
+                lineEntries3.add(new Entry(i, realConsumTotal2/realEntries2));
             }
-
+            realConsum2 = realConsumTotal2/realEntries2;
 
             // Segunda línea: promedio de consumo
 
@@ -476,7 +492,6 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         YAxis leftAxis = combinedChart2.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(10f);
         leftAxis.setGranularity(1f);
         combinedChart2.getAxisRight().setEnabled(false);
         combinedChart2.getDescription().setEnabled(false);
@@ -551,26 +566,8 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         }
 
         // Mostrar el consumo real promedio (opcional)
-        float totalConsumption = 0f;
-        int countRealConsumptions = 0;
 
-        for (int i = 0; i < refuels.size(); i++) {
-            Refuel refuel = refuels.get(i);
-
-            // Primera línea: consumo real
-            if (refuel.isFulled() && i > 0 && refuels.get(i - 1).isFulled()) {
-                float realConsumption = refuel.getRefuelConsumption();
-                lineEntries1.add(new Entry(i, realConsumption));
-
-                // Sumar el consumo real y contar el repostaje
-                totalConsumption += realConsumption;
-                countRealConsumptions++;
-            }
-        }
-
-
-        float averageConsumption = countRealConsumptions > 0 ? totalConsumption / countRealConsumptions : 0f;
-        tvRealConsum.setText(String.format("%.2f", averageConsumption));
+        tvRealConsum.setText(String.format("%.2f", realConsum));
 
 
 
@@ -654,26 +651,8 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         }
 
         // Mostrar el consumo real promedio (opcional)
-        float totalConsumption = 0f;
-        int countRealConsumptions = 0;
 
-        for (int i = 0; i < refuels.size(); i++) {
-            Refuel refuel = refuels.get(i);
-
-            // Primera línea: consumo real
-            if (refuel.isSecondFulled() && i > 0 && refuels.get(i - 1).isSecondFulled()) {
-                float realConsumption = refuel.getSecondRefuelConsumption();
-                lineEntries2.add(new Entry(i, realConsumption));
-
-                // Sumar el consumo real y contar el repostaje
-                totalConsumption += realConsumption;
-                countRealConsumptions++;
-            }
-        }
-
-
-        float averageConsumption = countRealConsumptions > 0 ? totalConsumption / countRealConsumptions : 0f;
-        tvRealConsum2.setText(String.format("%.2f", averageConsumption));
+        tvRealConsum2.setText(String.format("%.2f", realConsum2));
 
 
 

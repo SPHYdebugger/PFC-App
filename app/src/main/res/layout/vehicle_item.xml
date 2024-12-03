@@ -5,11 +5,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="#E4DEDE">
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/rounded_background_grey">
 
     <LinearLayout
-        android:layout_width="349dp"
-        android:layout_height="277dp"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
@@ -18,37 +19,39 @@
 
         <TextView
             android:id="@+id/license_layer"
-            android:layout_width="305dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/license_plate"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/license"
-            android:layout_width="305dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="TextView"
-            android:textSize="24sp"
+            android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="74dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="169dp"
-                android:layout_height="93dp"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/brand_layer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Marca"
-                    android:textSize="20sp"
+                    android:text="@string/vehicle_brand"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -64,15 +67,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="93dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/model_layer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Modelo"
-                    android:textSize="20sp"
+                    android:text="@string/vehicle_model"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -89,27 +92,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="82dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="172dp"
-                android:layout_height="match_parent"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/kms_layer"
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Kms"
-                    android:textSize="20sp"
+                    android:text="@string/actual_kms"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/kms"
                     android:layout_width="match_parent"
-                    android:layout_height="11dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textSize="24sp"
@@ -126,9 +129,10 @@
                 <TextView
                     android:id="@+id/consum_layer"
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
-                    android:text="Consumo medio"
-                    android:textSize="20sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/double_fuel"
+                    android:textColor="#156081"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -144,7 +148,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="307dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -156,7 +160,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="DETALLES"
+                android:text="@string/details"
                 android:translationX="-10dp"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -166,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="BORRAR" />
+                android:text="@string/delete" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

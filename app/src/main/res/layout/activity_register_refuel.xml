@@ -37,9 +37,9 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Personal Fuel Control"
+            android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Ingrese los detalles del repostaje"
+                android:text="@string/insert_refuel_details"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -123,14 +123,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Vehículo seleccionado: "
+                        android:text="@string/vehicle_selected"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/selectedVehicleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Matrícula"
+                        android:text="@string/license"
                         android:textColor="@android:color/holo_blue_dark"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -138,7 +138,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Combustible repostado"
+                    android:text="@string/fuel_refueled"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -150,7 +150,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Euros repostados"
+                    android:text="@string/amount"
                     android:textSize="18sp" />
 
                 <EditText
@@ -158,13 +158,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:hint="Ingrese la cantidad en €"
+                    android:hint="@string/insert_amount"
                     android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Precio actual del combustible (€/l)"
+                    android:text="@string/actual_price"
                     android:textSize="18sp" />
 
                 <EditText
@@ -172,13 +172,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:hint="€/L"
+                    android:hint="@string/e_l"
                     android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kilómetros realizados con este combustible"
+                    android:text="@string/km_travelled"
                     android:textSize="18sp" />
 
                 <EditText
@@ -192,7 +192,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estación de servicio"
+                    android:text="@string/station"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -206,14 +206,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Llenado" />
+                    android:text="@string/fulled" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Rellene los siguientes datos solo si es un repostaje doble"
+                    android:text="@string/only_double_refuel"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -221,13 +221,13 @@
                     android:id="@+id/checkBox3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Doble repostaje" />
+                    android:text="@string/double_refuel" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Segundo combustible repostado"
+                    android:text="@string/second_fuel_refueled"
                     android:textSize="18sp" />
 
                 <Spinner
@@ -240,7 +240,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Euros repostados"
+                    android:text="@string/fuel_refueled"
                     android:textSize="18sp" />
 
                 <EditText
@@ -248,14 +248,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:hint="Ingrese la cantidad en €"
+                    android:hint="@string/insert_amount"
                     android:inputType="numberDecimal" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Precio actual del combustible (€/l)"
+                    android:text="@string/actual_price"
                     android:textSize="18sp" />
 
                 <EditText
@@ -263,14 +263,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:hint="€/L"
+                    android:hint="@string/e_l"
                     android:inputType="numberDecimal" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kilómetros realizados con ese combustible"
+                    android:text="@string/km_travelled"
                     android:textSize="18sp" />
 
                 <EditText
@@ -285,7 +285,7 @@
                     android:id="@+id/checkBox4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Llenado del segundo depósito" />
+                    android:text="@string/second_fulled" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,5 +1,5 @@
 ﻿<p align="center">
-<img width="200px" src="https://github.com/SPHYdebugger/PFC-App/blob/master/app/src/main/res/images/logoapp.jpg">
+<img width="200px" src="https://github.com/SPHYdebugger/PFC-App/blob/master/app/src/main/res/drawable/logoapp.jpg">
 <h1 align="center"> Personal Fuel Controller APP</h1>
 </p>
 

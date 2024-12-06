@@ -122,7 +122,7 @@ public class RegisterRefuelView extends BaseActivity {
         textView9 = findViewById(R.id.textView9);
         textView10 = findViewById(R.id.textView10);
         textView11 = findViewById(R.id.textView11);
-
+        setupMenuButton(menuButton);
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
         username.setText(user.toUpperCase());
@@ -173,7 +173,7 @@ public class RegisterRefuelView extends BaseActivity {
                     // Ajusta el tamaño del layout si es necesario
                     LinearLayout linearLayout = findViewById(R.id.repostajeDetailsLayout);
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-                    layoutParams.height = 1500; // Ajusta según tus necesidades
+                    layoutParams.height = 1500;
                     linearLayout.setLayoutParams(layoutParams);
 
                 } else if (selectedPosition == 1) { // Si está en la posición 1, ocultar los campos del segundo repostaje
@@ -299,10 +299,12 @@ public class RegisterRefuelView extends BaseActivity {
                 int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
                 String fuelType = fuelTypeSpinner.getSelectedItem().toString();
 
-                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
-                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
+                String validationError = validateRefuelData(amount, fuelPrice, kmFuel);
+                if (validationError != null) {
+                    Toast.makeText(RegisterRefuelView.this, validationError, Toast.LENGTH_LONG).show();
                     return;
                 }
+
 
 
 
@@ -333,8 +335,9 @@ public class RegisterRefuelView extends BaseActivity {
                     fuelType2 = fuelTypeSpinner2.getSelectedItem().toString();
                     fulled2 = full2.isChecked();
 
-                    if (amount2 <= 0 || fuelPrice2 <= 0 || vehicleKm2 <= 0) {
-                        Toast.makeText(this, "Por favor, ingrese valores válidos para el segundo repostaje.", Toast.LENGTH_LONG).show();
+                    String validationError2 = validateRefuelData(amount2, fuelPrice2, vehicleKm2);
+                    if (validationError2 != null) {
+                        Toast.makeText(RegisterRefuelView.this, validationError, Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -362,6 +365,7 @@ public class RegisterRefuelView extends BaseActivity {
                 refuel.setDoubleRefuel(doubleRefuel.isChecked());
 
 
+
                 presenter.insertRefuel(vehicleId, stationId, refuel);
                 Intent intent = new Intent(RegisterRefuelView.this, MainMenu.class);
                 startActivity(intent);
@@ -386,8 +390,9 @@ public class RegisterRefuelView extends BaseActivity {
                 int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
                 String fuelType = fuelTypeSpinner.getSelectedItem().toString();
 
-                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
-                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
+                String validationError = validateRefuelData(amount, fuelPrice, kmFuel);
+                if (validationError != null) {
+                    Toast.makeText(RegisterRefuelView.this, validationError, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -450,8 +455,9 @@ public class RegisterRefuelView extends BaseActivity {
                 int kmFuel = Integer.parseInt(vehicleKmFuel1EditText.getText().toString());
                 String fuelType = fuelTypeSpinner.getSelectedItem().toString();
 
-                if (amount <= 0 || fuelPrice <= 0 || kmFuel <= 0) {
-                    Toast.makeText(RegisterRefuelView.this, "Por favor, ingrese valores válidos.", Toast.LENGTH_LONG).show();
+                String validationError = validateRefuelData(amount, fuelPrice, kmFuel);
+                if (validationError != null) {
+                    Toast.makeText(RegisterRefuelView.this, validationError, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -497,7 +503,7 @@ public class RegisterRefuelView extends BaseActivity {
         builder.setTitle("ALERTA, CONFIRMACIÓN");
         String message = "<b>¿SON ESTOS DATOS CORRECTOS?</b><br>" +
                 "<b>Vehículo:</b> " + license + "<br>" +
-                //"<b>Combustible:</b> " + fuelTypeSpinner.getSelectedItem().toString() + "<br>" +
+                "<b>Combustible:</b> " + fuelTypeSpinner.getSelectedItem().toString() + "<br>" +
                 "<b>Euros repostados:</b> " + eurosRepostadosEditText.getText().toString() + "<br>" +
                 "<b>Precio del combustible:</b> " + fuelPriceEditText.getText().toString() + "<br>" +
                 "<b>Kilómetros actuales del vehículo:</b> " + vehicleKmFuel1EditText.getText().toString() + "<br>" +
@@ -555,7 +561,18 @@ public class RegisterRefuelView extends BaseActivity {
         void onFuel2CheckComplete(boolean hasFuel2);
     }
 
-
+    private String validateRefuelData(float amount, float fuelPrice, int kmFuel) {
+        if (amount <= 0 || amount > 200) {
+            return "El importe debe estar entre 0 y 200.";
+        }
+        if (fuelPrice <= 0 || fuelPrice > 2) {
+            return "El precio del combustible debe estar entre 0 y 2.";
+        }
+        if (kmFuel <= 0 || kmFuel > 1500) {
+            return "Los kilómetros deben estar entre 0 y 1500.";
+        }
+        return null;
+    }
 
 
 

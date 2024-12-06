@@ -88,6 +88,10 @@
             android:name=".view.users.UserDetailsView"
             android:windowSoftInputMode="adjustResize"
             android:exported="false"/>
+        <activity
+            android:name=".view.vehicles.updateVehicleView"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false"/>
 
 
 

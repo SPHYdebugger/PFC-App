@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorFondoOscuro"
                 android:onClick="goLogin"
-                android:text="@string/register"
+                android:text="@string/access"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

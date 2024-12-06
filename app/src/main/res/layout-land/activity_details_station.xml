@@ -110,7 +110,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/detalleDE2"
+                    android:id="@+id/detalleDE"
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
                     android:text="TextView"

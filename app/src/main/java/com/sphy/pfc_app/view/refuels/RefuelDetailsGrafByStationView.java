@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +58,20 @@ public class RefuelDetailsGrafByStationView extends BaseActivity implements Refu
     private TextView tvBestStation;
     private TextView tvTextBestStation;
 
+
+    private TextView tvDetalleDE2;
+
+    private TextView tvRealConsum2;
+    private TextView tvTextRealConsum2;
+    private TextView tvBestConsum2;
+    private TextView tvTextBestConsum2;
+    private TextView tvWorstConsum2;
+    private TextView tvTextWorstConsum2;
+    private TextView tvBestStation2;
+    private TextView tvTextBestStation2;
+
+    private CombinedChart combinedChart2;
+
     private ScrollView scrollView;
 
     private CombinedChart combinedChart;
@@ -66,6 +81,7 @@ public class RefuelDetailsGrafByStationView extends BaseActivity implements Refu
 
     private TextView username;
     private Button backButton;
+    private ImageButton menuButton;
 
     private SharedPreferencesManager sharedPreferencesManager;
 
@@ -91,10 +107,34 @@ public class RefuelDetailsGrafByStationView extends BaseActivity implements Refu
         combinedChart = findViewById(R.id.combinedChart);
         username = findViewById(R.id.userNameTextView);
         backButton = findViewById(R.id.backButton);
-
+        menuButton = findViewById(R.id.menuButton);
+        setupMenuButton(menuButton);
         Intent intent = getIntent();
         String license = intent.getStringExtra("identifier");
         System.out.println("El nombre que se recoge en la gráfica por identifier es: " + license);
+
+        tvDetalleDE2 = findViewById(R.id.detalleDE2);
+        tvRealConsum2 = findViewById(R.id.realConsum2);
+        tvBestConsum2 = findViewById(R.id.bestConsum2);
+        tvWorstConsum2 = findViewById(R.id.worstConsum2);
+        tvBestStation2 = findViewById(R.id.bestStation2);
+        tvTextRealConsum2 = findViewById(R.id.textRealConsum2);
+        tvTextBestConsum2 = findViewById(R.id.textBestConsum2);
+        tvTextWorstConsum2 = findViewById(R.id.textWorstConsum2);
+        tvTextBestStation2 = findViewById(R.id.textBestStation2);
+        combinedChart2 = findViewById(R.id.combinedChart2);
+
+
+        tvDetalleDE2.setVisibility(View.GONE);
+        tvRealConsum2.setVisibility(View.GONE);
+        tvBestConsum2.setVisibility(View.GONE);
+        tvWorstConsum2.setVisibility(View.GONE);
+        tvBestStation2.setVisibility(View.GONE);
+        tvTextRealConsum2.setVisibility(View.GONE);
+        tvTextBestConsum2.setVisibility(View.GONE);
+        tvTextWorstConsum2.setVisibility(View.GONE);
+        tvTextBestStation2.setVisibility(View.GONE);
+        combinedChart2.setVisibility(View.GONE);
 
         String token = sharedPreferencesManager.getAuthToken();
         String user = sharedPreferencesManager.getUsernameFromJWT(token);
@@ -248,8 +288,8 @@ public class RefuelDetailsGrafByStationView extends BaseActivity implements Refu
         xAxis.setLabelRotationAngle(90f);
         xAxis.setTextSize(12f);
         // Añadir espacio extra en los extremos para evitar que las barras queden cortadas
-        xAxis.setAxisMinimum(-0.5f); // Un poco antes de la primera barra
-        xAxis.setAxisMaximum(barEntries.size() - 0.5f); // Un poco después de la última barra
+        xAxis.setAxisMinimum(-0.5f);
+        xAxis.setAxisMaximum(barEntries.size() - 0.5f);
 
         // Configurar el eje Y
         YAxis leftAxis = combinedChart.getAxisLeft();

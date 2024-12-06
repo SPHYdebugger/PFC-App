@@ -17,13 +17,12 @@ public class VehicleListPresenter implements VehicleListContract.Presenter, Vehi
 
     public VehicleListPresenter(VehicleListContract.View view) {
         this.view = view;
-        // Accede directamente al contexto de la vista
-        model = new VehicleListModel((Context) view); // Hacer un cast de View a Context
+        model = new VehicleListModel((Context) view);
     }
 
     @Override
     public void loadAllVehicles() {
-        model.loadAllVehicles(this);  // Llamamos al modelo para cargar los vehículos
+        model.loadAllVehicles(this);
     }
 
     @Override

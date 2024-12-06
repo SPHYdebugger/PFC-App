@@ -101,7 +101,6 @@ public class VehicleListView extends BaseActivity implements VehicleListContract
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Notificar al adapter que los datos han cambiado
                 adapter.notifyDataSetChanged();
             }
         }, 2000);

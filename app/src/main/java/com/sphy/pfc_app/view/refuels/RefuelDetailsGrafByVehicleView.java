@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -89,6 +90,10 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
     private float realConsum;
     private float realConsum2;
+    private ImageButton menuButton;
+
+    float maxRefuelConsumption1 = Float.MIN_VALUE;
+    float maxRefuelConsumption2 = Float.MIN_VALUE;
 
     private SharedPreferencesManager sharedPreferencesManager;
 
@@ -125,7 +130,8 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         username = findViewById(R.id.userNameTextView);
         backButton = findViewById(R.id.backButton);
-
+        menuButton = findViewById(R.id.menuButton);
+        setupMenuButton(menuButton);
         Intent intent = getIntent();
         String license = intent.getStringExtra("identifier");
         System.out.println("La matrícula que se recoge en la gráfica por identifier es: " + license);
@@ -185,6 +191,10 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
         }
         System.out.println("Refuels filtrados por fuel1");
         for (Refuel refuel : filteredRefuelsByFuel1) {
+
+            if (refuel.getRefuelConsumption() > maxRefuelConsumption1) {
+                maxRefuelConsumption1 = refuel.getRefuelConsumption();
+            }
             System.out.println("Fuel1: " + refuel.getFuel() + ", CreationDate: " + refuel.getCreationDate());
         }
         updateGraph(filteredRefuelsByFuel1);
@@ -193,6 +203,13 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
                 .filter(refuel -> refuel.getSecondFuel() != null)
                 .collect(Collectors.toList());
         if (!filteredRefuelsByFuel2.isEmpty()) {
+            for (Refuel refuel : filteredRefuelsByFuel2) {
+                if (refuel.getSecondRefuelConsumption() > maxRefuelConsumption2) {
+                    maxRefuelConsumption2 = refuel.getSecondRefuelConsumption();
+                }
+                System.out.println("Fuel1: " + refuel.getFuel() + ", CreationDate: " + refuel.getCreationDate());
+            }
+
             updateGraph2(filteredRefuelsByFuel2);
             System.out.println("Matrícula del primer Refuel recibido: " + filteredRefuelsByFuel1.get(0).getNameVehicle());
         } else {
@@ -383,6 +400,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         YAxis leftAxis = combinedChart.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(maxRefuelConsumption1+1);
         leftAxis.setGranularity(1f);
         combinedChart.getAxisRight().setEnabled(false);
         combinedChart.getDescription().setEnabled(false);
@@ -492,6 +510,7 @@ public class RefuelDetailsGrafByVehicleView extends BaseActivity implements Refu
 
         YAxis leftAxis = combinedChart2.getAxisLeft();
         leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(maxRefuelConsumption2+1);
         leftAxis.setGranularity(1f);
         combinedChart2.getAxisRight().setEnabled(false);
         combinedChart2.getDescription().setEnabled(false);

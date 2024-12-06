@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
 
     private ImageButton menuButton;
     private Button backButton;
+    public ImageView fulledIcon;
 
 
 
@@ -86,7 +88,7 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
         tvKmsVehicle = findViewById(R.id.detail_kms);
         tvRefuelConsumption = findViewById(R.id.detail_refuelConsumption);
         tvVehicleConsumption = findViewById(R.id.detail_consum);
-        cbFulled = findViewById(R.id.fulled);
+        fulledIcon = findViewById(R.id.fulledIcondetails);
         backButton = findViewById(R.id.backButton);
         presenter = new RefuelDetailsPresenter(this);
 
@@ -134,18 +136,40 @@ public class RefuelDetailsView extends BaseActivity implements RefuelDetailsCont
         String text = "DETALLE DEL REPOSTAJE: " + refuel.getCreationDate();
         tvDetalleDE.setText(text);
 
+
         tvRegisterDate.setText(refuel.getCreationDate());
         tvVehicleLicense.setText(refuel.getNameVehicle());
         tvStationName.setText(refuel.getNameStation());
-        tvAmount.setText(String.valueOf(refuel.getAmount()));
-        tvPrice.setText(String.valueOf(refuel.getPrice()));
-        tvFuel.setText(refuel.getFuel());
-        tvRefueledLiters.setText(String.valueOf(refuel.getRefueledLiters()));
-        //tvKmsTraveled.setText(String.valueOf(refuel.getKmTraveled()));
-        //tvKmsVehicle.setText(String.valueOf(refuel.getKmTotal()));
-        tvRefuelConsumption.setText(String.valueOf(refuel.getRefuelConsumption()));
-        tvVehicleConsumption.setText(String.valueOf(refuel.getMedConsumption()));
-        cbFulled.setChecked(refuel.isFulled());
+        if (refuel.getAmount() != 0){
+            tvAmount.setText(String.valueOf(refuel.getAmount()));
+            tvPrice.setText(String.valueOf(refuel.getPrice()));
+            tvFuel.setText(refuel.getFuel());
+            tvRefueledLiters.setText(String.valueOf(refuel.getRefueledLiters()));
+            tvKmsTraveled.setText(String.valueOf(refuel.getKmTraveled1()));
+            //tvKmsVehicle.setText(String.valueOf(refuel.getKmTotal()));
+            tvRefuelConsumption.setText(String.valueOf(refuel.getRefuelConsumption()));
+            tvVehicleConsumption.setText(String.valueOf(refuel.getMedConsumption()));
+            if (refuel.isFulled()) {
+                fulledIcon.setImageResource(R.drawable.comprobado);
+            }else {
+                fulledIcon.setImageResource(R.drawable.eliminar);
+            }
+        } else {
+            tvAmount.setText(String.valueOf(refuel.getSecondAmount()));
+            tvPrice.setText(String.valueOf(refuel.getSecondPrice()));
+            tvFuel.setText(refuel.getSecondFuel());
+            tvRefueledLiters.setText(String.valueOf(refuel.getSecondRefueledLiters()));
+            tvKmsTraveled.setText(String.valueOf(refuel.getKmsTraveledSecondrefuel()));
+            //tvKmsVehicle.setText(String.valueOf(refuel.getKmTotal()));
+            tvRefuelConsumption.setText(String.valueOf(refuel.getSecondRefuelConsumption()));
+            tvVehicleConsumption.setText(String.valueOf(refuel.getSecondMedConsumption()));
+            if (refuel.isSecondFulled()) {
+                fulledIcon.setImageResource(R.drawable.comprobado);
+            }else {
+                fulledIcon.setImageResource(R.drawable.eliminar);
+            }
+        }
+
 
     }
 

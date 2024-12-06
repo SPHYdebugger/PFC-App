@@ -46,13 +46,13 @@ public class MainMenu extends BaseActivity {
         setupMenuButton(menuButton);
 
         linearButton1.setOnClickListener(v -> {
-            Intent intent = new Intent(MainMenu.this, RegisterVehicleView.class);
+            Intent intent = new Intent(MainMenu.this, SelectionVehicleListView.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
         });
 
         linearButton2.setOnClickListener(v -> {
-            Intent intent = new Intent(MainMenu.this, SelectionVehicleListView.class);
+            Intent intent = new Intent(MainMenu.this, RegisterVehicleView.class);
             startActivity(intent);
             overridePendingTransition(0, 0);
         });

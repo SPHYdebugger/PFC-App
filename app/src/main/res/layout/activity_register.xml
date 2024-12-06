@@ -84,6 +84,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -147,8 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/colorFondoOscuro"
-                android:text="@string/go_register"
-                android:translationX="20dp" />
+                android:text="@string/go_register" />
 
             <TextView
                 android:id="@+id/error_message"

@@ -105,10 +105,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="392dp"
-        android:layout_height="54dp"
+        android:layout_width="394dp"
+        android:layout_height="83dp"
         android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -116,11 +117,19 @@
         tools:ignore="MissingConstraints">
 
         <Button
+            android:id="@+id/updateButton"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorFondoOscuro"
+            android:text="Modificar" />
+
+        <Button
             android:id="@+id/backButton"
             android:layout_width="348dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorFondoOscuro"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorFondoOscuro"
             android:text="@string/return_to_mainMenu" />
     </LinearLayout>
 

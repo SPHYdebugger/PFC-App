@@ -61,6 +61,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
 
     private TextView username;
     private Button backButton;
+    private Button updateButton;
 
     private SharedPreferencesManager sharedPreferencesManager;
 
@@ -76,6 +77,7 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         tvDetalleDE = findViewById(R.id.detalleDE);
         username = findViewById(R.id.userNameTextView);
         backButton = findViewById(R.id.backButton);
+        updateButton = findViewById(R.id.updateButton);
 
         tvLicense = findViewById(R.id.detail_license);
         tvBrand = findViewById(R.id.detail_brand);
@@ -103,9 +105,16 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backMain(v);  // Llamamos al método backMain cuando el botón es presionado
+                backMain(v);
             }
         });
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goUpdate(v);
+            }
+        });
+
 
         goRefuels.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +206,11 @@ public class VehicleDetailsView extends BaseActivity implements VehicleDetailsCo
     }
     public void backMain(View view) {
         Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
+    public void goUpdate(View view) {
+        Intent intent = new Intent(this, updateVehicleView.class);
+        intent.putExtra("id", vehicleId);
         startActivity(intent);
     }
 }

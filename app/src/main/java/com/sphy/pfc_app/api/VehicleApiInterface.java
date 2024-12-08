@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface VehicleApiInterface {
     @GET("vehicles")
-    Call<List<VehicleDTO>> getVehiclesByUserId(@Query("id") long id);
+    Call<List<VehicleDTO>> getVehiclesByUserId(@Query("id") long idV);
 
     @GET("vehicles/{id}")
     Call<Vehicle> getVehicleById(@Path("id") long id);
@@ -31,8 +31,8 @@ public interface VehicleApiInterface {
     @DELETE("vehicles/{id}")
     Call<Void> deleteVehicle(@Path("id") long id);
 
-    @PUT("vehicles/{license}")
-    Call<Vehicle> editVehicleByLicense(@Path("license") String license, @Body Vehicle vehicle);
+    @PUT("vehicles/{licensePlate}")
+    Call<Vehicle> editVehicleByLicense(@Path("licensePlate") String license, @Body Vehicle vehicle);
 
 
     @PUT("vehicles/{vehicleid}")

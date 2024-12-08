@@ -61,12 +61,13 @@ public class updateVehicleView extends BaseActivity implements UpdateVehicleCont
 
         updateVehicle.setOnClickListener(v -> {
             Vehicle updatedVehicle = new Vehicle();
-            updatedVehicle.setId(vehicleId);
+
             updatedVehicle.setLicensePlate(tvLicense.getText().toString());
             updatedVehicle.setBrand(tvBrand.getText().toString());
             updatedVehicle.setModel(tvModel.getText().toString());
             updatedVehicle.setKmActual(Integer.parseInt(tvKMs.getText().toString()));
-            updatedVehicle.setRegistrationDate(tvDate.getText().toString());
+
+
 
             presenter.updateVehicle(updatedVehicle);
         });
@@ -79,6 +80,7 @@ public class updateVehicleView extends BaseActivity implements UpdateVehicleCont
         tvModel.setText(vehicle.getModel());
         tvKMs.setText(String.valueOf(vehicle.getKmActual()));
         tvDate.setText(vehicle.getRegistrationDate());
+
     }
 
     @Override

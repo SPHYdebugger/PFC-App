@@ -42,7 +42,14 @@ public class UpdateVehicleModel implements UpdateVehicleContract.Model {
 
     @Override
     public void updateVehicleDetails(Vehicle vehicle, OnFinishedListener listener) {
+        System.out.println("llega a realizar la petición al model");
         VehicleApiInterface api = VehicleApi.buildInstance(context);
+        System.out.println("Vehículo que se va a enviar para actualización:");
+        System.out.println("Matrícula: " + vehicle.getLicensePlate());
+        System.out.println("Marca: " + vehicle.getBrand());
+        System.out.println("Modelo: " + vehicle.getModel());
+        System.out.println("Kilómetros: " + vehicle.getKmActual());
+        System.out.println("Fecha de registro: " + vehicle.getRegistrationDate());
         Call<Vehicle> updateVehicleCall = api.editVehicleByLicense(vehicle.getLicensePlate(), vehicle);
         updateVehicleCall.enqueue(new Callback<Vehicle>() {
             @Override

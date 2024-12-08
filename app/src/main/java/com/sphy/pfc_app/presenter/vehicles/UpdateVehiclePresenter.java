@@ -19,6 +19,7 @@ public class UpdateVehiclePresenter implements UpdateVehicleContract.Presenter {
 
     @Override
     public void fetchVehicleDetails(long vehicleId) {
+        System.out.println("llega la petición al presenter");
         model.fetchVehicleDetails(vehicleId, new UpdateVehicleContract.Model.OnFinishedListener() {
             @Override
             public void onSuccess(Vehicle vehicle) {

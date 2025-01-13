@@ -36,7 +36,7 @@ La app se conecta a una API externa para la gestión de vehículos y repostajes.
 
 ### Resumen pantallas APP
 ﻿<p align="center">
-<img width="200px" src="https://github.com/SPHYdebugger/PFC-App/blob/master/app/src/main/pantallas.jpg">
+<img width="100%" src="https://github.com/SPHYdebugger/PFC-App/blob/master/app/src/main/pantallas.jpg">
 <h1 align="center"> Personal Fuel Controller APP</h1>
 </p>
 

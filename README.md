@@ -19,7 +19,7 @@ Esta es una aplicación Android desarrollada para la gestión de vehículos y re
 
 ### Tecnologías Utilizadas
 
-- **Lenguaje**: Java/Kotlin para el desarrollo de la aplicación Android.
+- **Lenguaje**: Java para el desarrollo de la aplicación Android.
 - **Bases de datos**: Utilización de PostgreSQL o Room para almacenamiento local de datos.
 - **Arquitectura**: Modelo MVVM (Model-View-ViewModel) para una mejor organización y separación de responsabilidades.
 - **Frameworks y Librerías**:
@@ -33,3 +33,10 @@ La app se conecta a una API externa para la gestión de vehículos y repostajes.
 - **GET** `/vehicles`: Obtener una lista de todos los vehículos.
 - **PUT** `/refuels/{id}`: Actualizar un repostaje existente.
 - **DELETE** `/stations/{stationIdentifier}`: Eliminar una estación de servicio por ID o nombre.
+
+### Resumen pantallas APP
+﻿<p align="center">
+<img width="200px" src="https://github.com/SPHYdebugger/PFC-App/blob/master/app/src/main/pantallas.jpg">
+<h1 align="center"> Personal Fuel Controller APP</h1>
+</p>
+
